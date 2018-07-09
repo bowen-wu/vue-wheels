@@ -34,4 +34,13 @@
 21. cd codes
 22. npm init
 ![package.jpg](https://upload-images.jianshu.io/upload_images/9617841-ba9c9522f51fa910.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-23. 
+23. git add . (注意： 此时的目录应该在最外层，即有 .git 文件的目录下)
+24. git commit -m 'npm init'
+25. git pull
+26. git push
+27. cd codes
+28. npm i --save vue === npm i vue (npm version 6+)
+29. cd ..
+30. touch .gitignore
+31. vi .gitignore -> codes/node_modules/
+32. 
