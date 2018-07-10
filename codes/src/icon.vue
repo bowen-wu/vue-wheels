@@ -6,25 +6,25 @@
 
 <script>
 export default {
-    props: ['name', 'iconPosition'],
-    // porps: {
-    //     name: {
-    //         type: String,
-    //         required: false,
-    //         default: '',
-    //         validator(value){
-    //             return true;
-    //         },
-    //     },
-    //     iconPosition: {
-    //         type: String,
-    //         required: false,
-    //         default: 'left',
-    //         validator(value) {
-    //             return (value === 'left') || (value === 'right');
-    //         },
-    //     },
-    // },
+    // props: ['name', 'iconPosition'],
+    props: {
+        name: {
+            type: String,
+            required: false,
+            default: '',
+            validator(value){
+                return true;
+            },
+        },
+        iconPosition: {
+            type: String,
+            required: false,
+            default: 'left',
+            validator(value) {
+                return (value === 'left') || (value === 'right');
+            },
+        },
+    },
 }
 </script>
 
