@@ -43,4 +43,10 @@
 29. cd ..
 30. touch .gitignore
 31. vi .gitignore -> codes/node_modules/
-32. 
+32. git add .
+33. git commit -m 'npm install vue'
+34. git pull
+35. git push
+36. cd codes
+37. touch index.html
+38. ending -> write code
