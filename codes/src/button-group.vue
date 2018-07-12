@@ -28,7 +28,9 @@ export default {
         vertical-align: top;
         > .g-button{
             border-radius: 0;
-            margin-left: -1px; // 关键
+            &:not(:first){
+                margin-left: -1px; // 关键
+            }
             &:first-of-type{
                 border-top-left-radius: var(--border-radius);
                 border-bottom-left-radius: var(--border-radius);

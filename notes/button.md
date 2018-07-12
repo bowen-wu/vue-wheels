@@ -52,3 +52,9 @@
     ```
 
 - 按钮组边框多余 -> ` margin-left: -1px ` + ` position: relative; z-index: 1; `
+
+- ` vm.$el ` -> 表示 Vue 实例使用的根 DOM 元素。类型为 HTMLElement
+
+- 检测元素时应在 ` mounted ` 周期内
+
+- console.warn('这是在控制台打印出来的警告')
