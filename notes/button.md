@@ -11,7 +11,7 @@
     ```
 
 - CSS 变量 -> 带有前缀 ` -- ` 的属性名，表示的是带有值的自定义属性，其可以通过 ` var ` 函数在全文档内复用。
-    示例： 
+    示例：
     ```
     :root {
         --color: #333;
@@ -22,3 +22,32 @@
         background-color: var(--bg-color);
     }
     ```
+
+- ` $emit ` -> 触发当前实例上的事件，附加参数都会传给监听器回调。 ` vm.$emit(eventName, [...args]) `
+    [示例：](https://cn.vuejs.org/v2/api/#vm-emit)
+    ```
+    JS:
+    Vue.component('welcome-button', {
+        template: `
+            <button @click="$emit('welcome')">
+                Click me to be welcomed.
+            </button>
+        `
+    });
+    
+    HTML:
+    <div id="example">
+        <welcome-button @welcome="sayHi"></welcome-buttom>
+    </div>
+
+    JS:
+    new Vue({
+        el: '#example',
+        methods: {
+            sayHi() {
+                alert('Hi');
+            },
+        },
+    });
+    ```
+    

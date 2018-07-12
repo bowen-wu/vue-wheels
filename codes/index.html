@@ -40,8 +40,8 @@
 <body>
     <div id="app">
         <g-button>按钮</g-button>
-        <g-button icon="setting">按钮</g-button>
-        <g-button icon="setting" icon-position="right">按钮</g-button>
+        <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
+        <g-button icon="setting" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>
     </div>
     <script src="./src/app.js"></script>
     <script src="//at.alicdn.com/t/font_742059_0qo8i85vyiu.js"></script>
