@@ -15,3 +15,29 @@ new Vue({
         loading3: true,
     },
 });
+
+// unit test
+import chai from 'chai';
+
+const expect = chai.expect;
+
+{
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const Constructor = Vue.extend(Button);
+    const button = new Constructor({
+        propsData: {
+            icon: 'setting'
+        }
+    });
+    // first -> // button.$mount('#test'); // 可以不用 $mount 具体实例, mount 到内存中
+    // second -> // button.$mount(); // 占用内存
+    button.$mount(div); // third
+    let useElement = button.$el.querySelector('use');
+    let href = useElement.getAttribute('xlink:href');
+    expect(href).to.equal('#icon-setting');
+
+    // destroy
+    button.$el.remove();
+    button.$destroy()
+}

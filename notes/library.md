@@ -6,3 +6,6 @@
     console.assert(1 === 1) // 没有反应
     console.assert(1 === 2) // ERROR -> Assertion failed: console.assert
     ```
+
+2. chai.js -> 
+
