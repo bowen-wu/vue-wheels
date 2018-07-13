@@ -18,26 +18,115 @@ new Vue({
 
 // unit test
 import chai from 'chai';
+import spies from 'chai-spies';
+
+chai.use(spies);
 
 const expect = chai.expect;
 
 {
+    // icon
     const div = document.createElement('div');
     document.body.appendChild(div);
     const Constructor = Vue.extend(Button);
-    const button = new Constructor({
+    const vm = new Constructor({
         propsData: {
             icon: 'setting'
         }
     });
-    // first -> // button.$mount('#test'); // 可以不用 $mount 具体实例, mount 到内存中
-    // second -> // button.$mount(); // 占用内存
-    button.$mount(div); // third
-    let useElement = button.$el.querySelector('use');
+    // first -> // vm.$mount('#test'); // 可以不用 $mount 具体实例, mount 到内存中
+    // second -> // vm.$mount(); // 占用内存
+    vm.$mount(div); // third
+    let useElement = vm.$el.querySelector('use');
     let href = useElement.getAttribute('xlink:href');
     expect(href).to.equal('#icon-setting');
 
     // destroy
-    button.$el.remove();
-    button.$destroy()
+    vm.$el.remove();
+    vm.$destroy();
+}
+{
+    // icon + loading
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const Constructor = Vue.extend(Button);
+    const vm = new Constructor({
+        propsData: {
+            icon: 'setting',
+            loading: true,
+        }
+    });
+    vm.$mount(div);
+    let useElement = vm.$el.querySelector('use');
+    let href = useElement.getAttribute('xlink:href');
+    expect(href).to.equal('#icon-loading');
+
+    // destroy
+    vm.$el.remove();
+    vm.$destroy();
+}
+{
+    // icon order
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const Constructor = Vue.extend(Button);
+    const vm = new Constructor({
+        propsData: {
+            icon: 'setting',
+        },
+    });
+    vm.$mount(div);
+    let useElement = vm.$el.querySelector('svg');
+    let order = getComputedStyle(useElement).getPropertyValue('order');
+
+    expect(order).to.equal('0');
+
+    // destroy
+    vm.$el.remove();
+    vm.$destroy();
+}
+{
+    // iconPosition
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const Constructor = Vue.extend(Button);
+    const vm = new Constructor({
+        propsData: {
+            icon: 'setting',
+            iconPosition: 'right',
+        }
+    });
+    vm.$mount(div);
+    let useElement = vm.$el.querySelector('svg');
+    let order = getComputedStyle(useElement).getPropertyValue('order');
+
+    expect(order).to.equal('1');
+
+    // destroy
+    vm.$el.remove();
+    vm.$destroy();
+}
+{
+    // click event handle, function mock
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    const Constructor = Vue.extend(Button);
+    const vm = new Constructor({
+        propsData: {
+            icon: 'setting',
+        }
+    });
+    vm.$mount(div);
+
+    let spy = chai.spy(() => {});
+
+    vm.$on('click', spy);
+
+    let button = vm.$el;
+    button.click();
+    expect(spy).to.have.been.called();
+
+    // destroy
+    vm.$el.remove();
+    vm.$destroy();
 }
