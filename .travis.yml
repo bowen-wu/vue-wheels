@@ -1,10 +1,14 @@
+# 使用 node js
 language: node_js
+# node js 版本
 node_js:
   - "8"
   - "9"
   - "10"
+# 插件 -> chrome 稳定版
 addons: 
   chrome: stable
+# 
 sudo: required
 before_script:
   - "sudo chown root /opt/google/chrome/chrome-sandbox"
