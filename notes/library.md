@@ -90,4 +90,3 @@ describe('Array', () => {
 ## [Travis CI](https://travis-ci.org/) -> 持续集成
 
 ## [Circle CI](https://circleci.com/) -> 持续集成
-
