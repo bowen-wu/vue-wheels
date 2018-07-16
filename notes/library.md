@@ -1,16 +1,5 @@
 # Library
 
-## chai.js
-
-1. Assert -> 断言
-    示例：
-    ```
-    console.assert(1 === 1) // 没有反应
-    console.assert(1 === 2) // ERROR -> Assertion failed: console.assert
-    ```
-
-## chai-spies.js -> 
-
 ## Vue 框架
 Vue 是一套用于构建用户界面的渐进式框架。MVVM 框架，只关注视图层，是一个创建单页面应用的 web 应用框架。它具有响应式的数据绑定和组合的视图组件,并且运用虚拟 DOM 从而使得性能得到大幅度提升
 - 渐进式 -> 阶梯式向前，Vue 是轻量级的，它有很多独立的功能和库，我们会根据项目来选用 Vue 的一些功能
@@ -55,3 +44,50 @@ jQuery 是一套跨浏览器的 JavaScript 库，简化 HTML 与 JavaScript 之�
 
 ## PDF.js 库
 一款使用 HTML5 Canvas 安全地渲染 PDF 文件以及遵从网页标准的网页浏览器渲染 PDF 文件的 JavaScript 库。
+
+## [chai.js](http://www.chaijs.com/) -> 具体断言
+Chai is a BDD/TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.
+
+1. Assert -> 断言
+    示例：
+    ```
+    console.assert(1 === 1) // 没有反应
+    console.assert(1 === 2) // ERROR -> Assertion failed: console.assert
+    ```
+
+2. 断言时，如果需要**判断 CSS 样式**，则需要**挂载在 div** 中，如果**没有 CSS 样式**，则**挂载在内存**中即可。
+
+## [chai-spies.js](http://www.chaijs.com/plugins/chai-spy/)
+[GitHub](https://github.com/chaijs/chai-spies) chai-spy is a plugin for the chai assertion library and provides the basic necessities for spies within tests.
+
+## [karma](https://karma-runner.github.io/2.0/index.html)
+[GitHub](https://github.com/karma-runner/karma) A simple tool that allows you to execute JavaScript code in multiple real browsers. The main purpose of Karma is to make your test-driven development easy, fast and fun.
+#### 测试运行器，它可以呼起浏览器，加载测试脚本，然后运行测试用例
+` karma start --single-run ` || ` karma start `
+
+Mocha + Sinon 配合 Karma 一起构成
+
+## [Mocha](https://mochajs.org/) -> BDD 
+[GitHub](https://github.com/mochajs/mocha) Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser, making asyncronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.
+#### 单元测试框架/库，它可以用来写测试用例
+
+示例：
+```
+var assert = require('assert');
+describe('Array', () => {
+    describe('#indexOf()', () => {
+        it('should return -1 when the value is not present', () => {
+            expect([1, 2, 3].indexOf(4)).to.equal(-1); // 断言 -> chai
+        });
+    });
+});
+```
+
+## [Sinon](http://sinonjs.org/) -> spies function
+[GitHub](https://github.com/sinonjs/sinon) Standalone test spies, stubs and mocks for JavaScript. Works with any unit testing framework.
+#### spy / stub / mock 库，用以辅助测试
+
+## [Travis CI](https://travis-ci.org/) -> 持续集成
+
+## [Circle CI](https://circleci.com/) -> 持续集成
+

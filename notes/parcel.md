@@ -10,3 +10,7 @@
     }
     }
     ```
+3. ` parcel build test/* --no-cache --no-minify `   -> 将 ES6 语法转化成浏览器或 node 可以识别的代码
+    - ` test/* ` -> 指 test 下所有的一级文件
+    - ` --no-cache ` -> 不要缓存
+    - ` --no-minify ` -> 不要压缩
