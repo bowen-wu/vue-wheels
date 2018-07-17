@@ -43,6 +43,12 @@
 
     7. auto run after every push
 
+    8. 添加 Travis CI 标识
+        - 谷歌 **Travis CI badge**
+        - [URL](https://docs.travis-ci.com/user/status-images/)
+        - Travis CI 官网
+        - 点击图标，选择 Markdown，复制链接，粘贴到 README.md 文件中
+
 - [Circle CI](https://circleci.com/)
 
 #### npm 发布自己的包
@@ -54,7 +60,7 @@
     4. 更新 package.json -> ` "main": "dist/index.js" `
     5. 登录 npm.js (如果注册需要确认邮箱)
     6. 根目录运行 ` npm adduser ` (需要更换为 npm 官方源)，logged in 
-        - 更换官方源
+        - 更换官方源(设置淘宝镜像源： ` npm config set registry https://registry.npm.taobao.org/ -g `)
         - ` npm config list `
         - 注释 ` // registry = "https://regitry.npm.taobao.org/" ` 
         - ` npm adduser `
@@ -62,4 +68,8 @@
     8. 使用
         - 复制 ` :root ` 样式
         - 引入组件 ` import {Button, ButtonGroup, Icon} from 'xxx' `
-        - 引入 CSS ` import xxx/dist/index.css `
+        - 引入 CSS ` import 'xxx/dist/index.css' `
+        - 更新，如果发布新的需要使用方需要更新
+    9. npm link -> 本地使用
+        - 源码仓库 -> ` npm link ` -> 在本地注册(本机用户)
+        - 测试仓库 -> ` npm link vue-wheels-bowen ` -> 使用本地注册包

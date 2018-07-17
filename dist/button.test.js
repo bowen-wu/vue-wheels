@@ -10635,7 +10635,7 @@ describe('Button', function () {
         vm.$destroy();
     });
 });
-},{"vue":3,"../src/button":5}],25:[function(require,module,exports) {
+},{"vue":3,"../src/button":5}],28:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -10805,5 +10805,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[25,1], null)
+},{}]},{},[28,1], null)
 //# sourceMappingURL=/button.test.map
