@@ -63,13 +63,88 @@ Chai is a BDD/TDD assertion library for node and the browser that can be delight
 ## [karma](https://karma-runner.github.io/2.0/index.html)
 [GitHub](https://github.com/karma-runner/karma) A simple tool that allows you to execute JavaScript code in multiple real browsers. The main purpose of Karma is to make your test-driven development easy, fast and fun.
 #### 测试运行器，它可以呼起浏览器，加载测试脚本，然后运行测试用例
+#### npm i -D karma karma-chrome-launcher karma-mocha karma-sinon-chai karma-chai karma-chai-spies
 ` karma start --single-run ` || ` karma start `
+
+#### 配置
+```
+// 新建 karma.conf.js，内容如下
+module.exports = function (config) {
+    config.set({
+
+        // base path that will be used to resolve all patterns (eg. files, exclude)
+        basePath: '',
+        // frameworks to use
+        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+        frameworks: ['mocha', 'sinon-chai'],
+        client: {
+            chai: {
+                includeStack: true
+            }
+        },
+
+
+        // list of files / patterns to load in the browser
+        files: [
+            'dist/**/*.test.js',
+            'dist/**/*.test.css'
+        ],
+
+
+        // list of files / patterns to exclude
+        exclude: [],
+
+
+        // preprocess matching files before serving them to the browser
+        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+        preprocessors: {},
+
+
+        // test results reporter to use
+        // possible values: 'dots', 'progress'
+        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+        reporters: ['progress'],
+
+
+        // web server port
+        port: 9876,
+
+
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
+
+
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_INFO,
+
+
+        // enable / disable watching file and executing tests whenever any file changes
+        autoWatch: true,
+
+
+        // start these browsers
+        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        browsers: ['ChromeHeadless'],
+
+
+        // Continuous Integration mode
+        // if true, Karma captures browsers, runs the tests and exits
+        singleRun: false,
+
+        // Concurrency level
+        // how many browser should be started simultaneous
+        concurrency: Infinity
+    })
+}
+```
 
 Mocha + Sinon 配合 Karma 一起构成
 
 ## [Mocha](https://mochajs.org/) -> BDD 
 [GitHub](https://github.com/mochajs/mocha) Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser, making asyncronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.
 #### 单元测试框架/库，它可以用来写测试用例
+#### npm i -D mocha
 
 示例：
 ```
@@ -86,6 +161,7 @@ describe('Array', () => {
 ## [Sinon](http://sinonjs.org/) -> spies function
 [GitHub](https://github.com/sinonjs/sinon) Standalone test spies, stubs and mocks for JavaScript. Works with any unit testing framework.
 #### spy / stub / mock 库，用以辅助测试
+#### npm i -D sinon sinon-chai
 
 ## [Travis CI](https://travis-ci.org/) -> 持续集成
 
