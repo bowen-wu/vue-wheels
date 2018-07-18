@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    name: 'bowen-button-group',
     data() {
         return {
 

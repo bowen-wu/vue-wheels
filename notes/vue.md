@@ -64,6 +64,65 @@
     });
     ```
 
+- ` v-on ` -> 绑定事件监听器。事件类型由参数决定。表达式可以是一个方法的名字或一个内联语句，如果没有修饰符也可以省略。用在普通元素上时，只能监听**原生 DOM 事件**。用在自定义元素组件上时，也可以监听子组件触发的**自定义事件**。在监听原生 DOM 事件时，方法以事件为唯一的参数。*如果使用内联语句，语句可以访问一个 ` $event ` 属性： ` v-on:click = "handle('ok', $event)" `*
+    1. 修饰符：
+        - ` .stop ` -> 调用 ` event.stopPropagation() `
+        - ` .prevent ` -> 调用 ` event.preventDefault() `
+        - ` .capture ` -> 添加事件监听器时使用 capture 模式
+        - ` .self ` -> 只当事件是从监听器绑定的元素本身触发时才触发回调
+        - ` .{KeyCode | KeyAlias} ` -> 只当事件是从特定键触发时才触发回调
+        - ` .native ` -> 监听组件根元素的原生事件
+        - ` .once ` -> 只触发一次回调
+        - ` .left ` -> 只当点击鼠标左键时触发
+        - ` .right ` -> 只当点击鼠标右键时触发
+        - ` .middle ` -> 只当点击鼠标中键时触发
+        - ` .passive ` -> 以 ` { passive: true } ` 模式添加监听器
+    
+    2. 示例： 
+    ```
+    <!-- 方法处理器 -->
+    <button v-on:click="doThis"></button>
+
+    <!-- 内联语句 -->
+    <button v-on:click="doThat('hello', $event)"></button>
+
+    <!-- 缩写 -->
+    <button @click="doThis"></button>
+
+    <!-- 停止冒泡 -->
+    <button @click.stop="doThis"></button>
+
+    <!-- 阻止默认行为 -->
+    <button @click.prevent="doThis"></button>
+
+    <!-- 阻止默认行为，没有表达式 -->
+    <button @click.prevent></button>
+
+    <!-- 串联修饰符 -->
+    <button @click.stop.prevent="doThis"></button>
+
+    <!-- 键修饰符，键别名 -->
+    <button @keyup.enter="onEnter"></button>
+
+    <!-- 键修饰符，键代码 -->
+    <button @keyup.13="onEnter"></button>
+
+    <!-- 点击回调只会触发一次 -->
+    <button v-on:click.once="doThis"></button>
+
+    <!-- 对象语法 -->
+    <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
+
+    <!-- 在子组件上监听自定义事件(当子组件触发 'my-event' 时将调用事件处理器) -->
+    <my-component @my-event="handleThis"></my-component>
+
+    <!-- 内联语句 -->
+    <my-component @my-event="handleThis(123, $event)"></my-component>
+
+    <!-- 组件中的原生事件 -->
+    <my-component @click.native="onClick></my-component>
+    ```
+
 - ` vm.$on(event, callback) ` -> 监听当前实例上的自定义事件，事件可以由 ` vm.$emit ` 触发。回调函数会接收所有传入事件触发函数的额外参数。
     示例：
     ```
@@ -77,27 +136,48 @@
     [示例：](https://cn.vuejs.org/v2/api/#vm-emit)
     ```
     JS:
-    Vue.component('welcome-button', {
+    Vue.component('magic-eight-ball', {
+        data() {
+            return {
+                possibleAdvise: ['Yes', 'No', 'Maybe']
+            }
+        },
+        methods: {
+            giveAdvise() {
+                let randomAdviseIndex = Math.floor(Math.random() * this.possibleAdvise.length);
+                this.$emit('give-advise', $event, this.possbleAdvise[randomAdviseIndex]);
+            },
+        },
         template: `
-            <button @click="$emit('welcome')">
-                Click me to be welcomed.
+            <button @click="giveAdvice">
+                Click me for advice
             </button>
         `
     });
     
     HTML:
     <div id="example">
-        <welcome-button @welcome="sayHi"></welcome-buttom>
+        <magic-eight-ball @give-advice="showAdvice"></magic-eight-ball>
     </div>
 
     JS:
     new Vue({
         el: '#example',
         methods: {
-            sayHi() {
-                alert('Hi');
+            showAdvice(event, advice) {
+                console.log('event', event);
+                alert(advice)
             },
         },
     });
     ```
-    
+
+- Vue 的 HTML 是 HTML 语法，不是 XML 语法 -> 不可以自闭和
+
+- ` name ` -> 只有作为组件选项时起作用。类型为 String，允许组件模板递归地调用自身，注意，组件在全局使用 ` Vue.component() ` 注册时，全局 ID 自动作为组件的 name。指定 name 选项还可以便于调试，有名字的组件有更友好的警告信息。另外，当在有 ` vue-devtools `，未命名组件将显示成 ` <AnonymousComponent> `(匿名组件)，这很没有语义，通过提供 ` name ` 选项，可以获得更有语义信息的组件树。
+
+- scoped -> 有范围的 CSS，编译出来的 CSS 具有组件属性
+
+- ` template ` -> 一个字符串模板作为 Vue 实例的标识使用。模板将会**替换**挂载的元素。挂载元素的内容都将被忽略，除非模板的内容有分发插槽。如果值以 ` # ` 开始，则它将被用作选择符，并使用匹配元素的 innerHTML 作为模板。常用的技巧是用 ` <script type="x-template"> ` 包含模板。
+
+- 

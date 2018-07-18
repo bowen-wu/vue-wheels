@@ -11,6 +11,7 @@
 <script>
 import Icon from './icon';
 export default {
+    name: 'bowen-button',
     // props: ['icon', 'iconPosition'],
     props: {
         icon: {

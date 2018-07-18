@@ -7,6 +7,7 @@
 <script>
 import './svg.js';
 export default {
+    name: 'bowen-icon',
     // props: ['name', 'iconPosition'],
     props: {
         name: {

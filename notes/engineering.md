@@ -73,3 +73,5 @@
     9. npm link -> 本地使用
         - 源码仓库 -> ` npm link ` -> 在本地注册(本机用户)
         - 测试仓库 -> ` npm link vue-wheels-bowen ` -> 使用本地注册包
+- 添加 npm 标识
+    
