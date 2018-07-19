@@ -15,5 +15,11 @@ new Vue({
         loading1: false,
         loading2: false,
         loading3: true,
+        maxlength: 10,
+        userTips: '啦啦啦',
+        passwordTips: '',
+        width: 300,
+        autofocus: true,
+        falsy: false,
     },
 });

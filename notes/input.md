@@ -14,7 +14,7 @@
     2. focus
     3. hover
     4. disabled
-    5. read
+    5. readonly
     6. normal -> 1 - 5
     7. error -> + input | + focus | + hover
     8. success -> + input | + focus | + hover
