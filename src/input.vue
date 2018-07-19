@@ -1,38 +1,37 @@
 <template>
-    <div class="g-input-wrapper" :class="{error, tips, success, [`tips-${tipsPosition}`]: true}">
-        <label class="g-label">
+    <div class="g-input-wrapper" :class="{[`tips-${tipsPosition}`]: true}">
+        <label class="g-label" :class="{'pre-icon': preIcon, 'next-icon': nextIcon, 'pre-text': preText, 'next-text': nextText, 'tips': tipsType, [`tips-${tipsType}`]: true}">
             <!-- label -->
-            <span v-if="label">{{label}}</span>
+            <span v-if="label" class="g-label-content">{{label}}</span>
+
+            <!-- pre text -->
+            <div v-if="preText" class="g-pre-text">
+                {{preText}}               
+            </div>
 
             <!-- pre Icon -->
-            <g-icon v-if="preIcon" :name="preIcon" class="g-pre-icon"></g-icon>
+            <div v-if="preIcon" class="g-pre-icon">
+                <g-icon :name="preIcon" class="g-icon"></g-icon>                
+            </div>
 
             <!-- input -->
             <input class="g-input" :type="type" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style">
 
             <!-- next Icon -->
-            <g-icon v-if="nextIcon" :name="nextIcon" class="g-next-icon"></g-icon>
+            <div v-if="nextIcon" class="g-next-icon">
+                <g-icon v-if="nextIcon" :name="nextIcon" class="g-icon"></g-icon>
+            </div>
+
+            <!-- next text -->
+            <div v-if="nextText" class="g-next-text">
+                {{nextText}}               
+            </div>
 
             <!-- tips -->
             <div v-if="tipsType" class="g-tips">
                 <g-icon :name="tipsType" class="g-tips-icon"></g-icon>
                 <span v-if="tipsMessage" class="g-tips-message">{{tipsMessage}}</span>
             </div>
-
-            <!-- error tips -->
-            <div v-if="error" class="g-icon-message">
-                <g-icon name="error" class="g-tips g-error"></g-icon>
-                <span class="g-message">{{error}}</span>
-            </div>
-
-            <!-- tips -->
-            <div v-if="tips" class="g-icon-message">
-                <g-icon name="tips" class="g-tips"></g-icon>
-                <span class="g-message">{{tips}}</span>
-            </div>
-
-            <!-- success tips -->
-            <g-icon v-if="success" name="success" class="g-success"></g-icon>
         </label>
     </div>
 </template>
@@ -100,6 +99,16 @@ export default {
             required: false,
             default: '',
         },
+        preText: {
+            type: String,
+            required: false,
+            default: '',
+        },
+        nextText: {
+            type: String,
+            required: false,
+            default: '',
+        },
 
         // Tips
         tipsType: {
@@ -112,16 +121,6 @@ export default {
             required: false,
             default: '',
         },
-        error: {
-            type: String,
-            required: false,
-            default: '',
-        },
-        tips: {
-            type: String,
-            required: false,
-            default: '',
-        },
         tipsPosition: {
             type: String,
             required: false,
@@ -129,11 +128,6 @@ export default {
             validator(value) {
                 return value === 'right' || value === 'down';
             },
-        },
-        success: {
-            type: Boolean,
-            required: false,
-            default: false,
         },
     },
     data() {
@@ -171,6 +165,7 @@ $color-tips-success: #67c23a;
 $color-disabled: #c0c4cc;
 $border-radius: 4px;
 $border-color: #dcdfe6;
+$pre-next-icon-fill: #a1acb3;
 $bg-color-disabled: #f5f7fa;
 $border-color-disabled: #e4e7ed;
 $border-color-hover: #c0c4cc;
@@ -199,16 +194,96 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
 }
 
 .g-input-wrapper{
-    @include flex(center);
+    // @include flex(center);
     & > .g-label{
         width: 100%;
+        @include flex(center);
+        position: relative;
+
+        & > .g-label-content{
+            @include fontLineColor();
+        }
+
+        // pre icon + next icon
+        & > .g-pre-icon, & > .g-next-icon{
+            display: flex;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            padding: 0.5em;
+            & > .g-icon{
+                fill: $pre-next-icon-fill;
+            }
+        }
+
+        &.pre-icon{
+            & > .g-pre-icon{
+                left: 2px;
+            }
+            & > .g-input{
+                padding-left: calc(2em);
+            }
+        }
+
+        &.next-icon{
+            & > .g-next-icon{
+                right: 2px;
+            }
+            & > .g-input{
+                padding-right: calc(2em);
+            }
+        }
+
+        // pre text + next text
+        & > .g-pre-text, & > .g-next-text{
+            @include fontLineColor();
+            padding: 8px 16px;
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        &.pre-text{
+            & > .g-pre-text{
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            & > .g-input{
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                margin-left: -1px;
+                &:focus{
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+
+        &.next-text{
+            & > .g-next-text{
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                margin-left: -1px;
+            }
+            & > .g-input{
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                &:focus{
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+
+        // input 
         & > .g-input{
             @include fontLineColor();
             padding: 8px;
             border-radius: $border-radius;
             border: 1px solid $border-color;
             width: 100%;
-
+            min-width: 120px;
             &:hover{
                 border-color: $border-color-hover;
             }
@@ -227,75 +302,78 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
                 @include fontLineColor($color-placeholder);
             }
         }
-    }
-    .g-icon-message{
-        @include flex(center);
-        :not(:last-child){
-            margin-right: 0.5em;
-        }
-    }
-    &.tips{
-        .g-input{
-            margin-right: 0.5em;
-        }
-        & > .g-icon-message{
+
+        // tips
+        &.tips{
+            & > .g-input{
+                margin-right: 0.5em;
+                width: 60%;
+            }
             & > .g-tips{
-                fill: $color-tips;
+                @include flex(center);
+                :not(:last-child){
+                    margin-right: 0.5em;
+                }
             }
-            & > .g-message{
-                @include tips($color-tips);
+            &.tips-tips > .g-tips{
+                & > .g-tips-icon{
+                    fill: $color-tips;
+                }
+                & > .g-tips-message{
+                    @include tips($color-tips);
+                }
+            }
+            &.tips-error {
+                & > .g-input{
+                    border-color: $border-color-error;
+                    &:focus{
+                        box-shadow: 0 0 1px 1px $box-shadow-color-error;
+                    }
+                }
+                & > .g-tips{
+                    & > .g-tips-icon{
+                        fill: $color-tips-error;
+                    }
+                    & > .g-tips-message{
+                        @include tips($color-tips-error);
+                    }
+                }
+            }
+            &.tips-success {
+                & > .g-input{
+                    border-color: $border-color-success;
+                    &:focus{
+                        box-shadow: 0 0 1px 1px $box-shadow-color-success;
+                    }
+                }
+                & > .g-tips{
+                    & > .g-tips-icon{
+                        fill: $color-tips-success;
+                    }
+                    & > .g-tips-message{
+                        @include tips($color-tips-success);
+                    }
+                }
             }
         }
-    }
-    &.success{
-        .g-input{
-            margin-right: 0.5em;
-            border-color: $border-color-success;
-            &:focus{
-                box-shadow: 0 0 1px 1px $box-shadow-color-success;
-            }
-        }
-        & > .g-success{
-            margin-left: 0.5em;
-            fill: $color-tips-success;
-        }
-    }
-    &.error{
-        .g-input{
-            margin-right: 0.5em;
-            border-color: $border-color-error;
-            &:focus{
-                box-shadow: 0 0 1px 1px $box-shadow-color-error;
-            }
-        }
-        & > .g-icon-message{
-            & > .g-error{
-                fill: $color-tips-error;
-            }
-            & > .g-message{
-                @include tips($color-tips-error);
-            }
-        }
-    }
-    &.tips, &.success, &.error{
-        .g-input{
-            width: 60%;
-        }
+        
     }
     &.tips-down{
-        display: block;
-        :not(:last-child){
-            margin-right: 0;
-        }
-        .g-input{
-            width: 100%;
-        }
-        & > .g-icon-message{
-            @include flex(center);
-            margin-top: 0.5em;
-            padding-left: 4px;
+        & > .g-label{
+            display: block;
             :not(:last-child){
-                margin-right: 0.5em;
+                margin-right: 0;
+            }
+            & > .g-input{
+                width: 100%;
+            }
+            & > .g-tips{
+                @include flex(center);
+                margin-top: 0.5em;
+                padding-left: 4px;
+                :not(:last-child){
+                    margin-right: 0.5em;
+                }
             }
         }
     }
