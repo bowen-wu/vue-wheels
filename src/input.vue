@@ -15,7 +15,11 @@
             </div>
 
             <!-- input -->
-            <input class="g-input" :type="type" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style">
+            <input class="g-input" :type="type" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style" 
+            @change="$emit('change', $event)" 
+            @input="$emit('input', $event)" 
+            @focus="$emit('focus', $event)" 
+            @blur="$emit('blur', $event)">
 
             <!-- next Icon -->
             <div v-if="nextIcon" class="g-next-icon">
@@ -54,13 +58,6 @@ export default {
             type: String,
             required: false,
             default: '',
-        },
-        
-        // TODO: autofocus not work
-        autofocus: {
-            type: Boolean,
-            required: false,
-            default: true,
         },
         width: {
             type: Number,
@@ -109,6 +106,13 @@ export default {
             type: String,
             required: false,
             default: '',
+        },
+        
+        // TODO: autofocus not work
+        autofocus: {
+            type: Boolean,
+            required: false,
+            default: true,
         },
 
         // Tips
@@ -203,6 +207,7 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
 
         & > .g-label-content{
             @include fontLineColor();
+            white-space: nowrap;
         }
 
         // pre icon + next icon
