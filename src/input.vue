@@ -55,6 +55,7 @@ export default {
             required: false,
             default: '',
         },
+        
         // TODO: autofocus not work
         autofocus: {
             type: Boolean,
