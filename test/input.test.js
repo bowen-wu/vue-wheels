@@ -209,19 +209,39 @@ describe('Input', () => {
     });
 
     describe('event', () => {
+        function eventTest(eventName, inputElement, vm) {
+            const callback = sinon.fake();
+            vm.$on(eventName, callback);
+
+            // trigger input change event
+            let event = new Event(eventName);
+            inputElement.dispatchEvent(event);
+
+            // 期待函数被调用并且传 event 参数 -> sinon-chai[https://github.com/domenic/sinon-chai]
+            // expect(callback).to.have.been.called;
+            expect(callback).to.have.been.calledWith(event)
+        }
         it('change event', () => {
             instantiation({}, (inputElement, vm) => {
-                const callback = sinon.fake();
-                vm.$on('change', callback);
+                eventTest('change', inputElement, vm);
+            });
+        });
 
-                // trigger input change event
-                let event = new Event('change');
-                inputElement.dispatchEvent(event);
+        it('input event', () => {
+            instantiation({}, (inputElement, vm) => {
+                eventTest('input', inputElement, vm);   
+            });
+        });
 
-                // 期待函数被调用并且传 event 参数 -> sinon-chai[https://github.com/domenic/sinon-chai]
-                // expect(callback).to.have.been.called;
-                expect(callback).to.have.been.calledWith(event)      
+        it('focus event', () => {
+            instantiation({}, (inputElement, vm) => {
+                eventTest('focus', inputElement, vm);   
+            });
+        });
 
+        it('blur event', () => {
+            instantiation({}, (inputElement, vm) => {
+                eventTest('blur', inputElement, vm);   
             });
         });
     })
