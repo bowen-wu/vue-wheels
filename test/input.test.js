@@ -102,19 +102,13 @@ describe('Input', () => {
             });
         });
 
-        it('setting disabled', () => {
-            instantiation({
-                disabled: true,
-            }, (inputElement) => {
-                expect(inputElement.getAttribute('disabled')).to.equal('disabled');
-            });
-        });
-
-        it('setting readonly', () => {
-            instantiation({
-                readonly: true,
-            }, (inputElement) => {
-                expect(inputElement.getAttribute('readonly')).to.equal('readonly');
+        it('setting disabled | readonly', () => {
+            ['disabled', 'readonly', 'autofocus'].map(propertyName => {
+                instantiation({
+                    [propertyName]: true,
+                }, (inputElement) => {
+                    expect(inputElement.getAttribute(propertyName)).to.equal(propertyName);
+                });
             });
         });
 
@@ -128,51 +122,30 @@ describe('Input', () => {
             });
         });
 
-        it('setting preIcon', () => {
-            instantiation({
-                preIcon: 'setting'
-            }, (inputElement, vm) => {
-                let useElement = vm.$el.querySelector('use');
-                expect(useElement.getAttribute('xlink:href')).to.equal('#icon-setting');
-                expect(getComputedStyle(inputElement).getPropertyValue('padding-left')).to.not.equal('8px');
-                expect(getComputedStyle(inputElement).getPropertyValue('padding-right')).to.equal('8px');
-            }, true);
-        });
-
-        it('setting nextIcon', () => {
-            instantiation({
-                nextIcon: 'tips'
-            }, (inputElement, vm) => {
-                let useElement = vm.$el.querySelector('use');
-                expect(useElement.getAttribute('xlink:href')).to.equal('#icon-tips');
-                expect(getComputedStyle(inputElement).getPropertyValue('padding-left')).to.equal('8px');
-                expect(getComputedStyle(inputElement).getPropertyValue('padding-right')).to.not.equal('');
-            }, true);
-        });
-
-        it('settting preText', () => {
-            instantiation({
-                preText: '前置文本'
-            }, (inputElement, vm) => {
-                let divElement = vm.$el.querySelector('label').querySelector('div');
-                expect(divElement.textContent.trim()).to.equal('前置文本');
+        it('setting preIcon | nextIcon', () => {
+            ['preIcon', 'nextIcon'].map(propertyName => {
+                instantiation({
+                    [propertyName]: 'setting'
+                }, (inputElement, vm) => {
+                    let useElement = vm.$el.querySelector('use');
+                    expect(useElement.getAttribute('xlink:href')).to.equal('#icon-setting');
+                    let padding = ['padding-left', 'padding-right'];
+                    let propertyValue = propertyName === 'preIcon' ? padding[0] : padding[1];
+                    expect(getComputedStyle(inputElement).getPropertyValue(propertyValue)).to.not.equal('8px');
+                    propertyValue = propertyName === 'preIcon' ? padding[1] : padding[0];
+                    expect(getComputedStyle(inputElement).getPropertyValue(propertyValue)).to.equal('8px');
+                }, true);
             });
         });
 
-        it('settting nextText', () => {
-            instantiation({
-                nextText: '后置文本'
-            }, (inputElement, vm) => {
-                let divElement = vm.$el.querySelector('label').querySelector('div');
-                expect(divElement.textContent.trim()).to.equal('后置文本');
-            });
-        });
-
-        it('setting autofocus', () => {
-            instantiation({
-                autofocus: true,
-            }, (inputElement) => {
-                expect(inputElement.getAttribute('autofocus')).to.equal('autofocus');
+        it('settting preText | nextText', () => {
+            ['preText', 'nextText'].map(propertyName => {
+                instantiation({
+                    [propertyName]: '文本'
+                }, (inputElement, vm) => {
+                    let divElement = vm.$el.querySelector('label').querySelector('div');
+                    expect(divElement.textContent.trim()).to.equal('文本');
+                });
             });
         });
 
@@ -209,39 +182,20 @@ describe('Input', () => {
     });
 
     describe('event', () => {
-        function eventTest(eventName, inputElement, vm) {
-            const callback = sinon.fake();
-            vm.$on(eventName, callback);
-
-            // trigger input change event
-            let event = new Event(eventName);
-            inputElement.dispatchEvent(event);
-
-            // 期待函数被调用并且传 event 参数 -> sinon-chai[https://github.com/domenic/sinon-chai]
-            // expect(callback).to.have.been.called;
-            expect(callback).to.have.been.calledWith(event)
-        }
-        it('change event', () => {
+        it('change | input | focus | blur event', () => {
             instantiation({}, (inputElement, vm) => {
-                eventTest('change', inputElement, vm);
-            });
-        });
+                ['change', 'input', 'focus', 'blur'].map(eventName => {
+                    const callback = sinon.fake();
+                    vm.$on(eventName, callback);
 
-        it('input event', () => {
-            instantiation({}, (inputElement, vm) => {
-                eventTest('input', inputElement, vm);   
-            });
-        });
+                    // trigger input event
+                    let event = new Event(eventName);
+                    inputElement.dispatchEvent(event);
 
-        it('focus event', () => {
-            instantiation({}, (inputElement, vm) => {
-                eventTest('focus', inputElement, vm);   
-            });
-        });
-
-        it('blur event', () => {
-            instantiation({}, (inputElement, vm) => {
-                eventTest('blur', inputElement, vm);   
+                    // 期待函数被调用并且传 event 参数 -> sinon-chai[https://github.com/domenic/sinon-chai]
+                    // expect(callback).to.have.been.called;
+                    expect(callback).to.have.been.calledWith(event);
+                });
             });
         });
     })
