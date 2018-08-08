@@ -7,7 +7,7 @@ Vue.config.devtools = false;
 
 const Constructor = Vue.extend(Input);
 const div = document.createElement('div');
-function instantiation(propsData = {}, callback, mount) {
+function instantiation(propsData = {}, callback, mount = false) {
     if(mount){
         document.body.appendChild(div);
     }
@@ -132,5 +132,62 @@ describe('Input', () => {
             expect(getComputedStyle(inputElement).getPropertyValue('padding-right')).to.not.equal('');
         }, true);
     });
-    
+
+    it('settting preText', () => {
+        instantiation({
+            preText: '前置文本'
+        }, (inputElement, vm) => {
+            let divElement = vm.$el.querySelector('label').querySelector('div');
+            expect(divElement.textContent.trim()).to.equal('前置文本');
+        });
+    });
+
+    it('settting nextText', () => {
+        instantiation({
+            nextText: '后置文本'
+        }, (inputElement, vm) => {
+            let divElement = vm.$el.querySelector('label').querySelector('div');
+            expect(divElement.textContent.trim()).to.equal('后置文本');
+        });
+    });
+
+    it('setting autofocus', () => {
+        instantiation({
+            autofocus: true,
+        }, (inputElement) => {
+            expect(inputElement.getAttribute('autofocus')).to.equal('autofocus');
+        });
+    });
+
+    it('setting tipsType', () => {
+        instantiation({
+            tipsType: 'tips',
+        }, (inputElement, vm) => {
+            let useElement = vm.$el.querySelector('use');
+            expect(useElement.getAttribute('xlink:href')).to.equal('#icon-tips');
+        });
+    });
+
+    it('setting tipsMessage', () => {
+        instantiation({
+            tipsType: 'success',
+            tipsMessage: '这是提示文本',
+        }, (inputElement, vm) => {
+            // TODO: tisMEssage not work when only setting tispMessage 
+            let useElement = vm.$el.querySelector('use');
+            expect(useElement.getAttribute('xlink:href')).to.equal('#icon-success');
+            let spanElement = vm.$el.querySelector('span');
+            expect(spanElement.textContent.trim()).to.equal('这是提示文本');
+        });
+    });
+
+    it('setting tipsPosition', () => {
+        instantiation({
+            tipsPosition: 'down',
+        }, (inputElement, vm) => {
+            let labelElement = vm.$el.querySelector('label');
+            expect(getComputedStyle(labelElement).display).to.equal('block');
+        }, true);
+    });
+
 })

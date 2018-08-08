@@ -100,7 +100,7 @@ export default {
         preText: {
             type: String,
             required: false,
-            default: '',
+            default: '', 
         },
         nextText: {
             type: String,
@@ -121,6 +121,8 @@ export default {
             required: false,
             default: '',
         },
+
+        // TODO: tipsMessage 需要 tipsType 存在才生效
         tipsMessage: {
             type: String,
             required: false,
