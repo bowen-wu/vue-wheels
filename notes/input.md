@@ -19,3 +19,6 @@
     7. error -> + input | + focus | + hover
     8. success -> + input | + focus | + hover
     9. warning -> + input | + focus | + hover
+
+#### JS
+- ` dispatchEvent ` -> 
