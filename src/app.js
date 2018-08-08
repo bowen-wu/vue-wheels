@@ -18,9 +18,10 @@ new Vue({
         maxlength: 10,
         userTips: '啦啦啦',
         passwordTips: '',
-        width: 300,
+        width: 200,
         autofocus: true,
         falsy: false,
+        message: '',
     },
     created() {
         // validate dispatchEvent

@@ -103,11 +103,11 @@
         <h3>用户名 + 密码登录 -> 不设置 label ，左右结构，对齐</h3>
         <div class="box line">
             <span class="label">用户名：</span>
-            <g-input placeholder="账户" :tips="userTips" :width="width"></g-input>
+            <g-input placeholder="账户" :tips="userTips" :width="width" next-icon="tips"></g-input>
         </div>
         <div class="box line">
             <span class="label">密码：</span>
-            <g-input type="password" placeholder="密码" :tips="passwordTips" :maxlength="maxlength" :width="width"></g-input>
+            <g-input type="password" placeholder="密码" :tips="passwordTips" :maxlength="maxlength" :width="width" next-icon="tips"></g-input>
         </div>
 
         <h3>用户名 + 密码登录 -> 设置 label ，左右结构 + 不对齐</h3>
@@ -163,6 +163,16 @@
             <g-input value="啦啦啦" next-text="搜索"></g-input>
         </div>
 
+        <h3>clear</h3>
+        <div class="box">
+            <g-input value="啦啦啦" clearable></g-input>
+        </div>
+
+        <h3>v-model</h3>
+        <div class="box">
+            <g-input v-model="message"></g-input>
+            <p>{{message}}</p>
+        </div>
     </div>
     <div id="test"></div>
     <script src="./src/app.js"></script>

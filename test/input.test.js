@@ -190,11 +190,17 @@ describe('Input', () => {
 
                     // trigger input event
                     let event = new Event(eventName);
+                    Object.defineProperty(event, 'target', {
+                        value: {
+                            value: 'hi',
+                        },
+                        enumerable: true,
+                    });
                     inputElement.dispatchEvent(event);
 
                     // 期待函数被调用并且传 event 参数 -> sinon-chai[https://github.com/domenic/sinon-chai]
                     // expect(callback).to.have.been.called;
-                    expect(callback).to.have.been.calledWith(event);
+                    expect(callback).to.have.been.calledWith('hi');
                 });
             });
         });

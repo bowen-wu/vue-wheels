@@ -1,6 +1,6 @@
 <template>
     <div class="g-input-wrapper" :class="{[`tips-${tipsPosition}`]: true}">
-        <label class="g-label" :class="{'pre-icon': preIcon, 'next-icon': nextIcon, 'pre-text': preText, 'next-text': nextText, 'tips': tipsType, [`tips-${tipsType}`]: true}">
+        <label class="g-label" :class="{'pre-icon': preIcon, 'next-icon': nextIcon, 'pre-text': preText, 'next-text': nextText, 'tips': tipsType, [`tips-${tipsType}`]: true, 'clearable': clearable}">
             <!-- label -->
             <span v-if="label" class="g-label-content">{{label}}</span>
 
@@ -16,14 +16,19 @@
 
             <!-- input -->
             <input class="g-input" :type="type" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style" 
-            @change="$emit('change', $event)" 
-            @input="$emit('input', $event)" 
-            @focus="$emit('focus', $event)" 
-            @blur="$emit('blur', $event)">
+            @change="$emit('change', $event.target.value)" 
+            @input="inputEvent" 
+            @focus="$emit('focus', $event.target.value)" 
+            @blur="$emit('blur', $event.target.value)">
+
+            <!-- clearable -->
+            <div v-if="clearable" class="g-clear-icon" :class="{ 'active': clearableActive }">
+                <g-icon name="clear" class="g-icon"></g-icon>
+            </div>
 
             <!-- next Icon -->
             <div v-if="nextIcon" class="g-next-icon">
-                <g-icon v-if="nextIcon" :name="nextIcon" class="g-icon"></g-icon>
+                <g-icon :name="nextIcon" class="g-icon"></g-icon>
             </div>
 
             <!-- next text -->
@@ -107,6 +112,11 @@ export default {
             required: false,
             default: '',
         },
+        clearable: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
         
         // TODO: autofocus not work
         autofocus: {
@@ -152,9 +162,18 @@ export default {
                 return ;
             }
         },
+        clearableActive() {
+            console.log('this.value', this.value);
+            return this.value;
+        },
     },
     created() {
         // console.log(this.style)
+    },
+    methods: {
+        inputEvent($event) {
+            this.$emit('input', $event.target.value);
+        }
     },
 }
 </script>
@@ -213,7 +232,7 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
         }
 
         // pre icon + next icon
-        & > .g-pre-icon, & > .g-next-icon{
+        & > .g-pre-icon, & > .g-next-icon, & > .g-clear-icon{
             display: flex;
             position: absolute;
             top: 50%;
@@ -233,9 +252,16 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
             }
         }
 
-        &.next-icon{
-            & > .g-next-icon{
+        &.next-icon, &.clearable{
+            & > .g-next-icon, & > .g-clear-icon{
                 right: 2px;
+            }
+            & > .g-clear-icon{
+                &.active{
+                    display: block;
+                }
+                display: none;
+                z-index: 1;
             }
             & > .g-input{
                 padding-right: calc(2em);

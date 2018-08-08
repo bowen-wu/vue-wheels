@@ -21,4 +21,4 @@
     9. warning -> + input | + focus | + hover
 
 #### JS
-- ` dispatchEvent ` -> 
+- ` dispatchEvent ` -> 向一个指定的事件目标派发一个事件，以合适的顺序触发受影响的事件目标。标准事件处理规则(包括事件捕获和可选的冒泡过程)同样适用于通过手动的使用 ` dispatchEvent() ` 方法派发的事件
