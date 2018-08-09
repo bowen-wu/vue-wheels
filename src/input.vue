@@ -22,7 +22,7 @@
             @blur="$emit('blur', $event.target.value)">
 
             <!-- clearable -->
-            <div v-if="clearable" class="g-clear-icon" :class="{ 'active': clearableActive }">
+            <div v-if="clearable" class="g-clear-icon" :class="{'active': value}" @click="clearEvent">
                 <g-icon name="clear" class="g-icon"></g-icon>
             </div>
 
@@ -148,9 +148,7 @@ export default {
         },
     },
     data() {
-        return {
-            widthData: 'x',
-        }
+        return {}
     },
     computed: {
         style() {
@@ -162,17 +160,18 @@ export default {
                 return ;
             }
         },
-        clearableActive() {
-            console.log('this.value', this.value);
-            return this.value;
-        },
     },
     created() {
         // console.log(this.style)
     },
     methods: {
         inputEvent($event) {
-            this.$emit('input', $event.target.value);
+            let {value} = $event.target;
+            this.value = value;
+            this.$emit('input', value);
+        },
+        clearEvent() {
+            this.value = '';
         }
     },
 }
@@ -252,16 +251,22 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
             }
         }
 
+        &.clearable > .g-input:focus,
+        &.clearable > .g-input:hover{
+            & ~ .g-clear-icon.active{
+                display: block;
+            }
+        }
         &.next-icon, &.clearable{
             & > .g-next-icon, & > .g-clear-icon{
                 right: 2px;
             }
             & > .g-clear-icon{
-                &.active{
-                    display: block;
-                }
                 display: none;
                 z-index: 1;
+                &.active:hover{
+                    display: block;
+                }
             }
             & > .g-input{
                 padding-right: calc(2em);

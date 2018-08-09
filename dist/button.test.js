@@ -10115,7 +10115,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],23:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -10453,7 +10453,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: null,
+            _scopeId: "data-v-cd06b1",
             functional: undefined
           };
         })());
@@ -10479,7 +10479,7 @@ render._withStripped = true
       
       }
     })();
-},{"./svg.js":34,"_css_loader":23,"vue-hot-reload-api":26,"vue":5}],7:[function(require,module,exports) {
+},{"./svg.js":34,"_css_loader":24,"vue-hot-reload-api":26,"vue":5}],7:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10580,7 +10580,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: null,
+            _scopeId: "data-v-0a8aa0",
             functional: undefined
           };
         })());
@@ -10606,7 +10606,7 @@ render._withStripped = true
       
       }
     })();
-},{"./icon":21,"_css_loader":23,"vue-hot-reload-api":26,"vue":5}],1:[function(require,module,exports) {
+},{"./icon":21,"_css_loader":24,"vue-hot-reload-api":26,"vue":5}],1:[function(require,module,exports) {
 'use strict';
 
 var _vue = require('vue');
@@ -10752,7 +10752,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63543' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54131' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
