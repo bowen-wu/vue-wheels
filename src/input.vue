@@ -15,14 +15,14 @@
             </div>
 
             <!-- input -->
-            <input class="g-input" :type="type" :value="value" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style" 
+            <input class="g-input" :type="type" :value="inputValue" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style" 
             @change="$emit('change', $event.target.value)" 
             @input="inputEvent" 
             @focus="$emit('focus', $event.target.value)" 
             @blur="$emit('blur', $event.target.value)">
 
             <!-- clearable -->
-            <div v-if="clearable" class="g-clear-icon" :class="{'active': value}" @click="clearEvent">
+            <div v-if="clearable" class="g-clear-icon" :class="{'active': inputValue}" @click="clearEvent">
                 <g-icon name="clear" class="g-icon"></g-icon>
             </div>
 
@@ -148,7 +148,9 @@ export default {
         },
     },
     data() {
-        return {}
+        return {
+            inputValue: '',
+        }
     },
     computed: {
         style() {
@@ -163,15 +165,16 @@ export default {
     },
     created() {
         // console.log(this.style)
+        this.inputValue = this.value;
     },
     methods: {
         inputEvent($event) {
             let {value} = $event.target;
-            this.value = value;
+            this.inputValue = value;
             this.$emit('input', value);
         },
         clearEvent() {
-            this.value = '';
+            this.inputValue = '';
         }
     },
 }

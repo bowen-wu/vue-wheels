@@ -179,6 +179,29 @@ describe('Input', () => {
                 expect(getComputedStyle(labelElement).display).to.equal('block');
             }, true);
         });
+
+        it('settting clearable and no have value', () => {
+            instantiation({
+                clearable: true,
+            }, (inputElement, vm) => {
+                let clearableElement = vm.$el.querySelector('div.g-clear-icon');
+                expect(clearableElement).to.exist;
+                let inputValue = inputElement.value;
+                expect(clearableElement.className.indexOf('active')).to.equal(-1);
+            });
+        });
+
+        it('settting clearable and have value', () => {
+            instantiation({
+                clearable: true,
+                value: '文本'
+            }, (inputElement, vm) => {
+                let clearableElement = vm.$el.querySelector('div.g-clear-icon');
+                expect(clearableElement).to.exist;
+                let inputValue = inputElement.value;
+                expect(clearableElement.className.indexOf('active')).to.not.equal(-1);
+            });
+        });
     });
 
     describe('event', () => {
