@@ -186,7 +186,6 @@ describe('Input', () => {
             }, (inputElement, vm) => {
                 let clearableElement = vm.$el.querySelector('div.g-clear-icon');
                 expect(clearableElement).to.exist;
-                let inputValue = inputElement.value;
                 expect(clearableElement.className.indexOf('active')).to.equal(-1);
             });
         });
@@ -198,9 +197,14 @@ describe('Input', () => {
             }, (inputElement, vm) => {
                 let clearableElement = vm.$el.querySelector('div.g-clear-icon');
                 expect(clearableElement).to.exist;
-                let inputValue = inputElement.value;
                 expect(clearableElement.className.indexOf('active')).to.not.equal(-1);
-            });
+                inputElement.focus();
+                expect(getComputedStyle(clearableElement).display).to.equal('block');
+                inputElement.blur();
+                expect(getComputedStyle(clearableElement).display).to.equal('none');
+
+                // TODO: 未测试 hover 状态
+            }, true);
         });
     });
 
