@@ -33,24 +33,30 @@
         }
     </style>
     <style>
-        .box{
+        .box {
             margin: 20px 0;
         }
-        .user, .password{
+
+        .user,
+        .password {
             margin-top: 8px;
         }
-        .login{
+
+        .login {
             display: flex;
             align-items: center;
         }
-        .line{
+
+        .line {
             display: flex;
             align-items: center;
         }
-        .line > .label{
+
+        .line>.label {
             min-width: 60px;
         }
-        h3{
+
+        h3 {
             color: #3a7f3a;
         }
     </style>
@@ -58,6 +64,93 @@
 
 <body>
     <div id="app">
+        <h2>网格布局</h2>
+
+        <div class="box">
+            <h3>自动分布</h3>
+            <div class="box">
+                <g-row>
+                    <g-col>12</g-col>
+                    <g-col>12</g-col>
+                </g-row>
+            </div>
+
+            <div class="box">
+                <g-row>
+                    <g-col>8</g-col>
+                    <g-col>8</g-col>
+                    <g-col>8</g-col>
+                </g-row>
+            </div>
+
+            <div class="box">
+                <g-row>
+                    <g-col>6</g-col>
+                    <g-col>6</g-col>
+                    <g-col>6</g-col>
+                    <g-col>6</g-col>
+                </g-row>
+            </div>
+
+            <div class="box">
+                <g-row>
+                    <g-col>1/5</g-col>
+                    <g-col>1/5</g-col>
+                    <g-col>1/5</g-col>
+                    <g-col>1/5</g-col>
+                    <g-col>1/5</g-col>
+                </g-row>
+            </div>
+
+            <div class="box">
+                <g-row>
+                    <g-col>4</g-col>
+                    <g-col>4</g-col>
+                    <g-col>4</g-col>
+                    <g-col>4</g-col>
+                    <g-col>4</g-col>
+                    <g-col>4</g-col>
+                </g-row>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>span 分布</h3>
+            <div class="box">
+                <g-row>
+                    <g-col span="2">2</g-col>
+                    <g-col span="22">22</g-col>
+                </g-row>
+            </div>
+            <div class="box">
+                <g-row>
+                    <g-col span="4">4</g-col>
+                    <g-col span="20">20</g-col>
+                </g-row>
+            </div>
+            <div class="box">
+                <g-row>
+                    <g-col span="7">7</g-col>
+                    <g-col span="17">17</g-col>
+                </g-row>
+            </div>
+            <div class="box">
+                <g-row>
+                    <g-col span="8">8</g-col>
+                    <g-col span="16">16</g-col>
+                </g-row>
+            </div>
+            <div class="box">
+                <g-row>
+                    <g-col span="12">12</g-col>
+                    <g-col span="12">12</g-col>
+                </g-row>
+            </div>
+        </div>
+
+
+        <hr />
+        <div class="box"></div>
         <g-button>按钮</g-button>
         <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
         <g-button icon="setting" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>
@@ -79,7 +172,7 @@
 
         <h3>账户密码 + 提示</h3>
         <div class="box">
-            <g-input placeholder="账户"  tips-message="这是提示"></g-input>
+            <g-input placeholder="账户" tips-message="这是提示"></g-input>
         </div>
         <div class="box">
             <g-input type="password" placeholder="密码" tips-type="tips" tips-message="至少6个字符" :maxlength="maxlength"></g-input>
