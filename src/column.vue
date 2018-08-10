@@ -1,5 +1,5 @@
 <template>
-    <div class="g-col" :class="[span && `col-${span}`]">
+    <div class="g-col" :class="[span && `col-${span}`, offset && `col-offset-${offset}`]">
         <slot></slot>
     </div>
 </template>
@@ -11,7 +11,11 @@ export default {
         span: {
             type: [Number, String],
             required: false,
-        }
+		},
+		offset: {
+			type: [Number, String],
+			required: false,
+		},
     }
 }
 </script>
@@ -23,10 +27,16 @@ export default {
     width: 100%;
     background-color: #3af;
 
-    $class-pre: col-;
-	@for $i from 1 through 24 {
-		&.#{$class-pre}#{$i} {
-			width: ($i / 24) * 100%;
+    $class-prefix: col-;
+	@for $n from 1 through 24 {
+		&.#{$class-prefix}#{$n} {
+			width: ($n / 24) * 100%;
+		}
+	}
+	$class-prefix: col-offset-;
+	@for $n from 1 through 24 {
+		&.#{$class-prefix}#{$n} {
+			margin-left: ($n / 24) * 100%;
 		}
 	}
 }
