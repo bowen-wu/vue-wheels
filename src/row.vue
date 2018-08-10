@@ -1,5 +1,5 @@
 <template>
-    <div class="g-row" :style="{marginLeft: - gutter / 2 + 'px', marginRight: - gutter / 2 + 'px'}">
+    <div class="g-row" :style="dynamicStyle">
         <slot></slot>
     </div>
 </template>
@@ -13,11 +13,17 @@ export default {
             required: false,
         }
     },
+    computed: {
+        dynamicStyle() {
+            return {
+                marginLeft: - this.gutter / 2 + 'px',
+                marginRight: - this.gutter / 2 + 'px',
+            }
+        },
+    },
     created() {},
     mounted() {
-        console.log('this.$children', this.$children);
         this.$children.map((vm) => {
-            console.log(this.gutter);
             vm.gutter = this.gutter;
         })
     },
