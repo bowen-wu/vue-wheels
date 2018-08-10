@@ -1,6 +1,8 @@
 <template>
-    <div class="g-col" :class="[span && `col-${span}`, offset && `col-offset-${offset}`]">
-        <slot></slot>
+    <div class="g-col" :class="[span && `col-${span}`, offset && `col-offset-${offset}`]" :style="{paddingLeft: gutter / 2 + 'px', paddingRight: gutter / 2 + 'px'}">
+		<div class="g-col-inner">
+        	<slot></slot>
+		</div>
     </div>
 </template>
 
@@ -16,16 +18,23 @@ export default {
 			type: [Number, String],
 			required: false,
 		},
-    }
+	},
+	data() {
+		return {
+			gutter: 0,
+		}
+	}
 }
 </script>
 
 <style lang="scss" scoped>
 .g-col{
-    padding: 8px;
-    border: 1px solid #666;
-    width: 100%;
-    background-color: #3af;
+	width: 100%;
+	.g-col-inner{
+		padding: 8px;
+		border: 1px solid #666;
+		background-color: #3af;
+	}
 
     $class-prefix: col-;
 	@for $n from 1 through 24 {
