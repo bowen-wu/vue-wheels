@@ -1,5 +1,5 @@
 <template>
-    <div class="g-row" :style="dynamicStyle">
+    <div class="g-row" :style="dynamicStyle" :class="dynamicClass">
         <slot></slot>
     </div>
 </template>
@@ -11,7 +11,17 @@ export default {
         gutter: {
             type: [Number, String],
             required: false,
-        }
+        },
+        justify: {
+            type: String,
+            required: false,
+            default: 'start',
+        },
+        align: {
+            type: String,
+            required: false,
+            default: 'top'
+        },
     },
     computed: {
         dynamicStyle() {
@@ -19,6 +29,9 @@ export default {
                 marginLeft: - this.gutter / 2 + 'px',
                 marginRight: - this.gutter / 2 + 'px',
             }
+        },
+        dynamicClass() {
+            return [`justify-${this.justify}`, `align-${this.align}`]
         },
     },
     created() {},
@@ -34,6 +47,30 @@ export default {
 .g-row{
     display: flex;
     flex-wrap: wrap;
+    &.justify-start{
+        justify-content: flex-start;
+    }
+    &.justify-end{
+        justify-content: flex-end;
+    }
+    &.justify-center{
+        justify-content: center;
+    }
+    &.justify-space-around{
+        justify-content: space-around;
+    }
+    &.justify-space-between{
+        justify-content: space-between;
+    }
+    &.align-top{
+        align-items: flex-start;
+    }
+    &.align-bottom{
+        align-items: flex-end;
+    }
+    &.align-middle{
+        align-items: center;
+    }
 }
 </style>
 
