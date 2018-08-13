@@ -28,6 +28,7 @@ export default {
         span: {
             type: [Number, String],
 			required: false,
+			default: 24,
 		},
 		offset: {
 			type: [Number, String],
@@ -67,7 +68,6 @@ export default {
 	computed: {
 		dymanicClass() {
 			let {span, offset,createResponseClass, xs, sm, lg, xl} = this;
-			console.log('span', span);
 			return [
 				span && `col-${span}`,
 				offset && `col-offset-${offset}`,
@@ -103,8 +103,6 @@ export default {
 
 <style lang="scss" scoped>
 .g-col{
-	// width: 100%;
-
     $class-prefix: col-;
 	@for $n from 1 through 24 {
 		&.#{$class-prefix}#{$n} {
