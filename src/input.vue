@@ -33,7 +33,7 @@
 
             <!-- next text -->
             <div v-if="nextText" class="g-next-text">
-                {{nextText}}               
+                {{nextText}}
             </div>
 
             <!-- tips -->

@@ -27,7 +27,7 @@ export default {
     props: {
         span: {
             type: [Number, String],
-            required: false,
+			required: false,
 		},
 		offset: {
 			type: [Number, String],
@@ -38,6 +38,26 @@ export default {
 			required: false,
 			validator,
 		},
+		sm: {
+			type: Object,
+			required: false,
+			validator,
+		},
+		// md: {
+		// 	type: Object,
+		// 	required: false,
+		// 	validator,
+		// },
+		lg: {
+			type: Object,
+			required: false,
+			validator,
+		},
+		xl: {
+			type: Object,
+			required: false,
+			validator,
+		}
 	},
 	data() {
 		return {
@@ -46,10 +66,17 @@ export default {
 	},
 	computed: {
 		dymanicClass() {
+			let {span, offset,createResponseClass, xs, sm, lg, xl} = this;
+			console.log('span', span);
 			return [
-				this.span && `col-${this.span}`,
-				this.offset && `col-offset-${this.offset}`,
-				...this.createResponseClass(this.xs, 'xs'),
+				span && `col-${span}`,
+				offset && `col-offset-${offset}`,
+				...createResponseClass(xs, 'xs'),
+				...createResponseClass(sm, 'sm'),
+				...createResponseClass({span, offset}),
+				// ...createResponseClass(this.md, 'md'),
+				...createResponseClass(lg, 'lg'),
+				...createResponseClass(xl, 'xl'),
 			]
 		},
 		dynamicStyle() {
@@ -58,9 +85,6 @@ export default {
 				paddingRight: this.gutter / 2 + 'px',
 			}
 		}
-	},
-	created() {
-		this.createResponseClass(this.xs, 'xs');
 	},
 	methods: {
 		createResponseClass(obj, str = '') {
@@ -79,12 +103,7 @@ export default {
 
 <style lang="scss" scoped>
 .g-col{
-	width: 100%;
-	.g-col-inner{
-		padding: 8px;
-		border: 1px solid #666;
-		background-color: #3af;
-	}
+	// width: 100%;
 
     $class-prefix: col-;
 	@for $n from 1 through 24 {
@@ -112,6 +131,64 @@ export default {
 			}
 		}
 	}
+	@media (min-width: 577px) and (max-width: 768px){
+		$class-prefix: col-sm-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				width: ($n / 24) * 100%;
+			}
+		}
+		$class-prefix: col-sm-offset-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				margin-left: ($n / 24) * 100%;
+			}
+		}
+	}
+	// @media (min-width: 769px) and (max-width: 992px){
+	// 	$class-prefix: col-md-;
+	// 	@for $n from 1 through 24 {
+	// 		&.#{$class-prefix}#{$n} {
+	// 			width: ($n / 24) * 100%;
+	// 		}
+	// 	}
+	// 	$class-prefix: col-md-offset-;
+	// 	@for $n from 1 through 24 {
+	// 		&.#{$class-prefix}#{$n} {
+	// 			margin-left: ($n / 24) * 100%;
+	// 		}
+	// 	}
+	// }
+	@media (min-width: 993px) and (max-width: 1200px){
+		$class-prefix: col-lg-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				width: ($n / 24) * 100%;
+			}
+		}
+		$class-prefix: col-lg-offset-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				margin-left: ($n / 24) * 100%;
+			}
+		}
+	}
+	@media (min-width: 1201px) {
+		$class-prefix: col-xl-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				width: ($n / 24) * 100%;
+			}
+		}
+		$class-prefix: col-xl-offset-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				margin-left: ($n / 24) * 100%;
+			}
+		}
+	}
+
+
 
 }
 </style>
