@@ -73,7 +73,7 @@ export default {
 				offset && `col-offset-${offset}`,
 				...createResponseClass(xs, 'xs'),
 				...createResponseClass(sm, 'sm'),
-				...createResponseClass({span, offset}),
+				// ...createResponseClass({span, offset}),
 				// ...createResponseClass(this.md, 'md'),
 				...createResponseClass(lg, 'lg'),
 				...createResponseClass(xl, 'xl'),
@@ -90,10 +90,10 @@ export default {
 		createResponseClass(obj, str = '') {
 			let arr = [];
 			if(obj && obj.span){
-				arr.push(`col-${str}-${obj.span}`);
+				str ? arr.push(`col-${str}-${obj.span}`) : arr.push(`col-${obj.span}`);
 			}
 			if(obj && obj.offset){
-				arr.push(`col-${str}-offset-${obj.offset}`);
+				str ? arr.push(`col-${str}-offset-${obj.offset}`) : arr.push(`col-offset-${obj.offset}`);
 			}
 			return arr;
 		},
@@ -103,7 +103,7 @@ export default {
 
 <style lang="scss" scoped>
 .g-col{
-    $class-prefix: col-;
+	$class-prefix: col-;
 	@for $n from 1 through 24 {
 		&.#{$class-prefix}#{$n} {
 			width: ($n / 24) * 100%;
@@ -129,7 +129,7 @@ export default {
 			}
 		}
 	}
-	@media (min-width: 577px) and (max-width: 768px){
+	@media (min-width: 577px) {
 		$class-prefix: col-sm-;
 		@for $n from 1 through 24 {
 			&.#{$class-prefix}#{$n} {
@@ -143,7 +143,22 @@ export default {
 			}
 		}
 	}
-	// @media (min-width: 769px) and (max-width: 992px){
+	@media (min-width: 769px) {
+		$class-prefix: col-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				width: ($n / 24) * 100%;
+			}
+		}
+		$class-prefix: col-offset-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				margin-left: ($n / 24) * 100%;
+			}
+		}
+	}
+
+	// @media (min-width: 769px) {
 	// 	$class-prefix: col-md-;
 	// 	@for $n from 1 through 24 {
 	// 		&.#{$class-prefix}#{$n} {
@@ -157,7 +172,7 @@ export default {
 	// 		}
 	// 	}
 	// }
-	@media (min-width: 993px) and (max-width: 1200px){
+	@media (min-width: 993px) {
 		$class-prefix: col-lg-;
 		@for $n from 1 through 24 {
 			&.#{$class-prefix}#{$n} {
