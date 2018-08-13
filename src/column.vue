@@ -34,11 +34,6 @@ export default {
 			type: [Number, String],
 			required: false,
 		},
-		// xs: {
-		// 	type: Object,
-		// 	required: false,
-		// 	validator,
-		// },
 		sm: {
 			type: Object,
 			required: false,
@@ -71,12 +66,10 @@ export default {
 			return [
 				span && `col-${span}`,
 				offset && `col-offset-${offset}`,
-				// ...createResponseClass(xs, 'xs'),
-				...createResponseClass(sm, 'sm'),
-				// ...createResponseClass({span, offset}),
-				...createResponseClass(md, 'md'),
-				...createResponseClass(lg, 'lg'),
-				...createResponseClass(xl, 'xl'),
+				...createResponseClass(sm, 'sm-'),
+				...createResponseClass(md, 'md-'),
+				...createResponseClass(lg, 'lg-'),
+				...createResponseClass(xl, 'xl-'),
 			]
 		},
 		dynamicStyle() {
@@ -90,10 +83,10 @@ export default {
 		createResponseClass(obj, str = '') {
 			let arr = [];
 			if(obj && obj.span){
-				str ? arr.push(`col-${str}-${obj.span}`) : arr.push(`col-${obj.span}`);
+				arr.push(`col-${str}${obj.span}`);
 			}
 			if(obj && obj.offset){
-				str ? arr.push(`col-${str}-offset-${obj.offset}`) : arr.push(`col-offset-${obj.offset}`);
+				arr.push(`col-${str}offset-${obj.offset}`);
 			}
 			return arr;
 		},
@@ -115,20 +108,6 @@ export default {
 			margin-left: ($n / 24) * 100%;
 		}
 	}
-	// @media (max-width: 576px){
-	// 	$class-prefix: col-xs-;
-	// 	@for $n from 1 through 24 {
-	// 		&.#{$class-prefix}#{$n} {
-	// 			width: ($n / 24) * 100%;
-	// 		}
-	// 	}
-	// 	$class-prefix: col-xs-offset-;
-	// 	@for $n from 1 through 24 {
-	// 		&.#{$class-prefix}#{$n} {
-	// 			margin-left: ($n / 24) * 100%;
-	// 		}
-	// 	}
-	// }
 	@media (min-width: 577px) {
 		$class-prefix: col-sm-;
 		@for $n from 1 through 24 {
@@ -143,21 +122,6 @@ export default {
 			}
 		}
 	}
-	// @media (min-width: 769px) {
-	// 	$class-prefix: col-;
-	// 	@for $n from 1 through 24 {
-	// 		&.#{$class-prefix}#{$n} {
-	// 			width: ($n / 24) * 100%;
-	// 		}
-	// 	}
-	// 	$class-prefix: col-offset-;
-	// 	@for $n from 1 through 24 {
-	// 		&.#{$class-prefix}#{$n} {
-	// 			margin-left: ($n / 24) * 100%;
-	// 		}
-	// 	}
-	// }
-
 	@media (min-width: 769px) {
 		$class-prefix: col-md-;
 		@for $n from 1 through 24 {
@@ -200,8 +164,5 @@ export default {
 			}
 		}
 	}
-
-
-
 }
 </style>
