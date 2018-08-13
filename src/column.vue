@@ -34,21 +34,21 @@ export default {
 			type: [Number, String],
 			required: false,
 		},
-		xs: {
-			type: Object,
-			required: false,
-			validator,
-		},
+		// xs: {
+		// 	type: Object,
+		// 	required: false,
+		// 	validator,
+		// },
 		sm: {
 			type: Object,
 			required: false,
 			validator,
 		},
-		// md: {
-		// 	type: Object,
-		// 	required: false,
-		// 	validator,
-		// },
+		md: {
+			type: Object,
+			required: false,
+			validator,
+		},
 		lg: {
 			type: Object,
 			required: false,
@@ -67,14 +67,14 @@ export default {
 	},
 	computed: {
 		dymanicClass() {
-			let {span, offset,createResponseClass, xs, sm, lg, xl} = this;
+			let {span, offset,createResponseClass, sm, md, lg, xl} = this;
 			return [
 				span && `col-${span}`,
 				offset && `col-offset-${offset}`,
-				...createResponseClass(xs, 'xs'),
+				// ...createResponseClass(xs, 'xs'),
 				...createResponseClass(sm, 'sm'),
 				// ...createResponseClass({span, offset}),
-				// ...createResponseClass(this.md, 'md'),
+				...createResponseClass(md, 'md'),
 				...createResponseClass(lg, 'lg'),
 				...createResponseClass(xl, 'xl'),
 			]
@@ -115,20 +115,20 @@ export default {
 			margin-left: ($n / 24) * 100%;
 		}
 	}
-	@media (max-width: 576px){
-		$class-prefix: col-xs-;
-		@for $n from 1 through 24 {
-			&.#{$class-prefix}#{$n} {
-				width: ($n / 24) * 100%;
-			}
-		}
-		$class-prefix: col-xs-offset-;
-		@for $n from 1 through 24 {
-			&.#{$class-prefix}#{$n} {
-				margin-left: ($n / 24) * 100%;
-			}
-		}
-	}
+	// @media (max-width: 576px){
+	// 	$class-prefix: col-xs-;
+	// 	@for $n from 1 through 24 {
+	// 		&.#{$class-prefix}#{$n} {
+	// 			width: ($n / 24) * 100%;
+	// 		}
+	// 	}
+	// 	$class-prefix: col-xs-offset-;
+	// 	@for $n from 1 through 24 {
+	// 		&.#{$class-prefix}#{$n} {
+	// 			margin-left: ($n / 24) * 100%;
+	// 		}
+	// 	}
+	// }
 	@media (min-width: 577px) {
 		$class-prefix: col-sm-;
 		@for $n from 1 through 24 {
@@ -143,35 +143,35 @@ export default {
 			}
 		}
 	}
-	@media (min-width: 769px) {
-		$class-prefix: col-;
-		@for $n from 1 through 24 {
-			&.#{$class-prefix}#{$n} {
-				width: ($n / 24) * 100%;
-			}
-		}
-		$class-prefix: col-offset-;
-		@for $n from 1 through 24 {
-			&.#{$class-prefix}#{$n} {
-				margin-left: ($n / 24) * 100%;
-			}
-		}
-	}
-
 	// @media (min-width: 769px) {
-	// 	$class-prefix: col-md-;
+	// 	$class-prefix: col-;
 	// 	@for $n from 1 through 24 {
 	// 		&.#{$class-prefix}#{$n} {
 	// 			width: ($n / 24) * 100%;
 	// 		}
 	// 	}
-	// 	$class-prefix: col-md-offset-;
+	// 	$class-prefix: col-offset-;
 	// 	@for $n from 1 through 24 {
 	// 		&.#{$class-prefix}#{$n} {
 	// 			margin-left: ($n / 24) * 100%;
 	// 		}
 	// 	}
 	// }
+
+	@media (min-width: 769px) {
+		$class-prefix: col-md-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				width: ($n / 24) * 100%;
+			}
+		}
+		$class-prefix: col-md-offset-;
+		@for $n from 1 through 24 {
+			&.#{$class-prefix}#{$n} {
+				margin-left: ($n / 24) * 100%;
+			}
+		}
+	}
 	@media (min-width: 993px) {
 		$class-prefix: col-lg-;
 		@for $n from 1 through 24 {
