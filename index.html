@@ -27,12 +27,16 @@
         body {
             font-size: var(--font-size);
         }
-
-        #app {
-            padding: 20px;
-        }
     </style>
     <style>
+        .demo {
+            font-size: 36px;
+            text-align: center;
+            line-height: 42px;
+            color: #000;
+            border: 1px solid #eee;
+        }
+
         .box {
             margin: 20px 0;
         }
@@ -70,7 +74,17 @@
 
 <body>
     <div id="app">
+        <g-layout style="height: 100vh;">
+            <g-sider class="demo">sider</g-sider>
 
+            <g-layout>
+                <g-header class="demo">header</g-header>
+
+                <g-content class="demo">content</g-content>
+                <g-footer class="demo">footer</g-footer>
+
+            </g-layout>
+        </g-layout>
     </div>
     <script src="./src/app.js"></script>
 </body>
