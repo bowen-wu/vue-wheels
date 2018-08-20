@@ -26,3 +26,21 @@
 - 按钮组边框多余 -> ` margin-left: -1px ` + ` position: relative; z-index: 1; `
 
 - console.warn('这是在控制台打印出来的警告')
+
+```
+<div class="box"></div>
+<g-button>按钮</g-button>
+<g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
+<g-button icon="setting" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>
+
+<g-button-group>
+    <g-button icon="left">上一页</g-button>
+    <g-button icon="right" icon-position="right">下一页</g-button>
+</g-button-group>
+
+<g-button-group>
+    <g-button icon="left">上一页</g-button>
+    <g-button>更多</g-button>
+    <g-button icon="right" icon-position="right">下一页</g-button>
+</g-button-group>
+```
