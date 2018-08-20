@@ -16,11 +16,17 @@ export default {
             type: String,
             required: false,
             default: 'start',
+            validator(value) {
+                return ['start', 'end', 'center', 'space-around', 'space-between'].includes(value);
+            }
         },
         align: {
             type: String,
             required: false,
-            default: 'top'
+            default: 'top',
+            validator(value) {
+                return ['top', 'bottom', 'middle'].includes(value);
+            }
         },
     },
     computed: {
