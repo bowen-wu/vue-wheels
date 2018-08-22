@@ -10,6 +10,8 @@ import Header from './header';
 import Content from './content';
 import Footer from './footer';
 import Sider from './sider';
+import Toast from './toast';
+import ToastPlugin from './plugin/toast';
 
 Vue.component('g-button', Button);
 Vue.component('g-icon', Icon);
@@ -22,33 +24,20 @@ Vue.component('g-header', Header);
 Vue.component('g-content', Content);
 Vue.component('g-footer', Footer);
 Vue.component('g-sider', Sider);
+Vue.component('g-toast', Toast);
+
+Vue.use(ToastPlugin);
 
 new Vue({
     el: '#app',
     data: {
-        loading1: false,
-        loading2: false,
-        loading3: true,
-        maxlength: 10,
-        userTips: '啦啦啦',
-        passwordTips: '',
-        width: 200,
-        autofocus: true,
-        falsy: false,
-        message: '',
+
     },
     created() {
-        // validate dispatchEvent
-        // setTimeout(() => {
-        //     let event = new Event('change');
-        //     let inputElement = this.$el.querySelector('input');
-        //     inputElement.dispatchEvent(event);
-        //     console.log('hi');
-        // }, 3000);
     },
     methods: {
-        inputChange(e) {
-            console.log('e', e)
-        }
+        showToast() {
+            this.$toast('I am toast');
+        },
     },
 });
