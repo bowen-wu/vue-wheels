@@ -10,7 +10,6 @@ export default {
             });
             toast.$slots.default = [message];
             toast.$mount();
-            console.log('toast', toast);
             document.body.appendChild(toast.$el);
 
         }

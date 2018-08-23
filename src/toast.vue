@@ -1,13 +1,14 @@
 <template>
-    <div class="g-toast" ref="toast" :class="dynamicClass">
-        <div class="message">
-            <slot v-if="!enableHTML"></slot>
-            <div v-else v-html="this.$slots.default[0]"></div>
-        </div>
-
-        <div class="line" ref="line"></div>
-        <div class="close-button">
-            <div class="text" @click="onClickCloseButton">{{this.closeButton.text}}</div>
+    <div class="g-toast-wrapper" :class="dynamicClass">
+        <div class="g-toast" ref="toast">
+            <div class="message">
+                <slot v-if="!enableHTML"></slot>
+                <div v-else v-html="this.$slots.default[0]"></div>
+            </div>
+            <div class="line" ref="line"></div>
+            <div class="close-button">
+                <div class="text" @click="onClickCloseButton">{{this.closeButton.text}}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -24,7 +25,7 @@ export default {
         autoCloseDelay: {
             type: [String, Number],
             required: false,
-            default: 3
+            default: 2
         },
         closeButton: {
             type: Object,
@@ -44,7 +45,7 @@ export default {
         position: {
             type: String,
             required: false,
-            default: top,
+            default: 'top',
             validator(value) {
                 return ['top', 'middle', 'bottom'].indexOf(value) !== -1
             }
@@ -96,39 +97,80 @@ $color: #fff;
 $bg-color: rgba(0, 0, 0, 0.74);
 $min-height: 40px;
 
-.g-toast {
-    @include fontLineColor();
-    @include flex(center, center);
-    background: $bg-color;
-    border-radius: 4px;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.g-toast-wrapper {
     position: fixed;
-    min-height: $min-height;
-    padding: 0 16px;
     &.position-top {
         top: 0;
         left: 50%;
         transform: translateX(-50%);
+        .g-toast {
+            animation: slide-down 0.2s linear;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
     }
     &.position-middle {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        .g-toast {
+            animation: fadeIn 0.2s linear;
+        }
     }
     &.position-bottom {
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+        .g-toast {
+            animation: slide-up 0.2s linear;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
     }
-    .message {
-        padding: 12px 0;
-    }
-    .line {
-        border-left: 1px solid #666;
-        margin-right: 16px;
-        margin-left: 16px;
-    }
-    .close-button {
+    .g-toast {
+        @include fontLineColor();
+        @include flex(center, center);
+        background: $bg-color;
+        border-radius: 4px;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+        min-height: $min-height;
+        padding: 0 16px;
+        .message {
+            padding: 12px 0;
+        }
+        .line {
+            border-left: 1px solid #666;
+            margin-right: 16px;
+            margin-left: 16px;
+        }
+        .close-button {
+            flex-shrink: 0;
+        }
     }
 }
 </style>
