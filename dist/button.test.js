@@ -10146,7 +10146,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":47}],43:[function(require,module,exports) {
+},{"./bundle-url":47}],44:[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -10479,7 +10479,7 @@ render._withStripped = true
       
       }
     })();
-},{"./svg.js":52,"_css_loader":41,"vue-hot-reload-api":43,"vue":9}],11:[function(require,module,exports) {
+},{"./svg.js":52,"_css_loader":41,"vue-hot-reload-api":44,"vue":9}],13:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10606,7 +10606,7 @@ render._withStripped = true
       
       }
     })();
-},{"./icon":39,"_css_loader":41,"vue-hot-reload-api":43,"vue":9}],1:[function(require,module,exports) {
+},{"./icon":39,"_css_loader":41,"vue-hot-reload-api":44,"vue":9}],1:[function(require,module,exports) {
 'use strict';
 
 var _vue = require('vue');
@@ -10723,7 +10723,7 @@ describe('Button', function () {
         vm.$destroy();
     });
 });
-},{"vue":9,"../src/button":11}],54:[function(require,module,exports) {
+},{"vue":9,"../src/button":13}],54:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -10752,7 +10752,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56543' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58776' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

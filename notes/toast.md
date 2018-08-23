@@ -94,3 +94,20 @@ Vue.use(MyPlugin)
 Vue.use(MyPlugin, { someOption: true })
 ```
 ` Vue.use() `会自动阻止多次注册相同插件，届时只会注册一次该插件
+
+## Vue 动态创建实例 (在 .js 文件中使用 .vue 文件)
+```
+import Toast from '../toast'
+
+let Constructor = Vue.extend(Toast);
+let toast = new Constructor();
+toast.$slots.default = [message];
+toast.$mount();
+document.body.appendChild(toast.$el);
+```
+
+## 关闭 Toast
+```
+this.$el.remove();
+this.$destroy();
+```

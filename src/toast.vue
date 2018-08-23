@@ -1,6 +1,13 @@
 <template>
-    <div class="g-toast">
-        <slot></slot>
+    <div class="g-toast" ref="toast">
+        <div class="slot">
+            <slot></slot>
+        </div>
+
+        <div class="line" ref="line"></div>
+        <div class="close-button">
+            <div class="text" @click="onClickCloseButton">{{this.closeButton.text}}</div>
+        </div>
     </div>
 </template>
 
@@ -8,7 +15,51 @@
 export default {
     name: 'bowen-toast',
     props: {
-        
+        autoClose: {
+            type: Boolean,
+            required: false,
+            default: true,
+        },
+        autoCloseDelay: {
+            type: [String, Number],
+            required: false,
+            default: 3,
+        },
+        closeButton: {
+            type: Object,
+            required: false,
+            default() {
+                return {
+                    text: '关闭',
+                    callback: undefined,
+                }
+            },
+        }
+    },
+    mounted() {
+        this.setLineHeight();
+        if(this.autoClose){
+            setTimeout(() => {
+                this.close();
+            }, this.autoCloseDelay * 1000);
+        }
+    },
+    methods: {
+        close() {
+            this.$el.remove();
+            this.$destroy();
+        },
+        setLineHeight() {
+            this.$nextTick(() => {
+                this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`;
+            })
+        },
+        onClickCloseButton() {
+            this.close();
+            if(typeof this.closeButton.callback === 'function'){
+                this.closeButton.callback(this);
+            }
+        }
     },
 }
 </script>
@@ -19,18 +70,32 @@ export default {
 $font-size: 14px;
 $line-height: 16px;
 $color: #fff;
+$bg-color: rgba(0, 0, 0, 0.74);
+$min-height: 40px;
 
 .g-toast{
     @include fontLineColor();
     @include flex(center, center);
-    background: rgba(0,0,0,0.74);
+    background: $bg-color;
     border-radius: 4px;
-    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.50);
-    padding: 8px 16px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.50);
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+    min-height: $min-height;
+    padding: 0 16px;
+    .slot{
+        padding: 12px 0;
+    }
+    .line{
+        border-left: 1px solid #666;
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+    .close-button{
+        
+    }
 }
 </style>
 

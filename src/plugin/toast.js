@@ -5,7 +5,9 @@ export default {
         Vue.prototype.$toast = (message, userOptions) => {
             // Vue 动态创建实例
             let Constructor = Vue.extend(Toast);
-            let toast = new Constructor();
+            let toast = new Constructor({
+                propsData: userOptions,
+            });
             toast.$slots.default = [message];
             toast.$mount();
             console.log('toast', toast);
