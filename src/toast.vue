@@ -5,8 +5,8 @@
                 <slot v-if="!enableHTML"></slot>
                 <div v-else v-html="this.$slots.default[0]"></div>
             </div>
-            <div class="line" ref="line"></div>
-            <div class="close-button" @click="onClickCloseButton">
+            <div class="line" v-if="closeButton.text" ref="line"></div>
+            <div class="close-button" v-if="closeButton.text" @click="onClickCloseButton">
                 <div class="text">{{this.closeButton.text}}</div>
             </div>
         </div>
@@ -20,19 +20,19 @@ export default {
         autoClose: {
             type: Boolean,
             required: false,
-            default: true,
+            default: true
         },
         autoCloseDelay: {
             type: [String, Number],
             required: false,
-            default: 2,
+            default: 2
         },
         closeButton: {
             type: Object,
             required: false,
             default() {
                 return {
-                    text: '关闭',
+                    text: '',
                     callback: undefined
                 }
             }
@@ -47,7 +47,7 @@ export default {
             required: false,
             default: 'top',
             validator(value) {
-                return ['top', 'middle', 'bottom'].indexOf(value) !== -1;
+                return ['top', 'middle', 'bottom'].indexOf(value) !== -1
             }
         }
     },
@@ -67,25 +67,27 @@ export default {
             if (this.autoClose) {
                 setTimeout(() => {
                     this.close()
-                }, this.autoCloseDelay * 1000);
+                }, this.autoCloseDelay * 1000)
             }
         },
         close() {
-            this.$el.remove();
-            this.$emit('close');
-            this.$destroy();
+            this.$el.remove()
+            this.$emit('close')
+            this.$destroy()
         },
         setLineHeight() {
             this.$nextTick(() => {
-                this.$refs.line.style.height = `${
-                    this.$refs.toast.getBoundingClientRect().height
-                }px`;
-            });
+                if (this.closeButton.text) {
+                    this.$refs.line.style.height = `${
+                        this.$refs.toast.getBoundingClientRect().height
+                    }px`
+                }
+            })
         },
         onClickCloseButton() {
-            this.close();
+            this.close()
             if (typeof this.closeButton.callback === 'function') {
-                this.closeButton.callback(this);
+                this.closeButton.callback(this)
             }
         }
     }
