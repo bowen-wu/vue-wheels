@@ -111,3 +111,15 @@ document.body.appendChild(toast.$el);
 this.$el.remove();
 this.$destroy();
 ```
+
+## Props 属性
+当 ` props ` 中属性 ` type ` 为 ` Object ` 时， ` default ` 须是函数 ` return {} `
+若不写 function return -> 复用性 -> 引用类型
+- 单文件组件中 ` export default { 选项(用于构建组件) } ` -> ` Vue.component('xxx', { 选项(同上) }) `
+- 若不写 function return 初始化组件时都要用同一选项，两个 ` toast ` 用同一选项，其一改变，第二个必受影响(引用类型)
+- function return -> 每次创建新选项
+
+## callback
+```
+callback(this) -> 回调(this 给到使用者)
+```

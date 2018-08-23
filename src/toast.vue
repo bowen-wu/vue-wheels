@@ -1,7 +1,8 @@
 <template>
-    <div class="g-toast" ref="toast">
-        <div class="slot">
-            <slot></slot>
+    <div class="g-toast" ref="toast" :class="dynamicClass">
+        <div class="message">
+            <slot v-if="!enableHTML"></slot>
+            <div v-else v-html="this.$slots.default[0]"></div>
         </div>
 
         <div class="line" ref="line"></div>
@@ -18,12 +19,12 @@ export default {
         autoClose: {
             type: Boolean,
             required: false,
-            default: true,
+            default: true
         },
         autoCloseDelay: {
             type: [String, Number],
             required: false,
-            default: 3,
+            default: 3
         },
         closeButton: {
             type: Object,
@@ -31,36 +32,58 @@ export default {
             default() {
                 return {
                     text: '关闭',
-                    callback: undefined,
+                    callback: undefined
                 }
-            },
+            }
+        },
+        enableHTML: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        position: {
+            type: String,
+            required: false,
+            default: top,
+            validator(value) {
+                return ['top', 'middle', 'bottom'].indexOf(value) !== -1
+            }
         }
     },
     mounted() {
-        this.setLineHeight();
-        if(this.autoClose){
+        this.setLineHeight()
+        if (this.autoClose) {
             setTimeout(() => {
-                this.close();
-            }, this.autoCloseDelay * 1000);
+                this.close()
+            }, this.autoCloseDelay * 1000)
+        }
+    },
+    computed: {
+        dynamicClass() {
+            return {
+                [`position-${this.position}`]: true
+            }
         }
     },
     methods: {
         close() {
-            this.$el.remove();
-            this.$destroy();
+            this.$el.remove()
+            this.$destroy()
         },
         setLineHeight() {
             this.$nextTick(() => {
-                this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`;
+                this.$refs.line.style.height = `${
+                    this.$refs.toast.getBoundingClientRect().height
+                }px`
             })
         },
         onClickCloseButton() {
-            this.close();
-            if(typeof this.closeButton.callback === 'function'){
-                this.closeButton.callback(this);
+            this.close()
+            if (typeof this.closeButton.callback === 'function') {
+                this.closeButton.callback(this)
             }
         }
-    },
+    }
 }
 </script>
 
@@ -73,28 +96,39 @@ $color: #fff;
 $bg-color: rgba(0, 0, 0, 0.74);
 $min-height: 40px;
 
-.g-toast{
+.g-toast {
     @include fontLineColor();
     @include flex(center, center);
     background: $bg-color;
     border-radius: 4px;
-    box-shadow: 0 0 3px 0 rgba(0,0,0,0.50);
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
     position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     min-height: $min-height;
     padding: 0 16px;
-    .slot{
+    &.position-top {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &.position-middle {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &.position-bottom {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .message {
         padding: 12px 0;
     }
-    .line{
+    .line {
         border-left: 1px solid #666;
         margin-right: 16px;
         margin-left: 16px;
     }
-    .close-button{
-        
+    .close-button {
     }
 }
 </style>

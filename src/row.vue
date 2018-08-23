@@ -17,7 +17,7 @@ export default {
             required: false,
             default: 'start',
             validator(value) {
-                return ['start', 'end', 'center', 'space-around', 'space-between'].includes(value);
+                return ['start', 'end', 'center', 'space-around', 'space-between'].indexOf(value) !== -1;
             }
         },
         align: {
@@ -25,7 +25,7 @@ export default {
             required: false,
             default: 'top',
             validator(value) {
-                return ['top', 'bottom', 'middle'].includes(value);
+                return ['top', 'bottom', 'middle'].indexOf(value) !== -1;
             }
         },
     },

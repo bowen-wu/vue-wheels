@@ -39,13 +39,7 @@ new Vue({
         showToast() {
             this.$toast('I am toast', {
                 autoClose: false,
-                autoCloseDelay: 5,
-                closeButton: {
-                    text: 'hello',
-                    callback: (vm) => {
-                        console.log(vm);
-                    }
-                },
+                position: 'bottom',
             });
         },
     },
