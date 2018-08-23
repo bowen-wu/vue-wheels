@@ -20,12 +20,12 @@ export default {
         autoClose: {
             type: Boolean,
             required: false,
-            default: true
+            default: true,
         },
         autoCloseDelay: {
             type: [String, Number],
             required: false,
-            default: 2
+            default: 2,
         },
         closeButton: {
             type: Object,
@@ -47,17 +47,13 @@ export default {
             required: false,
             default: 'top',
             validator(value) {
-                return ['top', 'middle', 'bottom'].indexOf(value) !== -1
+                return ['top', 'middle', 'bottom'].indexOf(value) !== -1;
             }
         }
     },
     mounted() {
         this.setLineHeight()
-        if (this.autoClose) {
-            setTimeout(() => {
-                this.close()
-            }, this.autoCloseDelay * 1000)
-        }
+        this.executeAutoClose()
     },
     computed: {
         dynamicClass() {
@@ -67,6 +63,13 @@ export default {
         }
     },
     methods: {
+        executeAutoClose() {
+            if (this.autoClose) {
+                setTimeout(() => {
+                    this.close()
+                }, this.autoCloseDelay * 1000);
+            }
+        },
         close() {
             this.$el.remove();
             this.$emit('close');
@@ -76,13 +79,13 @@ export default {
             this.$nextTick(() => {
                 this.$refs.line.style.height = `${
                     this.$refs.toast.getBoundingClientRect().height
-                }px`
-            })
+                }px`;
+            });
         },
         onClickCloseButton() {
-            this.close()
+            this.close();
             if (typeof this.closeButton.callback === 'function') {
-                this.closeButton.callback(this)
+                this.closeButton.callback(this);
             }
         }
     }
@@ -97,6 +100,7 @@ $line-height: 16px;
 $color: #fff;
 $bg-color: rgba(0, 0, 0, 0.74);
 $min-height: 40px;
+$animate-duration: 0.3s;
 
 @keyframes fadeIn {
     0% {
@@ -130,7 +134,7 @@ $min-height: 40px;
         left: 50%;
         transform: translateX(-50%);
         .g-toast {
-            animation: slide-down 0.2s linear;
+            animation: slide-down $animate-duration linear;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
@@ -140,7 +144,7 @@ $min-height: 40px;
         left: 50%;
         transform: translate(-50%, -50%);
         .g-toast {
-            animation: fadeIn 0.2s linear;
+            animation: fadeIn $animate-duration linear;
         }
     }
     &.position-bottom {
@@ -148,7 +152,7 @@ $min-height: 40px;
         left: 50%;
         transform: translateX(-50%);
         .g-toast {
-            animation: slide-up 0.2s linear;
+            animation: slide-up $animate-duration linear;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }

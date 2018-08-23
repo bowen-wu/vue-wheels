@@ -14,6 +14,7 @@ export default {
                 propsData: userOptions,
                 message,
                 onClose: () => {
+                    // 不会多次调用 close()，如果 toast close，则将 toast 置为 null
                     currentToast = null;
                 }
             });

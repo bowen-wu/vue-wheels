@@ -37,10 +37,7 @@ new Vue({
     },
     methods: {
         showToast() {
-            this.$toast('I am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toastI am toast', {
-                position: 'bottom',
-                autoClose: false,
-            });
+            this.$toast('I am toast');
         },
     },
 });
