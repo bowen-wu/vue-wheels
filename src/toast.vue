@@ -6,8 +6,8 @@
                 <div v-else v-html="this.$slots.default[0]"></div>
             </div>
             <div class="line" ref="line"></div>
-            <div class="close-button">
-                <div class="text" @click="onClickCloseButton">{{this.closeButton.text}}</div>
+            <div class="close-button" @click="onClickCloseButton">
+                <div class="text">{{this.closeButton.text}}</div>
             </div>
         </div>
     </div>
@@ -68,8 +68,9 @@ export default {
     },
     methods: {
         close() {
-            this.$el.remove()
-            this.$destroy()
+            this.$el.remove();
+            this.$emit('close');
+            this.$destroy();
         },
         setLineHeight() {
             this.$nextTick(() => {
@@ -165,11 +166,12 @@ $min-height: 40px;
         }
         .line {
             border-left: 1px solid #666;
-            margin-right: 16px;
             margin-left: 16px;
         }
         .close-button {
             flex-shrink: 0;
+            cursor: pointer;
+            padding: 8px 0 8px 16px;
         }
     }
 }
