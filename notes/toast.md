@@ -123,3 +123,36 @@ this.$destroy();
 ```
 callback(this) -> 回调(this 给到使用者)
 ```
+
+## enableHTML
+当用户传 HTML 时，可以使用 ` v-html `, 并且此时不能使用 ` <slot></slot> ` 标签，可以使用 ` <div v-html='$slot.default[0]'></div> `, 并且让用户传 ` enableHTML `
+
+## flex -> shorthand property
+` flex === flex-grow flex-shrink flex-basis `
+- ` flex-grow ` -> 
+- ` flex-shrink ` -> shrink -> 收缩、退缩、畏缩 -> Flex items will shrink to fill the container according to the ` flex-shrink ` number, when the default size of flex items is large than the flex container.
+- ` flex-basis ` -> specifiles the initial ` main size ` of a flecx item. This property determines the size of the content-box unless specified otherwise using ` box-sizing `
+
+## getBoundingClientRect()
+The ` Element.getBoundingClientRect() ` methods returns the size of an element and its position relative to the viewport
+
+## debugger
+实际不为 0，js 打印出 0 ==> 异步问题
+
+## nextTick()
+- ` Vue.nextTick([callback, context]) ` -> 在下次 DOM 更新循环结束之后执行延时回调。在修改数据之后立即使用这个方法，获得更新后的 DOM。
+- ` vm.$nextTick([callback]) ` -> 将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 ` Vue.nextTick ` 一样，不同的是回调的 ` this ` 自动绑定到调用它的实例上。
+
+## vm.$slots
+用来访问被*插槽分发*的内容。每个*具名插槽*有其相应的属性(例如： ` slot="foo" ` 中的内容将会在 ` vm.$slots.foo ` 中被找到)。` default ` 属性包括了所有没有被包含在具名插槽中的节点。**在使用*渲染函数*书写一个组件时，访问 ` vm.slots ` 最有帮助。**
+
+## classList()
+The ` Element.classList ` is a read-only property which returns a live ` DOMTokenList ` collection of the class attributes of the element
+- ` add(String [, String [, ...]]) ` -> Add specified class values. If these classes already exist in attribute of the element, then they are ignored.
+- ` remove(String [, String [, ...]]) ` -> Remove specified class values, And removing a class that does not exist does not throw an error.
+- ` item(Number) ` -> Return class value by index in collection
+- ` toggle(String [, force]) ` -> When only one argument is present: Toggle class value. i.e., if class exists then remove it and return ` false `, if not, then add it and return ` true `. When a second argument is present: If the second argument evaluates to true, add specified class value, and if it evaluates to false, remove it.
+- ` contains(String) ` -> Checks if specified class value exists in class attribute of the element.
+- ` replace(oldClass, newClass) ` -> Replaces an exists class with a new class.
+
+

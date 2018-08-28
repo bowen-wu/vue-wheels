@@ -18,14 +18,12 @@ export default {
     name: 'bowen-toast',
     props: {
         autoClose: {
-            type: Boolean,
+            type: [Boolean, Number],
             required: false,
-            default: true
-        },
-        autoCloseDelay: {
-            type: [String, Number],
-            required: false,
-            default: 2
+            default: 2,
+            validator(value) {
+                return value === false || typeof value === 'number';
+            }
         },
         closeButton: {
             type: Object,
@@ -34,7 +32,7 @@ export default {
                 return {
                     text: '',
                     callback: undefined
-                }
+                };
             }
         },
         enableHTML: {
@@ -47,51 +45,51 @@ export default {
             required: false,
             default: 'top',
             validator(value) {
-                return ['top', 'middle', 'bottom'].indexOf(value) !== -1
+                return ['top', 'middle', 'bottom'].indexOf(value) !== -1;
             }
         }
     },
     mounted() {
-        this.setLineHeight()
-        this.executeAutoClose()
+        this.setLineHeight();
+        this.executeAutoClose();
     },
     computed: {
         dynamicClass() {
             return {
                 [`position-${this.position}`]: true
-            }
+            };
         }
     },
     methods: {
         executeAutoClose() {
             if (this.autoClose) {
                 setTimeout(() => {
-                    this.close()
-                }, this.autoCloseDelay * 1000)
+                    this.close();
+                }, this.autoClose * 1000);
             }
         },
         close() {
-            this.$el.remove()
-            this.$emit('close')
-            this.$destroy()
+            this.$el.remove();
+            this.$emit('close');
+            this.$destroy();
         },
         setLineHeight() {
             this.$nextTick(() => {
                 if (this.closeButton.text) {
                     this.$refs.line.style.height = `${
                         this.$refs.toast.getBoundingClientRect().height
-                    }px`
+                    }px`;
                 }
-            })
+            });
         },
         onClickCloseButton() {
-            this.close()
+            this.close();
             if (typeof this.closeButton.callback === 'function') {
-                this.closeButton.callback(this)
+                this.closeButton.callback(this);
             }
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
