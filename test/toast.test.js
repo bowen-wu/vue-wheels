@@ -48,7 +48,7 @@ describe('Toast', () => {
             }, true, true);
         });
 
-        it('setting closeButton', () => {
+        it('setting closeButton', (done) => {
             const callback = sinon.fake();
             instantiation({
                 closeButton: {
@@ -59,9 +59,15 @@ describe('Toast', () => {
                 let closeButtonElement = vm.$el.querySelector('.close-button');
                 let closeButtonTextElement = closeButtonElement.querySelector('.text');
                 expect(closeButtonTextElement.textContent.trim()).to.equal('关闭啦');
-                closeButtonElement.click();
-                expect(callback).to.have.been.called;
-            });
+                setTimeout(() => {
+                    closeButtonElement.click();
+                    expect(callback).to.have.been.called;
+                    done();
+
+                    vm.$el.remove();
+                    vm.$destroy();
+                }, 200);
+            }, false, true);
         });
 
         it('setting enableHTML', () => {
