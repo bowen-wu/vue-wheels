@@ -1,11 +1,11 @@
-@mixin fontLineColor($color: $color){
-    font-size: $font-size;
-    line-height: $line-height;
+@mixin fontLineColor($fontSize: 14px, $lineHeight: 32px, $color: #333){
+    font-size: $fontSize;
+    line-height: $lineHeight;
     color: $color;
 }
 
-@mixin flex($align-items: flex-start, $justify-content: flex-start){
+@mixin flex($justifyContent: flex-start, $alignItems: flex-start){
     display: flex;
-    justify-content: $justify-content;
-    align-items: $align-items;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
 }

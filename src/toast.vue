@@ -156,7 +156,7 @@ $animate-duration: 0.3s;
         }
     }
     .g-toast {
-        @include fontLineColor();
+        @include fontLineColor($font-size, $line-height, $color);
         @include flex(center, center);
         background: $bg-color;
         border-radius: 4px;
