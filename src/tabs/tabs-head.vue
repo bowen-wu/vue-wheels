@@ -8,6 +8,7 @@
 export default {
     name: 'bowen-tabs-head',
     props: {},
+    inject: ['EventHub'],
 }
 </script>
 

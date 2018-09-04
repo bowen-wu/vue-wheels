@@ -8,6 +8,7 @@
 export default {
     name: 'bowen-tabs-body',
     props: {},
+    inject: ['EventHub'],
 }
 </script>
 

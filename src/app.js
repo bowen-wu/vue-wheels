@@ -43,9 +43,12 @@ Vue.use(ToastPlugin);
 new Vue({
     el: '#app',
     data: {
-
+        selected: 'sport'
     },
     created() {
+        setTimeout(() => {
+            console.log('app', this.selected);
+        }, 10000);
     },
     methods: {
 

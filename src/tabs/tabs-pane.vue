@@ -1,5 +1,5 @@
 <template>
-    <div class="g-tabs-pane">
+    <div class="g-tabs-pane" :class="dynamicClass">
         <slot></slot>
     </div>
 </template>
@@ -7,7 +7,33 @@
 <script>
 export default {
     name: 'bowen-tabs-pane',
-    props: {},
+    inject: ['EventHub'],
+    props: {
+        name: {
+            type: String,
+            required: true,
+        }
+    },
+    data() {
+        return {
+            selected: '',
+        }
+    },
+    computed: {
+        dynamicClass() {
+            if(this.name === this.selected){
+                return {
+                    active: true
+                }
+            }
+        }
+    },
+    created() {
+        console.log(this.name, this.EventHub);
+        this.EventHub.$on('update:selected', (name) => {
+            this.selected = name;
+        })
+    },
 }
 </script>
 
@@ -15,7 +41,11 @@ export default {
 @import '../assist/style/scssMixin.scss';
 
 .g-tabs-pane{
-    
+    display: none;
+    &.active{
+        border: 1px solid red;
+        display: block;
+    }
 }
 </style>
 
