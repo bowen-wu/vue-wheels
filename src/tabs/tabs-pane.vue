@@ -29,9 +29,8 @@ export default {
         }
     },
     created() {
-        console.log(this.name, this.EventHub);
-        this.EventHub.$on('update:selected', (name) => {
-            this.selected = name;
+        this.EventHub.$on('update:selected', (selectedName) => {
+            this.selected = selectedName;
         })
     },
 }

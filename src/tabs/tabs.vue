@@ -15,21 +15,25 @@ export default {
             required: true,
         }
     },
+    data() {
+        return {
+            EventHub: new Vue(),
+        }
+    },
     created() {
-        console.log(this.selected, this, '2');
-        
     },
     mounted() {
         this.$children.map(parentComponent => {
-            parentComponent.selected = this.selected;
             parentComponent.$children.map(grandsonComponent => {
-                grandsonComponent.selected = this.selected;
+                if(grandsonComponent.$options.name === 'bowen-tabs-item' && grandsonComponent.name === this.selected){
+                    this.EventHub.$emit('update:selected', this.selected);
+                }
             });
         });
     },
     provide() {
         return {
-            EventHub: new Vue()
+            EventHub: this.EventHub
         }
     },
 }
