@@ -1,50 +1,57 @@
 {
-  "name": "vue-wheels-bowen",
-  "version": "0.0.1",
-  "description": "vue UI 组件",
-  "main": "dist/index.js",
-  "scripts": {
-    "start": "npx parcel index.html --no-cache",
-    "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-    "publish": "npx parcel build index.js --no-cache --no-minify"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bowen-wu/vue-wheels.git"
-  },
-  "keywords": [
-    "vue",
-    "UI"
-  ],
-  "author": "bowen-wu",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bowen-wu/vue-wheels/issues"
-  },
-  "homepage": "https://github.com/bowen-wu/vue-wheels#readme",
-  "dependencies": {
-    "vue": "^2.5.16",
-    "vue-hot-reload-api": "^2.3.0"
-  },
-  "devDependencies": {
-    "@vue/component-compiler-utils": "^2.1.0",
-    "chai": "^4.1.2",
-    "chai-spies": "^1.0.0",
-    "karma": "^2.0.4",
-    "karma-chai": "^0.1.0",
-    "karma-chai-spies": "^0.1.4",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-mocha": "^1.3.0",
-    "karma-sinon-chai": "^2.0.2",
-    "mocha": "^5.2.0",
-    "node-sass": "^4.9.3",
-    "parcel-bundler": "^1.9.4",
-    "sinon": "^6.1.3",
-    "sinon-chai": "^3.2.0",
-    "vue-template-compiler": "^2.5.16"
-  },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
-  }
+    "name": "vue-wheels-bowen",
+    "version": "0.0.1",
+    "description": "vue UI 组件",
+    "private": true,
+    "scripts": {
+        "start": "npm run serve --fix",
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "test:unit": "vue-cli-service test:unit"
+    },
+    "dependencies": {
+        "vue": "^2.5.17"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.0.1",
+        "@vue/cli-plugin-eslint": "^3.0.1",
+        "@vue/cli-plugin-unit-mocha": "^3.0.1",
+        "@vue/cli-service": "^3.0.1",
+        "@vue/eslint-config-prettier": "^3.0.1",
+        "@vue/test-utils": "^1.0.0-beta.20",
+        "chai": "^4.1.2",
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.0.1",
+        "vue-template-compiler": "^2.5.17"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "@vue/prettier"
+        ],
+        "rules": {
+            "no-console": "off",
+            "indent": ["error", 4],
+            "prettier/prettier": "off",
+            "quotes": ["error", "single", { "allowTemplateLiterals": true }]
+        },
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
 }
