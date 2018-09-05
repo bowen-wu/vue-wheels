@@ -42,7 +42,6 @@ export default {
 .g-tabs-pane{
     display: none;
     &.active{
-        border: 1px solid red;
         display: block;
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="g-tabs">
+    <div class="g-tabs" :class="dynamicClass">
         <slot></slot>
     </div>
 </template>
@@ -13,6 +13,14 @@ export default {
         selected: {
             type: String,
             required: true,
+        },
+        direction: {
+            type: String,
+            required: false,
+            default: 'horizontal',
+            validator(value) {
+                return ['horizontal', 'vertical'].indexOf(value) >= 0;
+            }
         }
     },
     data() {
@@ -20,10 +28,19 @@ export default {
             EventHub: new Vue(),
         }
     },
-    created() {
+    computed: {
+        dynamicClass() {
+            return {
+                [`direction-${this.direction}`]: true,
+            }
+        },
     },
+    created() {},
     mounted() {
         this.$children.map(parentComponent => {
+            if(parentComponent.$options.name === 'bowen-tabs-head'){
+                parentComponent.direction = this.direction;
+            }
             parentComponent.$children.map(grandsonComponent => {
                 if(grandsonComponent.$options.name === 'bowen-tabs-item' && grandsonComponent.name === this.selected){
                     this.EventHub.$emit('update:selected', this.selected);
@@ -44,6 +61,9 @@ export default {
 
 
 .g-tabs{
+    &.direction-vertical{
+        @include flex();
+    }
 }
 </style>
 

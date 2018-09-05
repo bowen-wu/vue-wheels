@@ -12,6 +12,11 @@ export default {
         name: {
             type: String,
             required: true,
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false,
         }
     },
     data() {
@@ -21,11 +26,15 @@ export default {
     },
     computed: {
         dynamicClass() {
-            if(this.name === this.selected){
-                return {
-                    active: true
-                }
+            let obj = {
+                disabled: this.disabled
             }
+            if(this.name === this.selected){
+                Object.assign(obj, {
+                    active: true,
+                });
+            }
+            return obj;
         },
     },
     created() {
@@ -35,6 +44,9 @@ export default {
     },
     methods: {
         changeItem() {
+            if(this.disabled){
+                return;
+            }
             this.EventHub.$emit('update:selected', this.name);
         },
     }
@@ -44,11 +56,25 @@ export default {
 <style lang="scss" scoped>
 @import '../assist/style/scssMixin.scss';
 
+$color: #409eff;
+$hover-color: #409eff;
+$line-color: #409eff;
+$disabled-color: #eee;
+
 .g-tabs-item{
-    @include fontLineColor();
-    padding: 6px 12px;
+    @include fontLineColor(14px, 24px);
+    @include flex(center, center);
+    padding: 8px 12px;
+    cursor: pointer;
+    &:hover{
+        color: $hover-color;
+    }
     &.active{
-        background-color: #ddd;
+        color: $color;
+    }
+    &.disabled{
+        cursor: not-allowed;
+        color: $disabled-color;
     }
 }
 </style>
