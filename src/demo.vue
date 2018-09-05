@@ -35,13 +35,18 @@ export default {
         'g-tabs-head': TabsHead,
         'g-tabs-body': TabsBody,
         'g-tabs-item': TabsItem,
-        'g-tabs-pane': TabsPane
+        'g-tabs-pane': TabsPane,
     },
     data() {
         return {
-            selected: 'sport'
+            selected: 'sport',
+            a: 1,
         };
-    }
+    },
+    created() {
+        let obj = { a: 1 };
+        console.warn(obj);
+    },
 };
 </script>
 
