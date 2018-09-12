@@ -45,7 +45,6 @@ export default {
     },
     created() {
         let obj = { a: 1 };
-        console.warn(obj);
     },
 };
 </script>

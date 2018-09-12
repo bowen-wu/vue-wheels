@@ -38,7 +38,7 @@ export default {
         },
     },
     created() {
-        this.EventHub.$on('update:selected', (selectedName) => {
+        this.EventHub.$on('update:selected', (selectedName, vm) => {
             this.selected = selectedName;
         })
     },
@@ -47,7 +47,7 @@ export default {
             if(this.disabled){
                 return;
             }
-            this.EventHub.$emit('update:selected', this.name);
+            this.EventHub.$emit('update:selected', this.name, this);
         },
     }
 }
@@ -58,19 +58,19 @@ export default {
 
 $color: #409eff;
 $hover-color: #409eff;
-$line-color: #409eff;
 $disabled-color: #eee;
 
 .g-tabs-item{
     @include fontLineColor(14px, 24px);
     @include flex(center, center);
-    padding: 8px 12px;
+    padding: 8px 0.8em;
     cursor: pointer;
     &:hover{
         color: $hover-color;
     }
     &.active{
         color: $color;
+        font-weight: 600;
     }
     &.disabled{
         cursor: not-allowed;

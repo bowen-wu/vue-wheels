@@ -16,7 +16,7 @@ export default {
 @import '../assist/style/scssMixin.scss';
 
 .g-tabs-body{
-    
+    padding: 0.6em 1em;    
 }
 </style>
 

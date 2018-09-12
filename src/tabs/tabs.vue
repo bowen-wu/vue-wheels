@@ -43,7 +43,7 @@ export default {
             }
             parentComponent.$children.map(grandsonComponent => {
                 if(grandsonComponent.$options.name === 'bowen-tabs-item' && grandsonComponent.name === this.selected){
-                    this.EventHub.$emit('update:selected', this.selected);
+                    this.EventHub.$emit('update:selected', this.selected, grandsonComponent);
                 }
             });
         });
