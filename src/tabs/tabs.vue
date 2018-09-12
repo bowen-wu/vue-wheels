@@ -37,13 +37,16 @@ export default {
     },
     created() {},
     mounted() {
+        if(this.$children.length === 0){
+            console && console.warn && console.warn('tabs的子组件应该是 tabs-head 和 tabs-body, 但你没有写子组件');
+        }
         this.$children.map(parentComponent => {
             if(parentComponent.$options.name === 'bowen-tabs-head'){
                 parentComponent.direction = this.direction;
             }
             parentComponent.$children.map(grandsonComponent => {
                 if(grandsonComponent.$options.name === 'bowen-tabs-item' && grandsonComponent.name === this.selected){
-                    this.EventHub.$emit('update:selected', this.selected, grandsonComponent);
+                    this.EventHub && this.EventHub.$emit('update:selected', this.selected, grandsonComponent);
                 }
             });
         });

@@ -1,5 +1,5 @@
 <template>
-    <div class="g-tabs-item" :class="dynamicClass" @click="changeItem">
+    <div class="g-tabs-item" :class="dynamicClass" @click="changeItem" :data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
         },
     },
     created() {
-        this.EventHub.$on('update:selected', (selectedName, vm) => {
+        this.EventHub && this.EventHub.$on('update:selected', (selectedName, vm) => {
             this.selected = selectedName;
         })
     },
@@ -48,6 +48,7 @@ export default {
                 return;
             }
             this.EventHub.$emit('update:selected', this.name, this);
+            this.$emit('click', this);
         },
     }
 }

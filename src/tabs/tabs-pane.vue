@@ -29,7 +29,7 @@ export default {
         }
     },
     created() {
-        this.EventHub.$on('update:selected', (selectedName) => {
+        this.EventHub && this.EventHub.$on('update:selected', (selectedName) => {
             this.selected = selectedName;
         })
     },

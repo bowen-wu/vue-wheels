@@ -28,7 +28,7 @@ export default {
         }
     },
     mounted() {
-        this.EventHub.$on('update:selected', (selectedName, vm) => {
+        this.EventHub && this.EventHub.$on('update:selected', (selectedName, vm) => {
             let {width, left} = vm.$el.getBoundingClientRect();
             this.$refs.line.style.width = `${width}px`;
             this.$refs.line.style.transform = `translateX(${left}px)`;
