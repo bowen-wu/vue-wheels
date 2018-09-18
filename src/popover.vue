@@ -1,5 +1,5 @@
 <template>
-    <div class="g-popover" @click="onClick">
+    <div class="g-popover" @click="onClick" ref="popover">
         <div class="g-popover-content-wrapper" ref="contentWrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
@@ -45,14 +45,16 @@ export default {
                 document.addEventListener('click', this.onClickDocumentEventHandle);
             });
         },
-        onClickDocumentEventHandle(event) {
-            // TODO: 仅仅内容区分还是说整个 popover 区分，芳芳是整个 popover，但是内容区分的时候，点击 button 直接取消监听，也不会有 bug
-            // if(!this.$refs.contentWrapper.contains(event.target)){
-            //     this.close();
-            // }
-            if(!this.$refs.popover.contains(event.target)){
-                this.close();
+        onClickDocumentEventHandle({target}) {
+            let {contentWrapper, popover} = this.$refs;
+            if(popover && (popover === target || popover.contains(target))){
+                return;
             }
+            if(contentWrapper && (contentWrapper === target || contentWrapper.contains(target))){
+                return;
+            }
+            this.close();
+
         },
         positionContent() {
             let {triggerWrapper, contentWrapper} = this.$refs;
@@ -66,6 +68,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$border-color: #ddd;
+$border-radius: 4px;
 .g-popover{
     position: relative;
     display: inline-flex;
@@ -76,9 +80,8 @@ export default {
     }
 }
 .g-popover-content-wrapper{
-    border: 1px solid red;
-    // display: inline-flex;
-    vertical-align: top;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
     position: absolute;
     transform: translateY(-100%);
     padding: 0.5em 1em;
