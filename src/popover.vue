@@ -46,7 +46,11 @@ export default {
             });
         },
         onClickDocumentEventHandle(event) {
-            if(!this.$refs.contentWrapper.contains(event.target)){
+            // TODO: 仅仅内容区分还是说整个 popover 区分，芳芳是整个 popover，但是内容区分的时候，点击 button 直接取消监听，也不会有 bug
+            // if(!this.$refs.contentWrapper.contains(event.target)){
+            //     this.close();
+            // }
+            if(!this.$refs.popover.contains(event.target)){
                 this.close();
             }
         },
