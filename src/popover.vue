@@ -1,9 +1,9 @@
 <template>
-    <div class="g-popover">
+    <div class="g-popover" @click="onClick">
         <div class="g-popover-content-wrapper" ref="contentWrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
-        <div class="g-popover-button-wrapper" ref="triggerWrapper" @click="onClick">
+        <div class="g-popover-button-wrapper" ref="triggerWrapper">
             <slot ref="button"></slot>
         </div>
     </div>
@@ -25,11 +25,16 @@ export default {
 
     },
     methods: {
-        onClick() {
-            if(this.visible){
-                this.close();
+        onClick(event) {
+            console.log(event.target);
+            if(this.$refs.triggerWrapper.contains(event.target)){
+                if(this.visible){
+                    this.close();
+                }else{
+                    this.open();
+                }
             }else{
-                this.open();
+                console.log(1)
             }
         },
         close() {
@@ -46,9 +51,12 @@ export default {
                 document.addEventListener('click', this.documentOnClickEventHandle);
             });
         },
-        documentOnClickEventHandle() {
-            this.visible = false;
-            document.removeEventListener('click', this.documentOnClickEventHandle);
+        documentOnClickEventHandle(event) {
+            console.log('documentOnClickEventHandle', event.target)
+            if(!this.$refs.contentWrapper.contains(event.target)){
+                this.visible = false;
+                document.removeEventListener('click', this.documentOnClickEventHandle);
+            }
         },
     },
 }
@@ -68,6 +76,7 @@ export default {
     vertical-align: top;
     position: absolute;
     transform: translateY(-100%);
+    padding: 0.5em 1em;
 }
 </style>
 
