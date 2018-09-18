@@ -83,7 +83,28 @@ $border-radius: 4px;
     border-radius: $border-radius;
     position: absolute;
     transform: translateY(-100%);
+    margin-top: -10px;
     padding: 0.5em 1em;
+    max-width: 20em;
+    word-break: break-all;
+    background-color: #fff;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+    &::before, &::after{
+        content: '';
+        display: block;
+        border: 10px solid transparent;
+        position: absolute;
+        left: 12px;
+    }
+    &::before{
+        border-top-color: #333;
+        top: 100%;
+    }
+    &::after{
+        border-top-color: #fff;
+        top: calc(100% - 1px);
+    }
+
 }
 </style>
 

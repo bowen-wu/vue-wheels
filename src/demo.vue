@@ -73,7 +73,7 @@ body {
     font-size: var(--font-size);
 }
 .demo {
-    margin: 40px;
+    margin: 300px;
 }
 </style>
 
