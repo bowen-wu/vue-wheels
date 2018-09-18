@@ -26,37 +26,36 @@ export default {
     },
     methods: {
         onClick(event) {
-            console.log(event.target);
             if(this.$refs.triggerWrapper.contains(event.target)){
                 if(this.visible){
                     this.close();
                 }else{
                     this.open();
                 }
-            }else{
-                console.log(1)
             }
         },
         close() {
             this.visible = false;
-            document.removeEventListener('click', this.documentOnClickEventHandle);
+            document.removeEventListener('click', this.onClickDocumentEventHandle);
         },
         open() {
             this.visible = true;
             this.$nextTick(() => {
-                let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect();
-                this.$refs.contentWrapper.style.left = `${left + window.scrollX}px`;
-                this.$refs.contentWrapper.style.top = `${top + window.scrollY}px`;
-                document.body.appendChild(this.$refs.contentWrapper);
-                document.addEventListener('click', this.documentOnClickEventHandle);
+                this.positionContent();
+                document.addEventListener('click', this.onClickDocumentEventHandle);
             });
         },
-        documentOnClickEventHandle(event) {
-            console.log('documentOnClickEventHandle', event.target)
+        onClickDocumentEventHandle(event) {
             if(!this.$refs.contentWrapper.contains(event.target)){
-                this.visible = false;
-                document.removeEventListener('click', this.documentOnClickEventHandle);
+                this.close();
             }
+        },
+        positionContent() {
+            let {triggerWrapper, contentWrapper} = this.$refs;
+            let {width, height, left, top} = triggerWrapper.getBoundingClientRect();
+            contentWrapper.style.left = `${left + window.scrollX}px`;
+            contentWrapper.style.top = `${top + window.scrollY}px`;
+            document.body.appendChild(contentWrapper);
         },
     },
 }
@@ -65,6 +64,8 @@ export default {
 <style lang="scss" scoped>
 .g-popover{
     position: relative;
+    display: inline-flex;
+    vertical-align: top;
     & > .g-popover-button-wrapper{
         display: inline-block;
         vertical-align: top;

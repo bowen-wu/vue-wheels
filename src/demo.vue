@@ -7,6 +7,13 @@
                 </template>
                 <g-button>click</g-button>
             </g-popover>
+
+            <g-popover>
+                <template slot="content">
+                    <div>内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
         </div>
     </div>
 </template>
@@ -38,7 +45,7 @@ export default {
     created() {},
     methods: {
         yyy() {
-            console.log('use yyy');
+            // console.log('use yyy');
         },
     }
 };
