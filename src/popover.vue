@@ -54,7 +54,6 @@ export default {
                 return;
             }
             this.close();
-
         },
         positionContent() {
             let {triggerWrapper, contentWrapper} = this.$refs;
@@ -68,7 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$border-color: #ddd;
+$border-color: #333;
 $border-radius: 4px;
 .g-popover{
     position: relative;
