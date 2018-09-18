@@ -1,21 +1,13 @@
 <template>
     <div class="demo">
-        <g-tabs :selected.sync="selected" class="tabs" direction="horizontal">
-            <g-tabs-head>
-                <g-tabs-item name="women">
-                    <g-icon name="setting" class="icon"></g-icon>美女</g-tabs-item>
-                <g-tabs-item name="finance" disabled>财经</g-tabs-item>
-                <g-tabs-item name="sport">体育</g-tabs-item>
-                <template slot="actions">
-                    <g-button>click</g-button>
+        <div @click="yyy" style="overflow: hidden; border: 1px solid green">
+            <g-popover>
+                <template slot="content">
+                    <div>内容</div>
                 </template>
-            </g-tabs-head>
-            <g-tabs-body>
-                <g-tabs-pane name="women">美女相关资讯</g-tabs-pane>
-                <g-tabs-pane name="finance">财经相关资讯</g-tabs-pane>
-                <g-tabs-pane name="sport">体育相关资讯</g-tabs-pane>
-            </g-tabs-body>
-        </g-tabs>
+                <g-button>click</g-button>
+            </g-popover>
+        </div>
     </div>
 </template>
 <script>
@@ -26,6 +18,8 @@ import TabsHead from './tabs/tabs-head';
 import TabsBody from './tabs/tabs-body';
 import TabsItem from './tabs/tabs-item';
 import TabsPane from './tabs/tabs-pane';
+import Popover from './popover';
+
 export default {
     name: 'bowen-demo',
     components: {
@@ -36,16 +30,17 @@ export default {
         'g-tabs-body': TabsBody,
         'g-tabs-item': TabsItem,
         'g-tabs-pane': TabsPane,
+        'g-popover': Popover,
     },
     data() {
-        return {
-            selected: 'sport',
-            a: 1,
-        };
+        return {};
     },
-    created() {
-        let obj = { a: 1 };
-    },
+    created() {},
+    methods: {
+        yyy() {
+            console.log('use yyy');
+        },
+    }
 };
 </script>
 
@@ -69,6 +64,9 @@ export default {
 
 body {
     font-size: var(--font-size);
+}
+.demo {
+    margin: 40px;
 }
 </style>
 
