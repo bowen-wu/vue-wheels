@@ -71,24 +71,30 @@ export default {
             this.close();
         },
         positionContent() {
-            // TODO: 四个方位
             let {triggerWrapper, contentWrapper} = this.$refs;
             document.body.appendChild(contentWrapper);
             let {width, height, left, top} = triggerWrapper.getBoundingClientRect();
             let {width: contentWidth, height: contentHeight} = contentWrapper.getBoundingClientRect();
-            if(this.position === 'top'){
-                contentWrapper.style.left = `${left + window.scrollX}px`;
-                contentWrapper.style.top = `${top + window.scrollY}px`;
-            }else if(this.position === 'bottom'){
-                contentWrapper.style.left = `${left + window.scrollX}px`;
-                contentWrapper.style.top = `${top + window.scrollY + height}px`;
-            }else if(this.position === 'left'){
-                contentWrapper.style.left = `${left + window.scrollX}px`;
-                contentWrapper.style.top = `${top + window.scrollY - Math.abs((height - contentHeight) / 2)}px`;
-            }else if(this.position === 'right'){
-                contentWrapper.style.left = `${left + window.scrollX + width}px`;
-                contentWrapper.style.top = `${top + window.scrollY - Math.abs((height - contentHeight) / 2)}px`;
+            let positions = {
+                top: {
+                    top: top + window.scrollY,
+                    left: left + window.scrollX,
+                },
+                bottom: {
+                    top: top + window.scrollY + height,
+                    left: left + window.scrollX,
+                },
+                left: {
+                    top: top + window.scrollY - Math.abs((height - contentHeight) / 2),
+                    left: left + window.scrollX,
+                },
+                right: {
+                    top: top + window.scrollY - Math.abs((height - contentHeight) / 2),
+                    left: left + window.scrollX + width,
+                },
             }
+            contentWrapper.style.top = `${positions[this.position].top}px`;
+            contentWrapper.style.left = `${positions[this.position].left}px`;
         },
     },
 }
