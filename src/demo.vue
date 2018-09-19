@@ -1,19 +1,34 @@
 <template>
     <div class="demo">
         <div @click="yyy" style="overflow: hidden; border: 1px solid green">
-            <g-popover>
+            <g-popover class="popover">
                 <template slot="content">
-                    <div>内容</div>
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
                 </template>
                 <g-button>click</g-button>
             </g-popover>
 
-            <g-popover>
+            <g-popover class="popover" position="bottom">
                 <template slot="content">
-                    <div>内容</div>
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
                 </template>
                 <g-button>click</g-button>
             </g-popover>
+
+            <g-popover class="popover" position="left">
+                <template slot="content">
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
+
+            <g-popover class="popover" position="right">
+                <template slot="content">
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
+
         </div>
     </div>
 </template>
@@ -73,7 +88,10 @@ body {
     font-size: var(--font-size);
 }
 .demo {
-    margin: 300px;
+    margin: 200px;
+}
+.popover{
+    margin-right: 20px;
 }
 </style>
 

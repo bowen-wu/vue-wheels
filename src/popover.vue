@@ -1,6 +1,6 @@
 <template>
     <div class="g-popover" @click="onClick" ref="popover">
-        <div class="g-popover-content-wrapper" ref="contentWrapper" v-if="visible">
+        <div class="g-popover-content-wrapper" :class="dynamicClass" ref="contentWrapper" v-if="visible">
             <slot name="content"></slot>
         </div>
         <div class="g-popover-button-wrapper" ref="triggerWrapper">
@@ -12,11 +12,26 @@
 <script>
 export default {
     name: 'bowen-popover',
-    props: {},
+    props: {
+        position: {
+            type: String,
+            default: 'top',
+            validator(val){
+                return ['top', 'bottom', 'left', 'right'].indexOf(val) >= 0;
+            }
+        }
+    },
     data() {
         return {
             visible: false,
         }
+    },
+    computed: {
+        dynamicClass() {
+            return {
+                [`position-${this.position}`]: true,
+            }
+        },
     },
     created() {
 
@@ -56,11 +71,24 @@ export default {
             this.close();
         },
         positionContent() {
+            // TODO: 四个方位
             let {triggerWrapper, contentWrapper} = this.$refs;
-            let {width, height, left, top} = triggerWrapper.getBoundingClientRect();
-            contentWrapper.style.left = `${left + window.scrollX}px`;
-            contentWrapper.style.top = `${top + window.scrollY}px`;
             document.body.appendChild(contentWrapper);
+            let {width, height, left, top} = triggerWrapper.getBoundingClientRect();
+            let {width: contentWidth, height: contentHeight} = contentWrapper.getBoundingClientRect();
+            if(this.position === 'top'){
+                contentWrapper.style.left = `${left + window.scrollX}px`;
+                contentWrapper.style.top = `${top + window.scrollY}px`;
+            }else if(this.position === 'bottom'){
+                contentWrapper.style.left = `${left + window.scrollX}px`;
+                contentWrapper.style.top = `${top + window.scrollY + height}px`;
+            }else if(this.position === 'left'){
+                contentWrapper.style.left = `${left + window.scrollX}px`;
+                contentWrapper.style.top = `${top + window.scrollY - Math.abs((height - contentHeight) / 2)}px`;
+            }else if(this.position === 'right'){
+                contentWrapper.style.left = `${left + window.scrollX + width}px`;
+                contentWrapper.style.top = `${top + window.scrollY - Math.abs((height - contentHeight) / 2)}px`;
+            }
         },
     },
 }
@@ -82,8 +110,6 @@ $border-radius: 4px;
     border: 1px solid $border-color;
     border-radius: $border-radius;
     position: absolute;
-    transform: translateY(-100%);
-    margin-top: -10px;
     padding: 0.5em 1em;
     max-width: 20em;
     word-break: break-all;
@@ -94,15 +120,63 @@ $border-radius: 4px;
         display: block;
         border: 10px solid transparent;
         position: absolute;
-        left: 12px;
     }
-    &::before{
-        border-top-color: #333;
-        top: 100%;
+    &.position-top, &.position-bottom{
+        &::before, &::after{
+            left: 12px;
+        }
     }
-    &::after{
-        border-top-color: #fff;
-        top: calc(100% - 1px);
+    &.position-left, &.position-right{
+        &::before, &::after{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &.position-top{
+        transform: translateY(-100%);
+        margin-top: -10px;
+        &::before{
+            border-top-color: #333;
+            top: 100%;
+        }
+        &::after{
+            border-top-color: #fff;
+            top: calc(100% - 1px);
+        }
+    }
+    &.position-bottom{
+        margin-top: 10px;
+        &::before{
+            border-bottom-color: #333;
+            bottom: 100%;
+        }
+        &::after{
+            border-bottom-color: #fff;
+            bottom: calc(100% - 1px);
+        }
+    }
+    &.position-left{
+        transform: translateX(-100%);
+        margin-left: -10px;
+        &::before{
+            border-left-color: #333;
+            left: 100%;
+        }
+        &::after{
+            border-left-color: #fff;
+            left: calc(100% - 1px);
+        }
+    }
+    &.position-right{
+        margin-left: 10px;
+        &::before{
+            border-right-color: #333;
+            right: 100%;
+        }
+        &::after{
+            border-right-color: #fff;
+            right: calc(100% - 1px);
+        }
     }
 
 }
