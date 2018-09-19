@@ -28,6 +28,34 @@
                 </template>
                 <g-button>click</g-button>
             </g-popover>
+            <div style="height: 20px;"></div>
+            <g-popover class="popover" trigger="hover">
+                <template slot="content">
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
+
+            <g-popover class="popover" position="bottom" trigger="hover">
+                <template slot="content">
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
+
+            <g-popover class="popover" position="left" trigger="hover">
+                <template slot="content">
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
+
+            <g-popover class="popover" position="right" trigger="hover">
+                <template slot="content">
+                    <div>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                </template>
+                <g-button>click</g-button>
+            </g-popover>
 
         </div>
     </div>
