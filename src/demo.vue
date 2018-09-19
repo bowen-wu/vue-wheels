@@ -2,9 +2,9 @@
     <div class="demo">
         <div @click="yyy" style="overflow: hidden; border: 1px solid green">
             <g-popover class="popover">
-                <template slot="content">
+                <template slot="content" slot-scope="{close}">
                     <div>内容内容<a href="http://www.baidu.com">百度</a>内容内容内容内容
-                        <g-button>关闭</g-button>
+                        <g-button @click="close">关闭</g-button>
                     </div>
                 </template>
                 <g-button>click</g-button>

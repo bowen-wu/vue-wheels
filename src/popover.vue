@@ -1,7 +1,7 @@
 <template>
     <div class="g-popover" ref="popover">
         <div class="g-popover-content-wrapper" :class="dynamicClass" ref="contentWrapper" v-if="visible">
-            <slot name="content"></slot>
+            <slot name="content" :close="close"></slot>
         </div>
         <div class="g-popover-button-wrapper" ref="triggerWrapper">
             <slot ref="button"></slot>
