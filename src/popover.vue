@@ -31,6 +31,7 @@ export default {
     data() {
         return {
             visible: false,
+            timer: null,
         };
     },
     computed: {
@@ -44,16 +45,16 @@ export default {
         if(this.trigger === 'click'){
             this.$refs.popover.addEventListener('click', this.onClick);
         }else{
-            this.$refs.popover.addEventListener('mouseenter', this.open);
-            this.$refs.popover.addEventListener('mouseleave', this.close);
+            this.$refs.popover.addEventListener('mouseenter', this.onMouseenter);
+            this.$refs.popover.addEventListener('mouseleave', this.onMouseLeave);
         }
     },
     destroyed() {
         if(this.trigger === 'click'){
             this.$refs.popover.removeEventListener('click', this.onClick);
         }else{
-            this.$refs.popover.removeEventListener('mouseenter', this.open);
-            this.$refs.popover.removeEventListener('mouseleave', this.close);
+            this.$refs.popover.removeEventListener('mouseenter', this.onMouseenter);
+            this.$refs.popover.removeEventListener('mouseleave', this.onMouseLeave);
         }
     },
     methods: {
@@ -123,6 +124,34 @@ export default {
             };
             contentWrapper.style.top = `${positions[this.position].top}px`;
             contentWrapper.style.left = `${positions[this.position].left}px`;
+        },
+        onMouseenter() {
+            if(this.$refs.contentWrapper){
+                this.$refs.contentWrapper.removeEventListener('mouseenter', this.onContentMouseenter);
+                this.$refs.contentWrapper.removeEventListener('mouseleave', this.onMouseLeave);
+            }
+            this.clearTimer();
+            this.open();
+        },
+        onMouseLeave() {
+            this.setTimer();
+            if(this.$refs.contentWrapper){
+                this.$refs.contentWrapper.addEventListener('mouseenter', this.onContentMouseenter);
+            }
+        },
+        onContentMouseenter() {
+            this.clearTimer();
+            this.$refs.contentWrapper.addEventListener('mouseleave', this.onMouseLeave);
+        },
+        clearTimer() {
+            if(this.timer){
+                clearTimeout(this.timer);
+            }
+        },
+        setTimer() {
+            this.timer = setTimeout(() => {
+                this.close();
+            }, 200);
         },
     },
 };
