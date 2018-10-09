@@ -1,6 +1,11 @@
 <template>
     <div class="demo">
-        <div @click="yyy" style="overflow: hidden; border: 1px solid green">
+        <g-collapse>
+            <g-collapse-item title="title1">content1</g-collapse-item>
+            <g-collapse-item title="title2">content2</g-collapse-item>
+            <g-collapse-item title="title3">content3</g-collapse-item>
+        </g-collapse>
+        <div @click="yyy" style="overflow: hidden; border: 1px solid green" v-if="false">
             <g-popover class="popover">
                 <template slot="content" slot-scope="{close}">
                     <div>内容内容<a href="http://www.baidu.com">百度</a>内容内容内容内容
@@ -71,6 +76,8 @@ import TabsBody from './tabs/tabs-body';
 import TabsItem from './tabs/tabs-item';
 import TabsPane from './tabs/tabs-pane';
 import Popover from './popover';
+import Collapse from './collapse';
+import CollapseItem from './collapse-item';
 
 export default {
     name: 'bowen-demo',
@@ -83,6 +90,8 @@ export default {
         'g-tabs-item': TabsItem,
         'g-tabs-pane': TabsPane,
         'g-popover': Popover,
+        'g-collapse': Collapse,
+        'g-collapse-item': CollapseItem, 
     },
     data() {
         return {};
