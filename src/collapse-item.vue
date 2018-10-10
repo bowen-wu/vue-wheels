@@ -1,9 +1,9 @@
 <template>
     <div class="g-collapse-item">
-        <div class="g-collapse-item-title" @click="onClick" :class="dynamicClass">
+        <div class="g-collapse-item-title" @click="toggle" :class="dynamicClass">
             {{title}}
         </div>
-        <div class="g-collapse-item-content" v-if="open">
+        <div class="g-collapse-item-content" v-if="show">
             <slot></slot>
         </div>
     </div>
@@ -16,24 +16,41 @@ export default {
         title: {
             type: String,
             required: true,
-        }
+        },
+        name: {
+            type: String,
+            required: true,
+        },
     },
     computed: {
         dynamicClass() {
-            if(this.open){
-                return {active: true};
+            if (this.show) {
+                return { active: true };
             }
         },
     },
     data() {
         return {
-            open: false,
+            show: false,
         };
     },
-    created() {},
+    inject: ['eventBus'],
+    created() {
+        this.eventBus.$on('update:selected', nameArray => {
+            if (nameArray.indexOf(this.name) >= 0) {
+                this.show = true;
+            }else{
+                this.show = false;
+            }
+        });
+    },
     methods: {
-        onClick() {
-            this.open = !this.open;
+        toggle() {
+            if (this.show) {
+                this.eventBus.$emit('update:removeSelected', this.name);
+            } else {
+                this.eventBus.$emit('update:addSelected', this.name);
+            }
         },
     },
 };
@@ -46,34 +63,34 @@ $border-radius: 4px;
 $padding-vertical: 7px;
 $padding-horizontal: 8px;
 
-.g-collapse-item{
+.g-collapse-item {
     margin-left: -1px;
     margin-right: -1px;
     margin-top: -1px;
-    > .g-collapse-item-title{
+    > .g-collapse-item-title {
         @include fontLineColor(12px, 16px, #333);
         border: 1px solid $border-color;
         padding: $padding-vertical $padding-horizontal;
         cursor: pointer;
         position: relative;
-        &.active{
+        &.active {
             z-index: 1;
         }
     }
-    &:first-of-type > .g-collapse-item-title{
+    &:first-of-type > .g-collapse-item-title {
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
     }
-    &:last-of-type > .g-collapse-item-title{
+    &:last-of-type > .g-collapse-item-title {
         border-bottom-left-radius: $border-radius;
         border-bottom-right-radius: $border-radius;
         margin-bottom: -1px;
-        &.active{
+        &.active {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
     }
-    > .g-collapse-item-content{
+    > .g-collapse-item-content {
         padding: 8px;
     }
 }

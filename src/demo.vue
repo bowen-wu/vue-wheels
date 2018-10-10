@@ -1,10 +1,11 @@
 <template>
     <div class="demo">
-        <g-collapse>
-            <g-collapse-item title="title1">content1</g-collapse-item>
-            <g-collapse-item title="title2">content2</g-collapse-item>
-            <g-collapse-item title="title3">content3</g-collapse-item>
+        <g-collapse :selected.sync="selected" single>
+            <g-collapse-item title="title1" name="first">content1</g-collapse-item>
+            <g-collapse-item title="title2" name="second">content2</g-collapse-item>
+            <g-collapse-item title="title3" name="third">content3</g-collapse-item>
         </g-collapse>
+        {{selected}}
         <div @click="yyy" style="overflow: hidden; border: 1px solid green" v-if="false">
             <g-popover class="popover">
                 <template slot="content" slot-scope="{close}">
@@ -94,7 +95,9 @@ export default {
         'g-collapse-item': CollapseItem, 
     },
     data() {
-        return {};
+        return {
+            selected: ['second'],
+        };
     },
     created() {},
     methods: {

@@ -8,7 +8,9 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "test:unit": "vue-cli-service test:unit"
+        "test:unit": "vue-cli-service test:unit",
+        "docs:dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs"
     },
     "dependencies": {
         "vue": "^2.5.17"
@@ -23,7 +25,8 @@
         "chai": "^4.1.2",
         "node-sass": "^4.9.0",
         "sass-loader": "^7.0.1",
-        "vue-template-compiler": "^2.5.17"
+        "vue-template-compiler": "^2.5.17",
+        "vuepress": "^0.14.4"
     },
     "eslintConfig": {
         "root": true,
@@ -35,39 +38,71 @@
             "@vue/prettier"
         ],
         "rules": {
-            "no-console": ["warn", {
-                "allow": ["warn", "error"]
-            }],
-            "indent": ["error", 4],
-            "prettier/prettier": "off",
-            "quotes": ["error", "single", {
-                "allowTemplateLiterals": true
-            }],
-            "semi": ["error", "always"],
-            "comma-dangle": ["error", {
-                "arrays": "always-multiline",
-                "objects": "always-multiline",
-                "imports": "always-multiline",
-                "exports": "always-multiline",
-                "functions": "always-multiline"
-            }],
-            "comma-spacing": ["error", {
-                "before": false,
-                "after": true
-            }],
-            "comma-style": ["error", "first", {
-                "exceptions": {
-                    "ArrayExpression": true,
-                    "ObjectExpression": true
+            "no-console": [
+                "warn",
+                {
+                    "allow": [
+                        "warn",
+                        "error"
+                    ]
                 }
-            }],
-            "no-unused-vars": ["error", {
-                "vars": "all",
-                "args": "all",
-                "ignoreRestSiblings": false
-            }],
+            ],
+            "indent": [
+                "error",
+                4
+            ],
+            "prettier/prettier": "off",
+            "quotes": [
+                "error",
+                "single",
+                {
+                    "allowTemplateLiterals": true
+                }
+            ],
+            "semi": [
+                "error",
+                "always"
+            ],
+            "comma-dangle": [
+                "error",
+                {
+                    "arrays": "always-multiline",
+                    "objects": "always-multiline",
+                    "imports": "always-multiline",
+                    "exports": "always-multiline",
+                    "functions": "always-multiline"
+                }
+            ],
+            "comma-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": true
+                }
+            ],
+            "comma-style": [
+                "error",
+                "first",
+                {
+                    "exceptions": {
+                        "ArrayExpression": true,
+                        "ObjectExpression": true
+                    }
+                }
+            ],
+            "no-unused-vars": [
+                "error",
+                {
+                    "vars": "all",
+                    "args": "all",
+                    "ignoreRestSiblings": false
+                }
+            ],
             "consistent-this": "error",
-            "eqeqeq": ["error", "always"],
+            "eqeqeq": [
+                "error",
+                "always"
+            ],
             "no-const-assign": "error",
             "no-dupe-args": "error",
             "no-empty-function": "error",
@@ -75,8 +110,16 @@
             "no-extra-semi": "error",
             "no-global-assign": "error",
             "curly": "error",
-            "object-curly-spacing": ["error", "always"],
-            "object-curly-newline": ["error", { "multiline": true }]
+            "object-curly-spacing": [
+                "error",
+                "always"
+            ],
+            "object-curly-newline": [
+                "error",
+                {
+                    "multiline": true
+                }
+            ]
         },
         "parserOptions": {
             "parser": "babel-eslint"
