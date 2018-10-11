@@ -1,6 +1,7 @@
 module.exports = {
     title: 'UI 框架',
     description: '基于 Vue 的 UI 框架',
+    base: '/vue-wheels/',
     themeConfig: {
         nav: [{
                 text: '主页',
@@ -17,7 +18,7 @@ module.exports = {
         ],
         sidebar: [{
                 title: '入门',
-                collapsable: true, // false 让一个组永远都是展开状态
+                collapsable: false, // false 让一个组永远都是展开状态
                 children: [
                     '/install/',
                     '/get-started/'
@@ -25,6 +26,7 @@ module.exports = {
             },
             {
                 title: '组件',
+                collapsable: false, 
                 children: [
                     '/button/',
                     '/input/',

@@ -45,6 +45,7 @@ export default {
 <style lang="scss" scoped>
 $font-size: 14px;
 $line-height: 32px;
+$min-height: 34px;
 $color: #333;
 $button-bg: #fff;
 $button-active-bg: #eee;
@@ -72,6 +73,7 @@ $border-color-hover: #666;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    min-height: $min-height;
     &:hover {
         border-color: $border-color-hover;
     }
