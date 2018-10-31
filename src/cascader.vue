@@ -1,10 +1,10 @@
 <template>
     <div class="g-cascader">
-        <div class="g-cascader-trigger">
+        <div class="g-cascader-trigger" @click="trigger">
 
         </div>
-        <template v-for="item in source" v-if="item.children">
-            <cascader-item :sourceItem="item" ></cascader-item>
+        <template v-if="cascaderItemVisible">
+            <cascader-item :source="source" ></cascader-item>
         </template>
     </div>
 </template>
@@ -23,19 +23,29 @@ export default {
         },
     },
     data() {
-        return {}
+        return {
+            cascaderItemVisible: false,
+        }
     },
     created() {},
     mounted() {},
-    methods: {},
+    methods: {
+        trigger() {
+            this.cascaderItemVisible = !this.cascaderItemVisible;
+        },
+    },
 }
 </script>
 
 <style lang="scss" scoped>
+@import './assist/style/_var.scss';
 
 .g-cascader{
     .g-cascader-trigger{
-        border: 1px solid #666;
+        border: 1px solid $border-color;
+        min-height: $min-height;
+        padding: $padding;
+        border-radius: $border-radius;
     }
 }
 </style>

@@ -143,6 +143,28 @@ export default {
                             ]
                         }
                     ]
+                },
+                {
+                    name: '辽宁',
+                    children: [{
+                        name: '鞍山',
+                        children: [{
+                            name: '铁东'
+                        },{
+                            name: '铁西'
+                        }, {
+                            name: '立山'
+                        }]
+                    }, {
+                        name: '沈阳',
+                        children: [{
+                            name: '和平'
+                        }, {
+                            name: '沈河'
+                        }, {
+                            name: '皇姑'
+                        }]
+                    }]
                 }
             ],
         };

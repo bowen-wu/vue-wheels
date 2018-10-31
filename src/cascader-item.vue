@@ -1,9 +1,13 @@
 <template>
     <div class="g-cascader-item">
-        {{sourceItem.name}}
-        <template v-if="sourceItem.children" v-for="item in sourceItem.children">
-            <bowen-cascader-item :sourceItem="item"></bowen-cascader-item>
-        </template>
+        <div class="g-cascader-item-parents">
+            <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)">
+                {{parent.name}}
+            </div>
+        </div>
+        <div class="g-cascader-item-children" v-if="children">
+            <bowen-cascader-item :source="children"></bowen-cascader-item>
+        </div>
     </div>
 </template>
 
@@ -11,9 +15,30 @@
 export default {
     name: 'bowen-cascader-item',
     props: {
-        sourceItem: {
-            type: Object,
+        source: {
+            type: Array,
         },
+    },
+    data() {
+        return {
+            selectParent: null
+        }
+    },
+    computed: {
+        children() {
+            if(this.selectParent && this.selectParent.children){
+                return this.selectParent.children;
+            }else {
+                return null
+            }
+        },
+    },
+    created() {},
+    mounted() {},
+    methods: {
+        onSelectParent(parent) {
+            this.selectParent = parent;
+        }
     },
 }
 </script>
