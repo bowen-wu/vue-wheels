@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assist/style/scssMixin.scss';
+@import '../assist/style/_var.scss';
 
 $border-color: #eee;
 $line-bg-color: #409eff;

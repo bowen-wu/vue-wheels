@@ -158,8 +158,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$border-color: #333;
-$border-radius: 4px;
+@import './assist/style/_var.scss';
 .g-popover {
     position: relative;
     display: inline-flex;

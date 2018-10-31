@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/assist/style/scssMixin.scss';
+@import '../../../src/assist/style/_var.scss';
 .demo-block {
     border: 1px solid #ebebeb;
     border-radius: 4px;

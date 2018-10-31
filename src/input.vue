@@ -181,28 +181,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$font-size: 14px;
-$font-size-tips: 12px;
-$line-height: 16px;
-$line-height-tips: 14px;
-$color: #606266;
-$color-placeholder: #ccc;
-$color-tips: #57a3f3;
-$color-tips-error: #F1453D;
-$color-tips-success: #67c23a;
-$color-disabled: #c0c4cc;
-$border-radius: 4px;
-$border-color: #dcdfe6;
-$pre-next-icon-fill: #a1acb3;
-$bg-color-disabled: #f5f7fa;
-$border-color-disabled: #e4e7ed;
-$border-color-hover: #c0c4cc;
-$border-color-focus: #999;
-$border-color-error: #F1453D;
-$border-color-success: #67c23a;
-$box-shadow-color: rgba(153, 153, 153, 0.2);
-$box-shadow-color-error: rgba(241, 69, 61, 0.2);
-$box-shadow-color-success: rgba(103, 194, 58, 0.2);
+
 
 @mixin fontLineColor($color: $color){
     font-size: $font-size;

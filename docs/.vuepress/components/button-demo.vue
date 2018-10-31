@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../src/assist/style/demo-style.scss';
+@import '../../../src/assist/style/docs-demo-style.scss';
 </style>
 
 

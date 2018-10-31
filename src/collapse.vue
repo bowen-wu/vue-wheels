@@ -59,10 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/scssMixin.scss';
-$border-color: #ccc;
-$border-radius: 4px;
-
+@import './assist/style/_var.scss';
 .g-collapse{
     border: 1px solid $border-color;
     border-radius: $border-radius;

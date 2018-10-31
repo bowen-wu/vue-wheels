@@ -43,15 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$font-size: 14px;
-$line-height: 32px;
-$min-height: 34px;
-$color: #333;
-$button-bg: #fff;
-$button-active-bg: #eee;
-$border-radius: 4px;
-$border-color: #999;
-$border-color-hover: #666;
+@import './assist/style/_var.scss';
 @keyframes spin {
     0% {
         transform: rotate(0deg);

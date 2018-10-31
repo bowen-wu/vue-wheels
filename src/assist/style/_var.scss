@@ -1,0 +1,42 @@
+$animate-duration: 0.3s;
+$bg-color-disabled: #f5f7fa;
+$bg-color: rgba(0, 0, 0, 0.74);
+$border-color-disabled: #e4e7ed;
+$border-color-error: #F1453D;
+$border-color-focus: #999;
+$border-color-hover: #666;
+$border-color-hover: #c0c4cc;
+$border-color-success: #67c23a;
+$border-color: #dcdfe6;
+$border-radius: 4px;
+$box-shadow-color-error: rgba(241, 69, 61, 0.2);
+$box-shadow-color-success: rgba(103, 194, 58, 0.2);
+$box-shadow-color: rgba(153, 153, 153, 0.2);
+$button-active-bg: #eee;
+$button-bg: #fff;
+$color-disabled: #c0c4cc;
+$color-placeholder: #ccc;
+$color-tips-error: #F1453D;
+$color-tips-success: #67c23a;
+$color-tips: #57a3f3;
+$color: #333;
+$font-size-tips: 12px;
+$font-size: 14px;
+$line-height-tips: 14px;
+$line-height: 16px;
+$min-height: 40px;
+$padding-horizontal: 8px;
+$padding-vertical: 7px;
+$pre-next-icon-fill: #a1acb3;
+
+@mixin fontLineColor($fontSize: 14px, $lineHeight: 32px, $color: #333){
+    font-size: $fontSize;
+    line-height: $lineHeight;
+    color: $color;
+}
+
+@mixin flex($justifyContent: flex-start, $alignItems: flex-start){
+    display: flex;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}

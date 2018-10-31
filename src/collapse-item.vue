@@ -57,12 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/scssMixin.scss';
-$border-color: #ccc;
-$border-radius: 4px;
-$padding-vertical: 7px;
-$padding-horizontal: 8px;
-
+@import './assist/style/_var.scss';
 .g-collapse-item {
     margin-left: -1px;
     margin-right: -1px;

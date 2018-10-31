@@ -91,14 +91,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/scssMixin.scss';
-
-$font-size: 14px;
-$line-height: 16px;
-$color: #fff;
-$bg-color: rgba(0, 0, 0, 0.74);
-$min-height: 40px;
-$animate-duration: 0.3s;
+@import './assist/style/_var.scss';
 
 @keyframes fadeIn {
     0% {
