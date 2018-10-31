@@ -1,11 +1,13 @@
 <template>
     <div class="demo">
-        <g-collapse :selected.sync="selected" single>
+        <g-cascader :source="source"></g-cascader>
+
+
+        <g-collapse :selected.sync="selected" single v-if="false">
             <g-collapse-item title="title1" name="first">content1</g-collapse-item>
             <g-collapse-item title="title2" name="second">content2</g-collapse-item>
             <g-collapse-item title="title3" name="third">content3</g-collapse-item>
         </g-collapse>
-        {{selected}}
         <div @click="yyy" style="overflow: hidden; border: 1px solid green" v-if="false">
             <g-popover class="popover">
                 <template slot="content" slot-scope="{close}">
@@ -70,15 +72,16 @@
 </template>
 <script>
 import Button from './button';
-import Icon from './icon';
-import Tabs from './tabs/tabs.vue';
-import TabsHead from './tabs/tabs-head';
-import TabsBody from './tabs/tabs-body';
-import TabsItem from './tabs/tabs-item';
-import TabsPane from './tabs/tabs-pane';
-import Popover from './popover';
+import Cascader from './cascader';
 import Collapse from './collapse';
 import CollapseItem from './collapse-item';
+import Icon from './icon';
+import Popover from './popover';
+import Tabs from './tabs/tabs.vue';
+import TabsBody from './tabs/tabs-body';
+import TabsHead from './tabs/tabs-head';
+import TabsItem from './tabs/tabs-item';
+import TabsPane from './tabs/tabs-pane';
 
 export default {
     name: 'bowen-demo',
@@ -93,17 +96,59 @@ export default {
         'g-popover': Popover,
         'g-collapse': Collapse,
         'g-collapse-item': CollapseItem, 
+        'g-cascader': Cascader,
     },
     data() {
         return {
             selected: ['second'],
+            source: [
+                {
+                    name: '浙江',
+                    children: [
+                        {
+                            name: '杭州',
+                            children: [
+                                {name: '西湖'},
+                                {name: '滨江'},
+                                {name: '上城'},
+                            ]
+                        },
+                        {
+                            name: '绍兴',
+                            children: [
+                                {name: '上虞'},
+                                {name: '柯桥'},
+                                {name: '越城'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: '山东',
+                    children: [
+                        {
+                            name: '青岛',
+                            children: [
+                                {name: '市南'},
+                                {name: '市北'},
+                                {name: '崂山'}
+                            ]
+                        },
+                        {
+                            name: '济南',
+                            children: [
+                                {name: '市中'},
+                                {name: '天桥'},
+                                {name: '历城'}
+                            ]
+                        }
+                    ]
+                }
+            ],
         };
     },
     created() {},
     methods: {
-        yyy() {
-            // console.log('use yyy');
-        },
     }
 };
 </script>
@@ -113,21 +158,6 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-:root {
-    --font-size: 14px;
-    --line-height: 32px;
-    --color: #333;
-    --button-bg: #fff;
-    --button-active-bg: #eee;
-    --border-radius: 4px;
-    --border-color: #999;
-    --border-color-hover: #666;
-}
-
-body {
-    font-size: var(--font-size);
 }
 .demo {
     margin: 200px;
