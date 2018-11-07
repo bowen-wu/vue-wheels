@@ -3,9 +3,13 @@
         <div class="g-cascader-trigger" @click="trigger">
 
         </div>
-        <template v-if="cascaderItemVisible">
-            <cascader-item :source="source" ></cascader-item>
-        </template>
+        <div class="g-cascader-item-wrapper">
+            <div class="g-cascader-item-inner">
+                <template v-if="cascaderItemVisible">
+                    <cascader-item :source="source" :height="cascaderHeight"></cascader-item>
+                </template>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -20,6 +24,12 @@ export default {
         source: {
             type: Array,
             required: true,
+        },
+        cascaderHeight: {
+            type: String,
+            default() {
+                return '200px';
+            },
         },
     },
     data() {
@@ -41,11 +51,25 @@ export default {
 @import './assist/style/_var.scss';
 
 .g-cascader{
-    .g-cascader-trigger{
+    position: relative;
+    > .g-cascader-trigger{
         border: 1px solid $border-color;
         min-height: $min-height;
+        min-width: $min-width;
         padding: $padding;
         border-radius: $border-radius;
+    }
+    > .g-cascader-item-wrapper{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: $bg-color-white;
+        > .g-cascader-item-inner{
+            @include boxShadow();
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            margin-top: $margin-top;
+        }
     }
 }
 </style>

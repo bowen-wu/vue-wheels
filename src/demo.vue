@@ -1,6 +1,9 @@
 <template>
     <div class="demo">
-        <g-cascader :source="source"></g-cascader>
+        <div>11111</div>
+        <g-cascader :source="source" cascaderHeight="200px"></g-cascader>
+        <div>22222</div>
+
 
 
         <g-collapse :selected.sync="selected" single v-if="false">

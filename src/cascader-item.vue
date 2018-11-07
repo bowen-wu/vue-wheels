@@ -1,8 +1,11 @@
 <template>
-    <div class="g-cascader-item">
+    <div class="g-cascader-item" :style="{height: height}">
         <div class="g-cascader-item-parents">
             <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)">
-                {{parent.name}}
+                <div class="g-cascader-item-parent-text">
+                    {{parent.name}}
+                </div>
+                <g-icon name="right" class="g-cascader-item-parent-icon" v-if="parent.children"></g-icon>
             </div>
         </div>
         <div class="g-cascader-item-children" v-if="children">
@@ -12,11 +15,18 @@
 </template>
 
 <script>
+import Icon from './icon';
 export default {
     name: 'bowen-cascader-item',
+    components: {
+        'g-icon': Icon,
+    },
     props: {
         source: {
             type: Array,
+        },
+        height: {
+            type: String,
         },
     },
     data() {
@@ -44,9 +54,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './assist/style/_var.scss';
 .g-cascader-item{
-    border: 1px solid red;
-    margin: 10px;
+    @include flex();
+    height: 100%;
+    > .g-cascader-item-parents{
+        height: 100%;
+        overflow: auto;
+        > .g-cascader-item-parent{
+            @include flex(flex-start, center);
+            padding: $padding-bigger;
+            min-width: 6em;
+            > .g-cascader-item-parent-icon{
+                margin-left: 1em;
+                transform: scale(0.8);
+            }
+        }
+    }
+    > .g-cascader-item-children{
+        border-left: 1px solid $border-color-light;
+        height: 100%;
+    }
 }
 </style>
 
