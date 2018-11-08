@@ -1,8 +1,6 @@
 <template>
     <div class="g-cascader">
-        <div>{{selected}}</div>
         <div class="g-cascader-trigger" @click="trigger">
-
         </div>
         <div class="g-cascader-item-wrapper">
             <div class="g-cascader-item-inner">
@@ -28,7 +26,7 @@ export default {
         },
         selected: {
             type: Array,
-            // required: true,
+            required: true,
         },
         cascaderHeight: {
             type: String,
@@ -51,7 +49,6 @@ export default {
             this.cascaderItemVisible = !this.cascaderItemVisible;
         },
         updateSelected(newSelected) {
-            console.log('newSelected', newSelected);
             this.$emit('update:selected', newSelected);
         },
     },

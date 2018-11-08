@@ -1,7 +1,5 @@
 <template>
     <div class="g-cascader-item" :style="{height: height}">
-        <div>{{selected}}</div>
-        <div>{{level}}</div>
         <div class="g-cascader-item-parents">
             <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)">
                 <div class="g-cascader-item-parent-text">
@@ -43,13 +41,12 @@ export default {
     },
     data() {
         return {
-            selectParent: null
         }
     },
     computed: {
         children() {
-            if(this.selectParent && this.selectParent.children){
-                return this.selectParent.children;
+            if(this.selected && this.selected[this.level] && this.selected[this.level].children){
+                return this.selected[this.level].children;
             }else {
                 return null
             }
@@ -61,9 +58,9 @@ export default {
         onSelectParent(parent) {
             // 需要 深拷贝
             let selectedCopy = JSON.parse(JSON.stringify(this.selected));
-            selectedCopy[this.level] = parent.name;
+            selectedCopy[this.level] = parent;
+            selectedCopy.splice(this.level + 1);
             this.$emit('update:selected', selectedCopy);
-            this.selectParent = parent;
         },
         updateSelected(selected) {
             this.$emit('update:selected', selected);
