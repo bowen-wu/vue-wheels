@@ -6,7 +6,7 @@
         <div class="g-cascader-item-wrapper">
             <div class="g-cascader-item-inner">
                 <template v-if="cascaderItemVisible">
-                    <cascader-item :source="source" :height="cascaderHeight" :selected="selected" @update:selected="updateSelected"></cascader-item>
+                    <cascader-item :source="source" :height="cascaderHeight" :selected="selected" @update:selected="updateSelected" @close-cascader="closeCascader"></cascader-item>
                 </template>
             </div>
         </div>
@@ -39,7 +39,7 @@ export default {
     data() {
         return {
             cascaderItemVisible: false,
-        }
+        };
     },
     computed: {
         exhibitionText() {
@@ -48,33 +48,44 @@ export default {
     },
     methods: {
         trigger() {
-            this.cascaderItemVisible = !this.cascaderItemVisible;
+            if (this.cascaderItemVisible) {
+                this.closeCascader();
+            } else {
+                this.openCascader();
+            }
+        },
+        openCascader() {
+            this.cascaderItemVisible = true;
+        },
+        closeCascader() {
+            console.log('closeCascader');
+            this.cascaderItemVisible = false;
         },
         updateSelected(newSelected) {
             this.$emit('update:selected', newSelected);
         },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import './assist/style/_var.scss';
 
-.g-cascader{
+.g-cascader {
     position: relative;
-    > .g-cascader-trigger{
+    > .g-cascader-trigger {
         border: 1px solid $border-color;
         min-height: $min-height;
         min-width: $min-width;
         padding: $padding;
         border-radius: $border-radius;
     }
-    > .g-cascader-item-wrapper{
+    > .g-cascader-item-wrapper {
         position: absolute;
         top: 100%;
         left: 0;
         background-color: $bg-color-white;
-        > .g-cascader-item-inner{
+        > .g-cascader-item-inner {
             @include boxShadow();
             border: 1px solid $border-color;
             border-radius: $border-radius;

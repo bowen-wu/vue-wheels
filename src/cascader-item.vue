@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="g-cascader-item-children" v-if="children">
-            <bowen-cascader-item :source="children" :selected="selected" @update:selected="updateSelected" :level="level + 1"></bowen-cascader-item>
+            <bowen-cascader-item :source="children" :selected="selected" @update:selected="updateSelected" @close-cascader="closeCascader" :level="level + 1"></bowen-cascader-item>
         </div>
     </div>
 </template>
@@ -40,20 +40,18 @@ export default {
         },
     },
     data() {
-        return {
-        }
+        return {};
     },
     computed: {
         children() {
-            if(this.selected && this.selected[this.level] && this.selected[this.level].children){
+            if (this.selected && this.selected[this.level] && this.selected[this.level].children) {
                 return this.selected[this.level].children;
-            }else {
-                return null
+            } else {
+                return null;
             }
         },
         dynamicClass() {
-
-            return 
+            return;
         },
     },
     created() {},
@@ -65,44 +63,50 @@ export default {
             selectedCopy[this.level] = parent;
             selectedCopy.splice(this.level + 1);
             this.$emit('update:selected', selectedCopy);
+            if (!parent.children) {
+                this.$emit('close-cascader');
+            }
         },
         updateSelected(selected) {
             this.$emit('update:selected', selected);
         },
+        closeCascader() {
+            this.$emit('close-cascader');
+        },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import './assist/style/_var.scss';
-.g-cascader-item{
+.g-cascader-item {
     @include flex();
     height: 100%;
-    > .g-cascader-item-parents{
+    > .g-cascader-item-parents {
         height: 100%;
         padding: 4px 0;
         overflow: auto;
-        > .g-cascader-item-parent{
+        > .g-cascader-item-parent {
             @include flex(flex-start, center);
             padding: $padding-bigger;
             min-width: 6em;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 background-color: $bg-color-light;
             }
-            &.g-cascader-item-parent-active{
+            &.g-cascader-item-parent-active {
                 color: $color-active;
-                > .g-cascader-item-parent-icon{
+                > .g-cascader-item-parent-icon {
                     fill: $color-active;
                 }
             }
-            > .g-cascader-item-parent-icon{
+            > .g-cascader-item-parent-icon {
                 margin-left: 1em;
                 transform: scale(0.8);
             }
         }
     }
-    > .g-cascader-item-children{
+    > .g-cascader-item-children {
         border-left: 1px solid $border-color-light;
         height: 100%;
     }
