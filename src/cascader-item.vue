@@ -1,7 +1,7 @@
 <template>
     <div class="g-cascader-item" :style="{height: height}">
         <div class="g-cascader-item-parents">
-            <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)">
+            <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)" :class="{'g-cascader-item-parent-active': selected[level] && (parent.name === selected[level].name)}">
                 <div class="g-cascader-item-parent-text">
                     {{parent.name}}
                 </div>
@@ -51,6 +51,10 @@ export default {
                 return null
             }
         },
+        dynamicClass() {
+
+            return 
+        },
     },
     created() {},
     mounted() {},
@@ -76,11 +80,22 @@ export default {
     height: 100%;
     > .g-cascader-item-parents{
         height: 100%;
+        padding: 4px 0;
         overflow: auto;
         > .g-cascader-item-parent{
             @include flex(flex-start, center);
             padding: $padding-bigger;
             min-width: 6em;
+            cursor: pointer;
+            &:hover{
+                background-color: $bg-color-light;
+            }
+            &.g-cascader-item-parent-active{
+                color: $color-active;
+                > .g-cascader-item-parent-icon{
+                    fill: $color-active;
+                }
+            }
             > .g-cascader-item-parent-icon{
                 margin-left: 1em;
                 transform: scale(0.8);

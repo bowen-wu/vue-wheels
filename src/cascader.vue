@@ -1,6 +1,7 @@
 <template>
     <div class="g-cascader">
         <div class="g-cascader-trigger" @click="trigger">
+            {{exhibitionText}}
         </div>
         <div class="g-cascader-item-wrapper">
             <div class="g-cascader-item-inner">
@@ -40,10 +41,11 @@ export default {
             cascaderItemVisible: false,
         }
     },
-    created() {
-
+    computed: {
+        exhibitionText() {
+            return this.selected.map(obj => obj.name).join(' / ');
+        },
     },
-    mounted() {},
     methods: {
         trigger() {
             this.cascaderItemVisible = !this.cascaderItemVisible;
