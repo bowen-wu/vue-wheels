@@ -1,5 +1,7 @@
 <template>
     <div class="g-cascader-item" :style="{height: height}">
+        <div>{{selected}}</div>
+        <div>{{level}}</div>
         <div class="g-cascader-item-parents">
             <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)">
                 <div class="g-cascader-item-parent-text">
@@ -9,7 +11,7 @@
             </div>
         </div>
         <div class="g-cascader-item-children" v-if="children">
-            <bowen-cascader-item :source="children"></bowen-cascader-item>
+            <bowen-cascader-item :source="children" :selected="selected" @update:selected="updateSelected" :level="level + 1"></bowen-cascader-item>
         </div>
     </div>
 </template>
@@ -24,6 +26,16 @@ export default {
     props: {
         source: {
             type: Array,
+            required: true,
+        },
+        selected: {
+            type: Array,
+            required: true,
+        },
+        level: {
+            type: Number,
+            required: false,
+            default: 0,
         },
         height: {
             type: String,
@@ -47,8 +59,15 @@ export default {
     mounted() {},
     methods: {
         onSelectParent(parent) {
+            // 需要 深拷贝
+            let selectedCopy = JSON.parse(JSON.stringify(this.selected));
+            selectedCopy[this.level] = parent.name;
+            this.$emit('update:selected', selectedCopy);
             this.selectParent = parent;
-        }
+        },
+        updateSelected(selected) {
+            this.$emit('update:selected', selected);
+        },
     },
 }
 </script>

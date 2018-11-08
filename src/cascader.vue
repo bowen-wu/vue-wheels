@@ -1,12 +1,13 @@
 <template>
     <div class="g-cascader">
+        <div>{{selected}}</div>
         <div class="g-cascader-trigger" @click="trigger">
 
         </div>
         <div class="g-cascader-item-wrapper">
             <div class="g-cascader-item-inner">
                 <template v-if="cascaderItemVisible">
-                    <cascader-item :source="source" :height="cascaderHeight"></cascader-item>
+                    <cascader-item :source="source" :height="cascaderHeight" :selected="selected" @update:selected="updateSelected"></cascader-item>
                 </template>
             </div>
         </div>
@@ -25,6 +26,10 @@ export default {
             type: Array,
             required: true,
         },
+        selected: {
+            type: Array,
+            // required: true,
+        },
         cascaderHeight: {
             type: String,
             default() {
@@ -37,11 +42,17 @@ export default {
             cascaderItemVisible: false,
         }
     },
-    created() {},
+    created() {
+
+    },
     mounted() {},
     methods: {
         trigger() {
             this.cascaderItemVisible = !this.cascaderItemVisible;
+        },
+        updateSelected(newSelected) {
+            console.log('newSelected', newSelected);
+            this.$emit('update:selected', newSelected);
         },
     },
 }

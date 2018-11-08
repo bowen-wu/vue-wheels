@@ -1,9 +1,9 @@
 <template>
     <div class="demo">
         <div>11111</div>
-        <g-cascader :source="source" cascaderHeight="200px"></g-cascader>
+        <div>{{selected}}</div>
+        <g-cascader :source="source" :selected="selected" @update:selected="selected = $event" cascaderHeight="200px"></g-cascader>
         <div>22222</div>
-
 
 
         <g-collapse :selected.sync="selected" single v-if="false">
@@ -103,7 +103,7 @@ export default {
     },
     data() {
         return {
-            selected: ['second'],
+            selected: [],
             source: [
                 {
                     name: '浙江',
