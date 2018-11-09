@@ -31,7 +31,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './assist/style/_var.scss';
 .g-icon {
+    @include inline-flex(center, center);
     width: 1em;
     height: 1em;
 }

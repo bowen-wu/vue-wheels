@@ -1,7 +1,10 @@
 <template>
     <div class="g-cascader">
         <div class="g-cascader-trigger" @click="trigger">
-            {{exhibitionText}}
+            {{exhibitionText || '&nbsp'}}
+            <div class="g-cascader-trigger-arrow" :class="dynamicClass">
+                <icon name="down" class="g-cascader-trigger-arrow-icon"></icon>
+            </div>
         </div>
         <div class="g-cascader-item-wrapper">
             <div class="g-cascader-item-inner">
@@ -15,10 +18,12 @@
 
 <script>
 import CascaderItem from './cascader-item';
+import Icon from './icon';
 export default {
     name: 'bowen-cascader',
     components: {
         CascaderItem,
+        Icon,
     },
     props: {
         source: {
@@ -27,7 +32,9 @@ export default {
         },
         selected: {
             type: Array,
-            required: true,
+            default() {
+                return [];
+            },
         },
         cascaderHeight: {
             type: String,
@@ -45,6 +52,9 @@ export default {
         exhibitionText() {
             return this.selected.map(obj => obj.name).join(' / ');
         },
+        dynamicClass() {
+            return {'g-cascader-trigger-arrow-cross': this.cascaderItemVisible}
+        },
     },
     methods: {
         trigger() {
@@ -58,7 +68,6 @@ export default {
             this.cascaderItemVisible = true;
         },
         closeCascader() {
-            console.log('closeCascader');
             this.cascaderItemVisible = false;
         },
         updateSelected(newSelected) {
@@ -74,11 +83,29 @@ export default {
 .g-cascader {
     position: relative;
     > .g-cascader-trigger {
+        @include inline-flex(flex-start, center);
         border: 1px solid $border-color;
         min-height: $min-height;
         min-width: $min-width;
-        padding: $padding;
+        padding: 0 $padding-biggest 0 $padding-bigger;
         border-radius: $border-radius;
+        position: relative;
+        .g-cascader-trigger-arrow{
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(50%, -50%);
+            margin-right: $padding-biggest / 2;
+            &.g-cascader-trigger-arrow-cross{
+                > .g-cascader-trigger-arrow-icon{
+                    transform: rotate(180deg);
+                }
+            }
+            > .g-cascader-trigger-arrow-icon{
+                transition: all 0.2s linear;
+                cursor: pointer;
+            }
+        }
     }
     > .g-cascader-item-wrapper {
         position: absolute;

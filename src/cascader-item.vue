@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="g-cascader-item-children" v-if="children">
-            <bowen-cascader-item :source="children" :selected="selected" @update:selected="updateSelected" @close-cascader="closeCascader" :level="level + 1"></bowen-cascader-item>
+            <bowen-cascader-item :source="children" :selected="selected" @update:selected="onUpdateSelected" @close-cascader="closeCascader" :level="level + 1"></bowen-cascader-item>
         </div>
     </div>
 </template>
@@ -28,7 +28,9 @@ export default {
         },
         selected: {
             type: Array,
-            required: true,
+            default() {
+                return [];
+            },
         },
         level: {
             type: Number,
@@ -44,7 +46,7 @@ export default {
     },
     computed: {
         children() {
-            if (this.selected && this.selected[this.level] && this.selected[this.level].children) {
+            if (this.selected[this.level] && this.selected[this.level].children) {
                 return this.selected[this.level].children;
             } else {
                 return null;
@@ -67,7 +69,7 @@ export default {
                 this.$emit('close-cascader');
             }
         },
-        updateSelected(selected) {
+        onUpdateSelected(selected) {
             this.$emit('update:selected', selected);
         },
         closeCascader() {
@@ -88,7 +90,7 @@ export default {
         overflow: auto;
         > .g-cascader-item-parent {
             @include flex(flex-start, center);
-            padding: $padding-bigger;
+            padding: $padding $padding-bigger;
             min-width: 6em;
             cursor: pointer;
             &:hover {
