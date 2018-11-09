@@ -4,7 +4,7 @@
         <div>{{selected[0] && selected[0].name || '空'}}</div>
         <div>{{selected[1] && selected[1].name || '空'}}</div>
         <div>{{selected[2] && selected[2].name || '空'}}</div>
-        <g-cascader :source="source" :selected="selected" @update:selected="selected = $event" cascaderHeight="200px"></g-cascader>
+        <g-cascader :source="source" :selected.sync="selected" cascaderHeight="200px"></g-cascader>
         <div>22222</div>
 
 
