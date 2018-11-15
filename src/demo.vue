@@ -1,11 +1,15 @@
 <template>
     <div class="demo">
 
+        <div @click="updateMessage">
+            {{obj.message}}            
+        </div>
+
         <div>11111</div>
         <div>{{selected[0] && selected[0].name || '空'}}</div>
         <div>{{selected[1] && selected[1].name || '空'}}</div>
         <div>{{selected[2] && selected[2].name || '空'}}</div>
-        <g-cascader :source="source" :selected.sync="selected" cascaderHeight="200px"></g-cascader>
+        <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
         <div>22222</div>
 
 
@@ -88,6 +92,15 @@ import TabsBody from './tabs/tabs-body';
 import TabsHead from './tabs/tabs-head';
 import TabsItem from './tabs/tabs-item';
 import TabsPane from './tabs/tabs-pane';
+import DB from './assist/util/china.js';
+const AJAX = ({id = '0'}) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let response = DB.filter(item => item.parentId === id);
+            resolve(response);
+        }, 200);
+    })
+}
 
 export default {
     name: 'bowen-demo',
@@ -108,75 +121,104 @@ export default {
         return {
             selected: [],
             source: [
-                {
-                    name: '浙江',
-                    children: [
-                        {
-                            name: '杭州',
-                            children: [
-                                {name: '西湖'},
-                                {name: '滨江'},
-                                {name: '上城'},
-                            ]
-                        },
-                        {
-                            name: '绍兴',
-                            children: [
-                                {name: '上虞'},
-                                {name: '柯桥'},
-                                {name: '越城'}
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: '山东',
-                    children: [
-                        {
-                            name: '青岛',
-                            children: [
-                                {name: '市南'},
-                                {name: '市北'},
-                                {name: '崂山'}
-                            ]
-                        },
-                        {
-                            name: '济南',
-                            children: [
-                                {name: '市中'},
-                                {name: '天桥'},
-                                {name: '历城'}
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: '辽宁',
-                    children: [{
-                        name: '鞍山',
-                        children: [{
-                            name: '铁东'
-                        },{
-                            name: '铁西'
-                        }, {
-                            name: '立山'
-                        }]
-                    }, {
-                        name: '沈阳',
-                        children: [{
-                            name: '和平'
-                        }, {
-                            name: '沈河'
-                        }, {
-                            name: '皇姑'
-                        }]
-                    }]
-                }
+                // {
+                //     name: '浙江',
+                //     children: [
+                //         {
+                //             name: '杭州',
+                //             children: [
+                //                 {name: '西湖'},
+                //                 {name: '滨江'},
+                //                 {name: '上城'},
+                //             ]
+                //         },
+                //         {
+                //             name: '绍兴',
+                //             children: [
+                //                 {name: '上虞'},
+                //                 {name: '柯桥'},
+                //                 {name: '越城'}
+                //             ]
+                //         }
+                //     ]
+                // },
+                // {
+                //     name: '山东',
+                //     children: [
+                //         {
+                //             name: '青岛',
+                //             children: [
+                //                 {name: '市南'},
+                //                 {name: '市北'},
+                //                 {name: '崂山'}
+                //             ]
+                //         },
+                //         {
+                //             name: '济南',
+                //             children: [
+                //                 {name: '市中'},
+                //                 {name: '天桥'},
+                //                 {name: '历城'}
+                //             ]
+                //         }
+                //     ]
+                // },
+                // {
+                //     name: '辽宁',
+                //     children: [{
+                //         name: '鞍山',
+                //         children: [{
+                //             name: '铁东'
+                //         },{
+                //             name: '铁西'
+                //         }, {
+                //             name: '立山'
+                //         }]
+                //     }, {
+                //         name: '沈阳',
+                //         children: [{
+                //             name: '和平'
+                //         }, {
+                //             name: '沈河'
+                //         }, {
+                //             name: '皇姑'
+                //         }]
+                //     }]
+                // }
             ],
+            obj: {},
         };
     },
-    created() {},
+    created() {
+        AJAX({}).then(source => {
+            this.source = source;
+            console.log('this.source', this.source);
+        });
+        // this.obj.message = 'message';
+        // let message = 'message';
+
+        // Object.assign(this.obj, {message});
+    },
+    mounted() {
+        this.$nextTick(() => {
+            let message = 'message';
+
+            Object.assign(this.obj, {message});
+        })
+
+    },
     methods: {
+        loadData(item, callback) {
+            AJAX(item).then(res => {
+                callback && callback(res);
+            });
+        },
+        updateMessage() {
+            console.log(1);
+            // this.obj.message = 'new message';
+            let message = 'new message';
+            this.obj = Object.assign({} , this.obj, {message});
+        }
     }
 };
 </script>

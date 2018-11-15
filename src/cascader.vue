@@ -42,6 +42,9 @@ export default {
                 return '200px';
             },
         },
+        loadData: {
+            type: Function,
+        },
     },
     data() {
         return {
@@ -53,7 +56,9 @@ export default {
             return this.selected.map(obj => obj.name).join(' / ');
         },
         dynamicClass() {
-            return {'g-cascader-trigger-arrow-cross': this.cascaderItemVisible}
+            return {
+                'g-cascader-trigger-arrow-cross': this.cascaderItemVisible,
+            };
         },
     },
     methods: {
@@ -71,7 +76,51 @@ export default {
             this.cascaderItemVisible = false;
         },
         updateSelected(newSelected) {
+            console.log('newSelected', newSelected);
             this.$emit('update:selected', newSelected);
+
+            let selectedItem = newSelected[newSelected.length - 1];
+            this.loadData(selectedItem, children => {
+                if(!children.length) {
+                    this.closeCascader();
+                } else {
+                    let sourceCopy = JSON.parse(JSON.stringify(this.source));
+                    let item = this.complex(sourceCopy, selectedItem.id);
+                    if (item) {
+                        item.children = children;
+                    } 
+                    this.$emit('update:source', sourceCopy);
+                }
+            });
+        },
+        simple(hasNoChildren, id) {
+            let fondItem = null;
+            hasNoChildren.some(item => {
+                if (item.id === id) {
+                    fondItem = item;
+                    return true;
+                }
+            });
+            return fondItem;
+        },
+        complex(source, id) {
+            let fondItem = null,
+                hasNoChildren = [],
+                hasChildren = [];
+            source.forEach(item => {
+                if (item.children) {
+                    hasChildren.push(item);
+                } else {
+                    hasNoChildren.push(item);
+                }
+            });
+            fondItem = this.simple(hasNoChildren, id) || this.simple(hasChildren, id);
+            if (!fondItem) {
+                hasChildren.forEach(item => {
+                    fondItem = this.complex(item.children, id);
+                });
+            }
+            return fondItem;
         },
     },
 };
@@ -90,18 +139,18 @@ export default {
         padding: 0 $padding-biggest 0 $padding-bigger;
         border-radius: $border-radius;
         position: relative;
-        .g-cascader-trigger-arrow{
+        .g-cascader-trigger-arrow {
             position: absolute;
             top: 50%;
             right: 0;
             transform: translate(50%, -50%);
             margin-right: $padding-biggest / 2;
-            &.g-cascader-trigger-arrow-cross{
-                > .g-cascader-trigger-arrow-icon{
+            &.g-cascader-trigger-arrow-cross {
+                > .g-cascader-trigger-arrow-icon {
                     transform: rotate(180deg);
                 }
             }
-            > .g-cascader-trigger-arrow-icon{
+            > .g-cascader-trigger-arrow-icon {
                 transition: all 0.2s linear;
                 cursor: pointer;
             }

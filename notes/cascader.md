@@ -28,3 +28,5 @@
     - 若有特殊逻辑，可以在函数内实现
     - 模板 (template) 简洁
 7. 将图标变小可以使用： ` transform: scale(0.5); `
+8. 当选择 level 时 | 更新时，穿的数组后面的都不要 -> ` copyData.splice(this.level + 1) `
+9. 输入框中先没有字后有字可能会造成一些问题 -> ` {{value || '&nbsp'}} `

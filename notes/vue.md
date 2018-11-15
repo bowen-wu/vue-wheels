@@ -180,4 +180,159 @@
 
 - ` template ` -> 一个字符串模板作为 Vue 实例的标识使用。模板将会**替换**挂载的元素。挂载元素的内容都将被忽略，除非模板的内容有分发插槽。如果值以 ` # ` 开始，则它将被用作选择符，并使用匹配元素的 innerHTML 作为模板。常用的技巧是用 ` <script type="x-template"> ` 包含模板。
 
-- 
+- ` vm.$set(target, key, value) ` & ` Vue.set ` -> 向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新属性，因为 ` Vue ` 无法探测普通的新增属性。( *注意：*对象不能是 ` Vue ` 实例，或者 ` Vue ` 实例的根数据对象。 )
+    - target: ` {Object | Array} `
+    - key: ` {string | number} `
+    - value: ` {any} `
+
+- ` Vue ` 不允许子组件修改 ` props `
+
+### 响应式原理
+` Vue ` 最独特的特性之一，是其非侵入性的响应式系统。数据模型仅仅是普通的 ` JavaScript ` 对象。而修改他们是，视图会进行更新。这使得状态管理非常简单直接，不过理解其工作原理同样重要，这样就可以回避一些常见的问题。
+
+#### 如何追踪变化
+- 当把一个普通的 JavaScript 对象传给 Vue 实例的 ` data ` 选项，Vue 将遍历对象所有的属性，并使用 ` Object.defineProperty ` 把这些属性全部转为 ` setter/getter ` 。 ` Object.defineProperty `  is an ES5-only and un-shimmable feature，这也就是为什么 Vue 不支持 IE8 以及更低版本浏览器。
+
+- 这些 ` setter/getter ` 对用户来说是不可见的，但是在内部他们让 Vue 追踪依赖，在属性被访问和修改是通知变化。这里需要注意的问题是浏览器控制台在打印数据对象时 ` setter/getter ` 的格式化并不同，所以可能需要安装 ` vue-devtools ` 来获取更加友好的检查接口。
+
+- 每个组件实例都有相应的 ` watcher ` 实例对象，他会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 ` setter ` 被调用时，会通知 ` watcher ` 重新计算，从而致使它关联的组件得以更新。
+
+#### 检测变化的注意事项
+受现代 JavaScript 的限制，Vue **不能检测到对象属性的添加或删除**。由于 Vue 会在初始化实例时对属性执行 ` setter/getter ` 转化过程，所以属性必须在 ` data ` 对象上存在才能让 Vue 转化它，这样才能让它是响应式的。例如：
+```
+let vm = new Vue({
+    data: {
+        a: 1,
+    }
+})
+// ` vm.a ` 是响应式的
+
+vm.b = 2;
+// ` vm.b ` 是非响应的
+```
+Vue 不允许在已经创建的实例上动态添加新的根级响应式属性( root-level reactive property )。然而它可以使用 ` Vue.$set(object, key, value) ` 方法将响应属性添加到嵌套的对象上：
+```
+Vue.set(vm.someObject, 'b', 2);
+```
+还可以使用 ` vm.$set ` 实例方法，这也是全局 ` Vue.set ` 方法的别名：
+```
+this.$set(this.someObject, 'b', 2);
+```
+有时你想向一个已有对象添加多个属性，例如使用 ` Object.assign() ` 或 ` _.extend() ` 方法来添加属性。但是这样添加到对象上的新属性不会触发更新。在这种情况下可以创建一个新的对象，让它包含原对象的属性和新的属性：
+```
+// 代替 ` Object.assign(this.someObject, {a: 1, b: 2}) `
+this.someObject = Object.assign({}, this.someObject, {a: 1, b: 2});
+```
+#### 数组更新检测
+##### 变异方法
+Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新，如下：
+- ` push() `
+- ` pop() `
+- ` shift() `
+- ` unshift() `
+- ` splice() `
+- ` sort() `
+- ` reverse() `
+
+##### 替换数组
+变异方法（mutation method），顾名思义，会改变被这些方法调用的原始数组。相比之下，也有非变异（non-mutating method）方法，例如：` filter() ` 、 ` concat() ` 和 ` slice() ` 。这些不会改变原始数组，但**总是会返回一个新数组**。当使用非变异方法时，可以用新数组替换旧数组：
+```
+example1.items = example1.items.filter(item => item.message.match(/Foo/));
+```
+这样操作并不会导致 Vue 丢弃现有 DOM 并重新渲染整个列表。Vue 为了使得 DOM 元素得到最大范围的重用而实现了一些智能的、启发式的方法，所以用一个含有相同元素的数组去替换原来的数组是非常高效的操作。
+
+##### 注意事项
+由于 JavaScript 的限制，**Vue 不能检测以下变动的数组**：
+1. 当利用索引直接设置一个项时，例如： ` vm.items[indexOfItem] = newValue `
+2. 当修改数组的长度时，例如： ` vm.items.length = newLength `
+例如：
+```
+let vm = new Vue({
+    data: {
+        items: ['a', 'b', 'c']
+    }
+})
+vm.items[1] = 'x'   // 不是响应式的
+vm.items.length = 2  // 不是响应式的
+```
+为了解决第一类问题，以下两种当时都可以实现和 ` vm.items[indexOfItem] = newValue ` 相同的效果，同时也将触发状态更新：
+```
+// Vue.set
+Vue.set(vm.items, indexOfItem, newValue);
+// vm.$set
+vm.$set(vm.items, indexOfItem, newValue);
+```
+```
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue);
+```
+为了解决第二类问题，可以使用 ` splice `
+```
+vm.items.splice(newLength);
+```
+
+#### 声明响应式属性
+由于 Vue 不允许动态添加根级响应式属性，所以你必须在初始化实例前声明根级响应式属性，哪怕只是一个空置：
+```
+let vm = new Vue({
+    data: {
+        message: '',
+    },
+    template: `<div>{{ message }}</div>`
+});
+
+vm.message = 'hello';
+```
+如果未在 ` data ` 选项中声明 ` message `，Vue 将警告渲染函数正在试图访问的属性不存在。
+这样的限制在背后是有其技术原因的，它消除了在依赖跟踪系统中的一类边界情况，也使 Vue 实例在类型检查系统的帮助下运行的更高效。并且在代码可维护方面也有一点重要的考虑： ` data ` 对象就想组件状态的概要，提前声明所有的响应式属性，可以让组件代码在以后重新阅读或其他开发人员阅读时更易于被理解。
+
+#### 异步更新队列
+Vue **异步**执行 DOM 更新。只要观察到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个 watcher 被多次触发，只会被推入到队列一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作上非常重要。然后，在下一个的事件循环 "tick" 中，Vue 刷新队列并执行实际（已去重的）工作。Vue 在内部尝试对异步队列使用原生的 ` Promise.then ` 和 ` MessageChannel `，如果执行环境不支持，会采用 ` setTimeout(fn, 0) ` 代替。
+例如，当你设置 ` vm.someData = 'new Value' `，该组件不会立即重新渲染。当刷新队列时，组件会在事件循环队列清空时的下一个 "tick" 更新。多数情况不需要关心这个过程，但是如果要在 DOM 状态更新后做点什么，这就可能会有些棘手。虽然 Vue.js 通常鼓励开发人员沿着 "数据驱动" 的方式思考，避免直接接触 DOM，但是有时确实要这么做。为了在数据变化之后等待 Vue 完成更新 DOM，可以在数据变化之后立即使用 ` Vue.nextTick(callback) `。这样回调函数在 DOM 更新完成后就会调用。例如：
+```
+<div id="example">{{ message }}</div>
+```
+```
+let vm = new Vue({
+    el: '#example',
+    data: {
+        message: '123'
+    },
+});
+vm.message = 'new message' // 更改数据
+vm.$el.textContent === 'new message' // false
+Vue.nextTick(() => {
+    vm.$el.textContent === 'new message'  // true
+})
+```
+在组件内使用 ` vm.$nextTick() ` 实例方法特别方便，因为它不需要全局 ` Vue `，并且回调函数中的 ` this ` 将自动绑定到当前的 Vue 实例上：
+```
+Vue.component('example', {
+    template: '<span>{{ message }}</span>',
+    data() {
+        return {
+            message: '没有更新',
+        }
+    },
+    methods: {
+        updateMessage() {
+            this.message = '更新完成'
+            console.log(this.$el.textContent)  // => '没有更新'
+            this.$nextTick(() => {
+                console.log(this.$el.textContent)  // => '更新完成'
+            })
+        },
+    }
+})
+```
+因为 ` $nextTick() ` 返回一个 Promise 对象，所以可以使用 ES6。
+```
+methods: {
+    async updateMessage() {
+        this.message = 'updated'
+        console.log(this.$el.textContent) // => '未更新'
+        await this.$nextTick()
+        console.log(this.$el.textContent) // => '已更新'
+    }
+}
+```

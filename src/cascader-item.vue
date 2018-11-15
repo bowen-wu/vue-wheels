@@ -46,10 +46,13 @@ export default {
     },
     computed: {
         children() {
-            if (this.selected[this.level] && this.selected[this.level].children) {
-                return this.selected[this.level].children;
-            } else {
-                return null;
+            if(this.selected[this.level]) {
+                let item = this.source.filter(item => item.id === this.selected[this.level].id)
+                if(item && item[0].children && item[0].children.length > 0) {
+                    return item[0].children;
+                } else {
+                    return null;
+                }
             }
         },
         dynamicClass() {
@@ -65,9 +68,6 @@ export default {
             selectedCopy[this.level] = parent;
             selectedCopy.splice(this.level + 1);
             this.$emit('update:selected', selectedCopy);
-            if (!parent.children) {
-                this.$emit('close-cascader');
-            }
         },
         onUpdateSelected(selected) {
             this.$emit('update:selected', selected);
