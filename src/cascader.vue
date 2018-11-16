@@ -1,5 +1,5 @@
 <template>
-    <div class="g-cascader" ref="cascader">
+    <div class="g-cascader" ref="cascader" v-click-outside="closeCascader">
         <div class="g-cascader-trigger" @click="trigger">
             {{exhibitionText || '&nbsp'}}
             <div class="g-cascader-trigger-arrow" :class="dynamicClass">
@@ -19,12 +19,14 @@
 <script>
 import CascaderItem from './cascader-item';
 import Icon from './icon';
+import ClickOutside, {removeEventListener} from './assist/util/click-outside.js';
 export default {
     name: 'bowen-cascader',
     components: {
         CascaderItem,
         Icon,
     },
+    directives: {ClickOutside},
     props: {
         source: {
             type: Array,
@@ -71,20 +73,9 @@ export default {
         },
         openCascader() {
             this.cascaderItemVisible = true;
-            this.$nextTick(() => {
-                document.addEventListener('click', this.onClickDocumentEventHandle);
-            });
         },
         closeCascader() {
             this.cascaderItemVisible = false;
-            document.removeEventListener('click', this.onClickDocumentEventHandle);
-        },
-        onClickDocumentEventHandle({ target }) {
-            let { cascader } = this.$refs;
-            if (cascader && (cascader === target || cascader.contains(target))) {
-                return;
-            }
-            this.closeCascader();
         },
         updateSelected(newSelected) {
             this.$emit('update:selected', newSelected);
@@ -149,6 +140,7 @@ export default {
 
 .g-cascader {
     position: relative;
+    @include inline-flex();
     > .g-cascader-trigger {
         @include inline-flex(flex-start, center);
         border: 1px solid $border-color;
@@ -157,6 +149,7 @@ export default {
         padding: 0 $padding-biggest 0 $padding-bigger;
         border-radius: $border-radius;
         position: relative;
+        background-color: $bg-color-white;
         .g-cascader-trigger-arrow {
             position: absolute;
             top: 50%;
@@ -179,6 +172,7 @@ export default {
         top: 100%;
         left: 0;
         background-color: $bg-color-white;
+        z-index: 1;
         > .g-cascader-item-inner {
             @include boxShadow();
             border: 1px solid $border-color;

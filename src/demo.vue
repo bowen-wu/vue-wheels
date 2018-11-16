@@ -14,7 +14,7 @@
         <div>{{selected[2] && selected[2].name || '空'}}</div>
         <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
         <div>22222</div>
-        {{source}}
+        <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
 
         <g-collapse :selected.sync="selected" single v-if="false">
             <g-collapse-item title="title1" name="first">content1</g-collapse-item>
@@ -96,6 +96,7 @@ import TabsHead from './tabs/tabs-head';
 import TabsItem from './tabs/tabs-item';
 import TabsPane from './tabs/tabs-pane';
 import DB from './assist/util/china.js';
+import {removeListener} from './assist/util/click-outside.js'
 const AJAX = ({ id = '0' }) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -204,10 +205,7 @@ export default {
             this.source = source;
             console.log('this.source', this.source);
         });
-        // this.obj.message = 'message';
-        // let message = 'message';
-
-        // Object.assign(this.obj, {message});
+        // removeListener();
     },
     mounted() {
         this.$nextTick(() => {

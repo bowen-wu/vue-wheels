@@ -7,14 +7,10 @@
 
 ## API
 ```
-<cascader :source="source" @on-change="onChange"></cascader>
+<g-cascader :source.sync="source" :selected.sync="selected"></g-cascader>
 
-<cascader :source="source" @on-change="onChange">
-    <g-button>toggle</g-button>
-</cascader>
 
-<g-cascader :source="source" :selected.sync="selected" cascaderHeight="200px"></g-cascader>
-
+<g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
 ```
 
 ## 总结

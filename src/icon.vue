@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import './svg.js';
+import './assist/util/svg.js';
 export default {
     name: 'bowen-icon',
     // props: ['name', 'iconPosition'],
