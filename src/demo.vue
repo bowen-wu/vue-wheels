@@ -84,12 +84,12 @@
     </div>
 </template>
 <script>
-import Button from './button';
-import Cascader from './cascader';
-import Collapse from './collapse';
-import CollapseItem from './collapse-item';
-import Icon from './icon';
-import Popover from './popover';
+import Button from './button/button';
+import Cascader from './cascader/cascader';
+import Collapse from './collapse/collapse';
+import CollapseItem from './collapse/collapse-item';
+import Icon from './icon/icon';
+import Popover from './popover/popover';
 import Tabs from './tabs/tabs.vue';
 import TabsBody from './tabs/tabs-body';
 import TabsHead from './tabs/tabs-head';

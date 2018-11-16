@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 .g-collapse-item {
     margin-left: -1px;
     margin-right: -1px;

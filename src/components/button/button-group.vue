@@ -24,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assist/style/_var.scss';
+
 .g-button-group {
     display: inline-flex;
     vertical-align: top;

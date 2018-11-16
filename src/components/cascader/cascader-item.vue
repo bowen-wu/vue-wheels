@@ -5,7 +5,7 @@
                 <div class="g-cascader-item-parent-text">
                     {{parent.name}}
                 </div>
-                <template v-if="loadingItem.id === parent.id">
+                <template v-if="loadingItem.id === parent.id && loadingItem.name === parent.name">
                     <g-icon name="loading" class="g-cascader-item-parent-icon g-cascader-item-parent-icon-loading"></g-icon>
                 </template>
                 <template v-else>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Icon from './icon';
+import Icon from '../icon/icon';
 export default {
     name: 'bowen-cascader-item',
     components: {
@@ -94,7 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 .g-cascader-item {
     @include flex();
     height: 100%;

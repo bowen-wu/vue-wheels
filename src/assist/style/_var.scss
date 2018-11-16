@@ -1,16 +1,16 @@
 $animate-duration: 0.3s;
 $bg-color-disabled: #f5f7fa;
+$bg-color-light: #f3f3f3;
 $bg-color-white: #fff;
 $bg-color: rgba(0, 0, 0, 0.74);
-$bg-color-light: #f3f3f3;
 $border-color-disabled: #e4e7ed;
 $border-color-error: #F1453D;
 $border-color-focus: #999;
 $border-color-hover: #666;
 $border-color-hover: #c0c4cc;
-$border-color: #dcdfe6;
 $border-color-light: lighten($border-color, 6%);
 $border-color-success: #67c23a;
+$border-color: #dcdfe6;
 $border-radius-large: 6px;
 $border-radius: 4px;
 $box-shadow-color-error: rgba(241, 69, 61, 0.2);
@@ -18,16 +18,18 @@ $box-shadow-color-success: rgba(103, 194, 58, 0.2);
 $box-shadow-color: rgba(153, 153, 153, 0.2);
 $button-active-bg: #eee;
 $button-bg: #fff;
+$color-active: #2d8cf0;
 $color-disabled: #c0c4cc;
 $color-placeholder: #ccc;
 $color-tips-error: #F1453D;
 $color-tips-success: #67c23a;
 $color-tips: #57a3f3;
 $color: #333;
-$color-active: #2d8cf0;
-
+$disabled-color: #eee;
 $font-size-tips: 12px;
 $font-size: 14px;
+$hover-color: #409eff;
+$line-bg-color: #409eff;
 $line-height-tips: 14px;
 $line-height: 16px;
 $margin-top: 4px;
@@ -69,5 +71,32 @@ $pre-next-icon-fill: #a1acb3;
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
     }
 }
