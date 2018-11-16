@@ -1,9 +1,12 @@
 <template>
     <div class="demo">
 
-        <div @click="updateMessage">
-            {{obj.message}}
-        </div>
+        <g-popover>
+            <template slot="content" slot-scope="{close}">
+                <div>内容</div>
+            </template>
+            <g-button>click</g-button>
+        </g-popover>
 
         <div>11111</div>
         <div>{{selected[0] && selected[0].name || '空'}}</div>

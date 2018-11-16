@@ -1,5 +1,5 @@
 <template>
-    <div class="g-cascader">
+    <div class="g-cascader" ref="cascader">
         <div class="g-cascader-trigger" @click="trigger">
             {{exhibitionText || '&nbsp'}}
             <div class="g-cascader-trigger-arrow" :class="dynamicClass">
@@ -71,26 +71,43 @@ export default {
         },
         openCascader() {
             this.cascaderItemVisible = true;
+            this.$nextTick(() => {
+                document.addEventListener('click', this.onClickDocumentEventHandle);
+            });
         },
         closeCascader() {
             this.cascaderItemVisible = false;
+            document.removeEventListener('click', this.onClickDocumentEventHandle);
+        },
+        onClickDocumentEventHandle({ target }) {
+            let { cascader } = this.$refs;
+            if (cascader && (cascader === target || cascader.contains(target))) {
+                return;
+            }
+            this.closeCascader();
         },
         updateSelected(newSelected) {
             this.$emit('update:selected', newSelected);
 
             let selectedItem = newSelected[newSelected.length - 1];
-            
-            if(selectedItem.isLeaf || (!this.loadData && !selectedItem.children)) {
+
+            if (
+                selectedItem.isLeaf ||
+                (!this.loadData && !selectedItem.children)
+            ) {
                 this.closeCascader();
             } else {
-                this.loadData && this.loadData(selectedItem, children => {
-                    let sourceCopy = JSON.parse(JSON.stringify(this.source));
-                    let item = this.complex(sourceCopy, selectedItem.id);
-                    if (item) {
-                        item.children = children;
-                    } 
-                    this.$emit('update:source', sourceCopy);
-                });
+                this.loadData &&
+                    this.loadData(selectedItem, children => {
+                        let sourceCopy = JSON.parse(
+                            JSON.stringify(this.source),
+                        );
+                        let item = this.complex(sourceCopy, selectedItem.id);
+                        if (item) {
+                            item.children = children;
+                        }
+                        this.$emit('update:source', sourceCopy);
+                    });
             }
         },
         simple(hasNoChildren, id) {
@@ -114,7 +131,8 @@ export default {
                     hasNoChildren.push(item);
                 }
             });
-            fondItem = this.simple(hasNoChildren, id) || this.simple(hasChildren, id);
+            fondItem =
+                this.simple(hasNoChildren, id) || this.simple(hasChildren, id);
             if (!fondItem) {
                 hasChildren.forEach(item => {
                     fondItem = this.complex(item.children, id);
