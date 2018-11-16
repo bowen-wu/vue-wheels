@@ -12,9 +12,9 @@
         <div>{{selected[0] && selected[0].name || '空'}}</div>
         <div>{{selected[1] && selected[1].name || '空'}}</div>
         <div>{{selected[2] && selected[2].name || '空'}}</div>
-        <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
+        <g-cascader :source.sync="source1" :selected.sync="selected1" cascaderHeight="200px" :load-data="loadData"></g-cascader>
         <div>22222</div>
-        <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
+        <g-cascader :source.sync="source" :selected.sync="selected"></g-cascader>
 
         <g-collapse :selected.sync="selected" single v-if="false">
             <g-collapse-item title="title1" name="first">content1</g-collapse-item>
@@ -131,6 +131,7 @@ export default {
     data() {
         return {
             selected: [],
+            selected1: [],
             source: [
                 {
                     name: '浙江',
@@ -197,12 +198,13 @@ export default {
                     }]
                 }
             ],
+            source1: [],
             obj: {},
         };
     },
     created() {
         AJAX({}).then(source => {
-            this.source = source;
+            this.source1 = source;
             console.log('this.source', this.source);
         });
         // removeListener();

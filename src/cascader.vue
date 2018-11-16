@@ -9,7 +9,7 @@
         <div class="g-cascader-item-wrapper">
             <div class="g-cascader-item-inner">
                 <template v-if="cascaderItemVisible">
-                    <cascader-item :source="source" :height="cascaderHeight" :selected="selected" :loadData="loadData" @update:selected="updateSelected" @close-cascader="closeCascader"></cascader-item>
+                    <cascader-item :source="source" :height="cascaderHeight" :selected="selected" :loadData="loadData" :loadingItem="loadingItem" @update:selected="updateSelected" @close-cascader="closeCascader"></cascader-item>
                 </template>
             </div>
         </div>
@@ -51,6 +51,7 @@ export default {
     data() {
         return {
             cascaderItemVisible: false,
+            loadingItem: {},
         };
     },
     computed: {
@@ -81,14 +82,13 @@ export default {
             this.$emit('update:selected', newSelected);
 
             let selectedItem = newSelected[newSelected.length - 1];
-
-            if (
-                selectedItem.isLeaf ||
-                (!this.loadData && !selectedItem.children)
-            ) {
-                this.closeCascader();
-            } else {
-                this.loadData &&
+            
+            if(this.loadData) {
+                this.loadingItem = selectedItem;
+                if(selectedItem.isLeaf) {
+                    this.closeCascader();
+                    this.loadingItem = {};
+                } else {
                     this.loadData(selectedItem, children => {
                         let sourceCopy = JSON.parse(
                             JSON.stringify(this.source),
@@ -98,8 +98,36 @@ export default {
                             item.children = children;
                         }
                         this.$emit('update:source', sourceCopy);
+                        this.loadingItem = {};
                     });
+                }
+            } else {
+                if(!selectedItem.children) {
+                    this.closeCascader();                    
+                }
             }
+            // this.loadingItem = selectedItem;
+
+            // if (
+            //     selectedItem.isLeaf ||
+            //     (!this.loadData && !selectedItem.children)
+            // ) {
+            //     this.closeCascader();
+            //     this.loadingItem = {};
+            // } else {
+            //     this.loadData &&
+            //         this.loadData(selectedItem, children => {
+            //             let sourceCopy = JSON.parse(
+            //                 JSON.stringify(this.source),
+            //             );
+            //             let item = this.complex(sourceCopy, selectedItem.id);
+            //             if (item) {
+            //                 item.children = children;
+            //             }
+            //             this.$emit('update:source', sourceCopy);
+            //             this.loadingItem = {};
+            //         });
+            // }
         },
         simple(hasNoChildren, id) {
             let fondItem = null;
@@ -150,6 +178,7 @@ export default {
         border-radius: $border-radius;
         position: relative;
         background-color: $bg-color-white;
+        cursor: pointer;
         .g-cascader-trigger-arrow {
             position: absolute;
             top: 50%;
@@ -163,7 +192,6 @@ export default {
             }
             > .g-cascader-trigger-arrow-icon {
                 transition: all 0.2s linear;
-                cursor: pointer;
             }
         }
     }

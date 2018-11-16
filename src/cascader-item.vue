@@ -5,11 +5,16 @@
                 <div class="g-cascader-item-parent-text">
                     {{parent.name}}
                 </div>
-                <g-icon name="right" class="g-cascader-item-parent-icon" v-if="rightIconVisible(parent)"></g-icon>
+                <template v-if="loadingItem.id === parent.id">
+                    <g-icon name="loading" class="g-cascader-item-parent-icon g-cascader-item-parent-icon-loading"></g-icon>
+                </template>
+                <template v-else>
+                    <g-icon name="right" class="g-cascader-item-parent-icon" v-if="rightIconVisible(parent)"></g-icon>
+                </template>
             </div>
         </div>
         <div class="g-cascader-item-children" v-if="children">
-            <bowen-cascader-item :source="children" :selected="selected" @update:selected="onUpdateSelected" :loadData="loadData" @close-cascader="closeCascader" :level="level + 1"></bowen-cascader-item>
+            <bowen-cascader-item :source="children" :selected="selected" :loadData="loadData" :loadingItem="loadingItem" :level="level + 1" @update:selected="onUpdateSelected"  @close-cascader="closeCascader"></bowen-cascader-item>
         </div>
     </div>
 </template>
@@ -42,6 +47,9 @@ export default {
         },
         loadData: {
             type: Function,
+        },
+        loadingItem: {
+            type: Object,
         },
     },
     data() {
@@ -111,10 +119,15 @@ export default {
             > .g-cascader-item-parent-text{
                 margin-right: 1em;
                 user-select: none;
+                white-space: nowrap;
             }
             > .g-cascader-item-parent-icon {
                 margin-left: auto;
                 transform: scale(0.8);
+                &.g-cascader-item-parent-icon-loading{
+                    // fill: inherit;
+                    animation: spin 1.5s linear infinite;
+                }
             }
         }
     }

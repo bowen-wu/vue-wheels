@@ -62,3 +62,12 @@ $pre-next-icon-fill: #a1acb3;
 @mixin boxShadow() {
     box-shadow: 0 1px 6px rgba(0,0,0,.2);
 }
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
