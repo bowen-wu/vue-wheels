@@ -80,10 +80,10 @@ export default {
 
             let selectedItem = newSelected[newSelected.length - 1];
             
-            if(selectedItem.isLeaf) {
+            if(selectedItem.isLeaf || !selectedItem.children) {
                 this.closeCascader();
             } else {
-                this.loadData(selectedItem, children => {
+                this.loadData && this.loadData(selectedItem, children => {
                     let sourceCopy = JSON.parse(JSON.stringify(this.source));
                     let item = this.complex(sourceCopy, selectedItem.id);
                     if (item) {
