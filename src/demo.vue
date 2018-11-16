@@ -2,7 +2,7 @@
     <div class="demo">
 
         <div @click="updateMessage">
-            {{obj.message}}            
+            {{obj.message}}
         </div>
 
         <div>11111</div>
@@ -12,7 +12,6 @@
         <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
         <div>22222</div>
         {{source}}
-
 
         <g-collapse :selected.sync="selected" single v-if="false">
             <g-collapse-item title="title1" name="first">content1</g-collapse-item>
@@ -94,14 +93,21 @@ import TabsHead from './tabs/tabs-head';
 import TabsItem from './tabs/tabs-item';
 import TabsPane from './tabs/tabs-pane';
 import DB from './assist/util/china.js';
-const AJAX = ({id = '0'}) => {
+const AJAX = ({ id = '0' }) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             let response = DB.filter(item => item.parentId === id);
+            response.forEach(obj => {
+                if (DB.filter(item => item.parentId === obj.id).length > 0) {
+                    obj.isLeaf = false;
+                } else {
+                    obj.isLeaf = true;
+                }
+            });
             resolve(response);
-        }, 200);
-    })
-}
+        }, 2000);
+    });
+};
 
 export default {
     name: 'bowen-demo',
@@ -115,7 +121,7 @@ export default {
         'g-tabs-pane': TabsPane,
         'g-popover': Popover,
         'g-collapse': Collapse,
-        'g-collapse-item': CollapseItem, 
+        'g-collapse-item': CollapseItem,
         'g-cascader': Cascader,
     },
     data() {
@@ -204,9 +210,8 @@ export default {
         this.$nextTick(() => {
             let message = 'message';
 
-            Object.assign(this.obj, {message});
-        })
-
+            Object.assign(this.obj, { message });
+        });
     },
     methods: {
         loadData(item, callback) {
@@ -218,9 +223,9 @@ export default {
             console.log(1);
             // this.obj.message = 'new message';
             let message = 'new message';
-            this.obj = Object.assign({} , this.obj, {message});
-        }
-    }
+            this.obj = Object.assign({}, this.obj, { message });
+        },
+    },
 };
 </script>
 
@@ -233,7 +238,7 @@ export default {
 .demo {
     margin: 200px;
 }
-.popover{
+.popover {
     margin-right: 20px;
 }
 </style>

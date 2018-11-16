@@ -5,11 +5,11 @@
                 <div class="g-cascader-item-parent-text">
                     {{parent.name}}
                 </div>
-                <g-icon name="right" class="g-cascader-item-parent-icon" v-if="parent.children"></g-icon>
+                <g-icon name="right" class="g-cascader-item-parent-icon" v-if="rightIconVisible(parent)"></g-icon>
             </div>
         </div>
         <div class="g-cascader-item-children" v-if="children">
-            <bowen-cascader-item :source="children" :selected="selected" @update:selected="onUpdateSelected" @close-cascader="closeCascader" :level="level + 1"></bowen-cascader-item>
+            <bowen-cascader-item :source="children" :selected="selected" @update:selected="onUpdateSelected" :loadData="loadData" @close-cascader="closeCascader" :level="level + 1"></bowen-cascader-item>
         </div>
     </div>
 </template>
@@ -39,6 +39,9 @@ export default {
         },
         height: {
             type: String,
+        },
+        loadData: {
+            type: Function,
         },
     },
     data() {
@@ -74,6 +77,9 @@ export default {
         },
         closeCascader() {
             this.$emit('close-cascader');
+        },
+        rightIconVisible(parent) {
+            return this.loadData ? !parent.isLeaf : parent.children
         },
     },
 };
