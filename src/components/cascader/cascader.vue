@@ -18,8 +18,8 @@
 
 <script>
 import CascaderItem from './cascader-item';
-import Icon from './icon';
-import ClickOutside, {removeEventListener} from './assist/util/click-outside.js';
+import Icon from '../icon/icon';
+import ClickOutside, {removeEventListener} from '../../assist/util/click-outside.js';
 export default {
     name: 'bowen-cascader',
     components: {
@@ -106,28 +106,6 @@ export default {
                     this.closeCascader();                    
                 }
             }
-            // this.loadingItem = selectedItem;
-
-            // if (
-            //     selectedItem.isLeaf ||
-            //     (!this.loadData && !selectedItem.children)
-            // ) {
-            //     this.closeCascader();
-            //     this.loadingItem = {};
-            // } else {
-            //     this.loadData &&
-            //         this.loadData(selectedItem, children => {
-            //             let sourceCopy = JSON.parse(
-            //                 JSON.stringify(this.source),
-            //             );
-            //             let item = this.complex(sourceCopy, selectedItem.id);
-            //             if (item) {
-            //                 item.children = children;
-            //             }
-            //             this.$emit('update:source', sourceCopy);
-            //             this.loadingItem = {};
-            //         });
-            // }
         },
         simple(hasNoChildren, id) {
             let fondItem = null;
@@ -164,7 +142,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 
 .g-cascader {
     position: relative;

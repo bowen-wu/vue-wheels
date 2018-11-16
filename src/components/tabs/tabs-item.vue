@@ -55,11 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assist/style/_var.scss';
-
-$color: #409eff;
-$hover-color: #409eff;
-$disabled-color: #eee;
+@import '../../assist/style/_var.scss';
 
 .g-tabs-item{
     @include fontLineColor(14px, 24px);

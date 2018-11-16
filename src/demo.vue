@@ -84,17 +84,17 @@
     </div>
 </template>
 <script>
-import Button from './button';
-import Cascader from './cascader';
-import Collapse from './collapse';
-import CollapseItem from './collapse-item';
-import Icon from './icon';
-import Popover from './popover';
-import Tabs from './tabs/tabs.vue';
-import TabsBody from './tabs/tabs-body';
-import TabsHead from './tabs/tabs-head';
-import TabsItem from './tabs/tabs-item';
-import TabsPane from './tabs/tabs-pane';
+import Button from './components/button/button';
+import Cascader from './components/cascader/cascader';
+import Collapse from './components/collapse/collapse';
+import CollapseItem from './components/collapse/collapse-item';
+import Icon from './components/icon/icon';
+import Popover from './components/popover/popover';
+import Tabs from './components/tabs/tabs.vue';
+import TabsBody from './components/tabs/tabs-body';
+import TabsHead from './components/tabs/tabs-head';
+import TabsItem from './components/tabs/tabs-item';
+import TabsPane from './components/tabs/tabs-pane';
 import DB from './assist/util/china.js';
 import {removeListener} from './assist/util/click-outside.js'
 const AJAX = ({ id = '0' }) => {

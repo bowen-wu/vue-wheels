@@ -158,7 +158,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 .g-popover {
     position: relative;
     display: inline-flex;

@@ -38,10 +38,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 
-$border-color: #eee;
-$line-bg-color: #409eff;
 .g-tabs-head {
     @include flex(flex-start, center);
     padding: 0 1em;

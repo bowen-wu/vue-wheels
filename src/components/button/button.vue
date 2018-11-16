@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Icon from './icon';
+import Icon from '../icon/icon';
 export default {
     name: 'bowen-button',
     // props: ['icon', 'iconPosition'],
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 .g-button {
     font-size: $font-size;
     line-height: $line-height;

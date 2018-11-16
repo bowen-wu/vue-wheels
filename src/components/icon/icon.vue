@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import './assist/util/svg.js';
+import '../../assist/util/svg.js';
 export default {
     name: 'bowen-icon',
     // props: ['name', 'iconPosition'],
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
+@import '../../assist/style/_var.scss';
 .g-icon {
     @include inline-flex(center, center);
     width: 1em;
