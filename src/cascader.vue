@@ -76,11 +76,12 @@ export default {
             this.cascaderItemVisible = false;
         },
         updateSelected(newSelected) {
-            console.log('newSelected', newSelected);
+            // console.log('newSelected', newSelected);
             this.$emit('update:selected', newSelected);
 
             let selectedItem = newSelected[newSelected.length - 1];
             this.loadData(selectedItem, children => {
+                console.log('children', children);
                 if(!children.length) {
                     this.closeCascader();
                 } else {

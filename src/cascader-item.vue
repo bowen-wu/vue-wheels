@@ -102,8 +102,12 @@ export default {
                     fill: $color-active;
                 }
             }
+            > .g-cascader-item-parent-text{
+                margin-right: 1em;
+                user-select: none;
+            }
             > .g-cascader-item-parent-icon {
-                margin-left: 1em;
+                margin-left: auto;
                 transform: scale(0.8);
             }
         }

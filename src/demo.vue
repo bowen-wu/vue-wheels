@@ -11,6 +11,7 @@
         <div>{{selected[2] && selected[2].name || '空'}}</div>
         <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
         <div>22222</div>
+        {{source}}
 
 
         <g-collapse :selected.sync="selected" single v-if="false">
