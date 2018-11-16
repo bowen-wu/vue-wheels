@@ -9,7 +9,7 @@
         <div>{{selected[0] && selected[0].name || '空'}}</div>
         <div>{{selected[1] && selected[1].name || '空'}}</div>
         <div>{{selected[2] && selected[2].name || '空'}}</div>
-        <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px"></g-cascader>
+        <g-cascader :source.sync="source" :selected.sync="selected" cascaderHeight="200px" :load-data="loadData"></g-cascader>
         <div>22222</div>
         {{source}}
 
@@ -105,7 +105,7 @@ const AJAX = ({ id = '0' }) => {
                 }
             });
             resolve(response);
-        }, 2000);
+        }, 200);
     });
 };
 
@@ -128,70 +128,70 @@ export default {
         return {
             selected: [],
             source: [
-                // {
-                //     name: '浙江',
-                //     children: [
-                //         {
-                //             name: '杭州',
-                //             children: [
-                //                 {name: '西湖'},
-                //                 {name: '滨江'},
-                //                 {name: '上城'},
-                //             ]
-                //         },
-                //         {
-                //             name: '绍兴',
-                //             children: [
-                //                 {name: '上虞'},
-                //                 {name: '柯桥'},
-                //                 {name: '越城'}
-                //             ]
-                //         }
-                //     ]
-                // },
-                // {
-                //     name: '山东',
-                //     children: [
-                //         {
-                //             name: '青岛',
-                //             children: [
-                //                 {name: '市南'},
-                //                 {name: '市北'},
-                //                 {name: '崂山'}
-                //             ]
-                //         },
-                //         {
-                //             name: '济南',
-                //             children: [
-                //                 {name: '市中'},
-                //                 {name: '天桥'},
-                //                 {name: '历城'}
-                //             ]
-                //         }
-                //     ]
-                // },
-                // {
-                //     name: '辽宁',
-                //     children: [{
-                //         name: '鞍山',
-                //         children: [{
-                //             name: '铁东'
-                //         },{
-                //             name: '铁西'
-                //         }, {
-                //             name: '立山'
-                //         }]
-                //     }, {
-                //         name: '沈阳',
-                //         children: [{
-                //             name: '和平'
-                //         }, {
-                //             name: '沈河'
-                //         }, {
-                //             name: '皇姑'
-                //         }]
-                //     }]
-                // }
+                {
+                    name: '浙江',
+                    children: [
+                        {
+                            name: '杭州',
+                            children: [
+                                {name: '西湖'},
+                                {name: '滨江'},
+                                {name: '上城'},
+                            ]
+                        },
+                        {
+                            name: '绍兴',
+                            children: [
+                                {name: '上虞'},
+                                {name: '柯桥'},
+                                {name: '越城'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: '山东',
+                    children: [
+                        {
+                            name: '青岛',
+                            children: [
+                                {name: '市南'},
+                                {name: '市北'},
+                                {name: '崂山'}
+                            ]
+                        },
+                        {
+                            name: '济南',
+                            children: [
+                                {name: '市中'},
+                                {name: '天桥'},
+                                {name: '历城'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    name: '辽宁',
+                    children: [{
+                        name: '鞍山',
+                        children: [{
+                            name: '铁东'
+                        },{
+                            name: '铁西'
+                        }, {
+                            name: '立山'
+                        }]
+                    }, {
+                        name: '沈阳',
+                        children: [{
+                            name: '和平'
+                        }, {
+                            name: '沈河'
+                        }, {
+                            name: '皇姑'
+                        }]
+                    }]
+                }
             ],
             obj: {},
         };

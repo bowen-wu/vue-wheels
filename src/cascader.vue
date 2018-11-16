@@ -80,7 +80,7 @@ export default {
 
             let selectedItem = newSelected[newSelected.length - 1];
             
-            if(selectedItem.isLeaf || !selectedItem.children) {
+            if(selectedItem.isLeaf || (!this.loadData && !selectedItem.children)) {
                 this.closeCascader();
             } else {
                 this.loadData && this.loadData(selectedItem, children => {
