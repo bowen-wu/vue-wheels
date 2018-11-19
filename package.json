@@ -9,6 +9,7 @@
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
         "test:unit": "vue-cli-service test:unit",
+        "test:unit-watch": "vue-cli-service test:unit --watch",
         "docs:dev": "vuepress dev docs",
         "docs:build": "vuepress build docs"
     },
@@ -25,6 +26,8 @@
         "chai": "^4.1.2",
         "node-sass": "^4.9.0",
         "sass-loader": "^7.0.1",
+        "sinon": "^7.1.1",
+        "sinon-chai": "^3.2.0",
         "vue-template-compiler": "^2.5.17",
         "vuepress": "^0.14.4"
     },
