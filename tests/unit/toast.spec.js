@@ -21,19 +21,21 @@ describe('Toast', () => {
                 propsData: {
                     autoClose: 1,
                 },
-                destroyed () {
+                destroyed() {
                     callback();
                 }
             });
-            const {vm} = wrapper;
-            
+            const {
+                vm
+            } = wrapper;
+
             // TODO: 如何检测销毁 || 检测事件被触发
 
             vm.$on('close', () => {
                 // expect(wrapper.emitted().close).to.equal(true);
 
                 // expect(callback).to.have.been.called;
-                
+
                 // expect(document.body.contains(vm.$el)).to.equal(false);
             });
         });
@@ -60,11 +62,11 @@ describe('Toast', () => {
                     enableHTML: true
                 },
                 slots: {
-                    default: [`<strong id="test">Hello World</strong>`],
-                },
+                    default: [`<strong id="test">Hello World</strong>`]
+                }
             });
-            console.log(wrapper.html());
-            // expect(wrapper.find('#test')).to.exist;
+            // console.log(wrapper.html());
+            expect(wrapper.find('#test')).to.exist;
         });
 
         it('setting position', () => {

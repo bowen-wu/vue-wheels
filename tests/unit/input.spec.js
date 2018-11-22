@@ -93,7 +93,7 @@ describe('Input', () => {
                         [propertyName]: 'setting'
                     }
                 });
-                let propName = propertyName.replace(/([A-Z])/g,"-$1").toLowerCase();
+                let propName = propertyName.replace(/([A-Z])/g, "-$1").toLowerCase();
                 expect(wrapper.find('label').classes()).to.contain(propName);
                 expect(wrapper.find(`.g-${propName}`).html()).to.exist;
             });
@@ -105,7 +105,7 @@ describe('Input', () => {
                     propsData: {
                         [propertyName]: '文本'
                     }
-                });                
+                });
                 expect(wrapper.find('label div').text().trim()).to.equal('文本');
             });
         });
@@ -176,7 +176,9 @@ describe('Input', () => {
             const wrapper = mount(Input);
             ['change', 'input', 'focus', 'blur'].map(eventName => {
                 const callback = sinon.fake();
-                const {vm} = wrapper;
+                const {
+                    vm
+                } = wrapper;
                 vm.$on(eventName, callback);
 
                 // trigger input event

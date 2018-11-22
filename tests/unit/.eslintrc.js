@@ -29,7 +29,7 @@ module.exports = {
             "always"
         ],
         "comma-dangle": [
-            "error",
+            "off",
             {
                 "arrays": "always-multiline",
                 "objects": "never",
