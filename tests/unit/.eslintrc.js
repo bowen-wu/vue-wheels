@@ -32,9 +32,9 @@ module.exports = {
             "error",
             {
                 "arrays": "always-multiline",
-                "objects": "always-multiline",
-                "imports": "always-multiline",
-                "exports": "always-multiline",
+                "objects": "never",
+                "imports": "never",
+                "exports": "never",
                 "functions": "always-multiline"
             }
         ],
@@ -77,13 +77,11 @@ module.exports = {
         "curly": "error",
         "object-curly-spacing": [
             "error",
-            "never"
+            "always"
         ],
         "object-curly-newline": [
             "error",
-            {
-                "multiline": true
-            }
+            "always"
         ]
     },
   }

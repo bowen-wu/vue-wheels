@@ -75,7 +75,7 @@ export default {
         },
         setLineHeight() {
             this.$nextTick(() => {
-                if (this.closeButton.text) {
+                if (this.closeButton.text && this.$refs.line) {
                     this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`;
                 }
             });

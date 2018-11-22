@@ -1,6 +1,9 @@
 <template>
     <div class="demo">
 
+        <g-button @click="onClickToast">click toast</g-button>
+        <g-input class="input" :clearable="true" value="文本"></g-input>
+
         <g-popover>
             <template slot="content" slot-scope="{close}">
                 <div>内容</div>
@@ -84,6 +87,7 @@
     </div>
 </template>
 <script>
+import Input from './components/input/input';
 import Button from './components/button/button';
 import Cascader from './components/cascader/cascader';
 import Collapse from './components/collapse/collapse';
@@ -95,6 +99,7 @@ import TabsBody from './components/tabs/tabs-body';
 import TabsHead from './components/tabs/tabs-head';
 import TabsItem from './components/tabs/tabs-item';
 import TabsPane from './components/tabs/tabs-pane';
+import Toast from './components/toast/toast';
 import DB from './assist/util/china.js';
 import {removeListener} from './assist/util/click-outside.js'
 const AJAX = ({ id = '0' }) => {
@@ -116,6 +121,7 @@ const AJAX = ({ id = '0' }) => {
 export default {
     name: 'bowen-demo',
     components: {
+        'g-input': Input,
         'g-button': Button,
         'g-icon': Icon,
         'g-tabs': Tabs,
@@ -127,6 +133,7 @@ export default {
         'g-collapse': Collapse,
         'g-collapse-item': CollapseItem,
         'g-cascader': Cascader,
+        'g-toast': Toast,
     },
     data() {
         return {
@@ -228,11 +235,15 @@ export default {
             let message = 'new message';
             this.obj = Object.assign({}, this.obj, { message });
         },
+        onClickToast() {
+            this.$toast('text');
+        },
     },
 };
 </script>
 
-<style>
+<style lang="scss">
+@import './assist/style/_var.scss';
 * {
     margin: 0;
     padding: 0;
@@ -240,9 +251,13 @@ export default {
 }
 .demo {
     margin: 200px;
+    height: 100vh;
 }
 .popover {
     margin-right: 20px;
+}
+.input{
+    @include flex();
 }
 </style>
 

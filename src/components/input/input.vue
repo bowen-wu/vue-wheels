@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Icon from './icon/icon';
+import Icon from '../icon/icon';
 
 export default {
     name: 'bowen-input',
@@ -182,6 +182,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assist/style/_var.scss';
+
+@mixin tips($tips-color: $color-tips) {
+    font-size: $font-size-tips;
+    line-height: $line-height-tips;
+    color: $tips-color;
+    white-space: nowrap;
+}
 
 .g-input-wrapper{
     // @include flex(center);
