@@ -242,7 +242,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import './assist/style/_var.scss';
 * {
     margin: 0;
