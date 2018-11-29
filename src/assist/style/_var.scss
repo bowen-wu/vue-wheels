@@ -41,20 +41,19 @@ $padding-horizontal: 8px;
 $padding-vertical: 7px;
 $padding: 0.5em;
 $pre-next-icon-fill: #a1acb3;
-
-@mixin fontLineColor($fontSize: 14px, $lineHeight: 32px, $color: #333){
+@mixin fontLineColor($fontSize: 14px, $lineHeight: 32px, $color: #333) {
     font-size: $fontSize;
     line-height: $lineHeight;
     color: $color;
 }
 
-@mixin flex($justifyContent: flex-start, $alignItems: flex-start){
+@mixin flex($justifyContent: flex-start, $alignItems: flex-start) {
     display: flex;
     justify-content: $justifyContent;
     align-items: $alignItems;
 }
 
-@mixin inline-flex($justifyContent: flex-start, $alignItems: flex-start){
+@mixin inline-flex($justifyContent: flex-start, $alignItems: flex-start) {
     display: inline-flex;
     justify-content: $justifyContent;
     align-items: $alignItems;
@@ -62,7 +61,7 @@ $pre-next-icon-fill: #a1acb3;
 }
 
 @mixin boxShadow() {
-    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
 }
 
 @keyframes spin {

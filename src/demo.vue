@@ -19,7 +19,7 @@
         <div>22222</div>
         <g-cascader :source.sync="source" :selected.sync="selected"></g-cascader>
 
-        <g-collapse :selected.sync="selected" single v-if="false">
+        <g-collapse :selected.sync="selected" single>
             <g-collapse-item title="title1" name="first">content1</g-collapse-item>
             <g-collapse-item title="title2" name="second">content2</g-collapse-item>
             <g-collapse-item title="title3" name="third">content3</g-collapse-item>

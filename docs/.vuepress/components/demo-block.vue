@@ -3,44 +3,74 @@
         <div class="demo">
             <slot></slot>
         </div>
-        <div class="code" v-if="showCode">
-            <slot name="code"></slot>
-        </div>
-        <div class="switch" @click="toggle">
-            <div class="icon">
-                <div class="triangle" :class="dynamicClass"></div>
+
+        <div class="line" v-if="codeVisible"></div>
+
+
+        <div class="code-switch-wrapper">
+            <transition name="demo-fade">
+                <div class="code" v-if="codeVisible">
+                    <slot name="code"></slot>
+                </div>
+            </transition>
+
+            <div class="switch" @click="toggle" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+                <g-icon :name="iconName" class="icon" :class="iconDynamicClass"></g-icon>
+                <transition name="demo-slide">
+                    <div class="text" v-if="textVisible">{{text}}</div>
+                </transition> 
             </div>
-            <div class="text">{{text}}</div>
         </div>
+
     </div>
     </div>
 </template>
 
 <script>
+import Icon from '../../../src/components/icon/icon';
+import Collapse from '../../../src/components/collapse/collapse';
+import CollapseItem from '../../../src/components/collapse/collapse-item';
 export default {
     name: 'demo-block',
+    components: {
+        'g-icon': Icon,
+        'g-collapse': Collapse,
+        'g-collapse-item': CollapseItem,
+    },
     props: {},
     data() {
         return {
-            showCode: false,
+            codeVisible: false,
             text: '显示代码',
+            textVisible: false,
         };
     },
     computed: {
-        dynamicClass() {
-            if(this.showCode){
-                return {'up': true};
+        iconDynamicClass() {
+            return this.textVisible ? {'active': true} : '';
+        },
+        iconName() {
+            let name = 'down-solid';
+            if(this.codeVisible) {
+                name = 'up-solid';
             }
+            return name;
         },
     },
     methods: {
         toggle() {
-            if(this.showCode){
+            if(this.codeVisible){
                 this.text = '显示代码';
             }else{
                 this.text = '隐藏代码';
             }
-            this.showCode = !this.showCode;
+            this.codeVisible = !this.codeVisible;
+        },
+        onMouseEnter() {
+            this.textVisible = true;
+        },
+        onMouseLeave() {
+            this.textVisible = false;
         },
     },
 };
@@ -51,7 +81,6 @@ export default {
 .demo-block {
     border: 1px solid #ebebeb;
     border-radius: 4px;
-    transition: 0.2s;
     position: relative;
     z-index: 1;
     &:hover {
@@ -61,51 +90,60 @@ export default {
     > .demo{
         padding: 24px;
     }
-    > .code{
+    > .line{
         border-top: 1px solid #ebebeb;
-        padding: 24px;
     }
-    > .switch{
-        @include flex(center, center);
-        padding: 12px 0;
-        transition: 0.2s;
-        border-top: 1px solid #ebebeb;
-        > .icon{
-            width: 16px;
-            height: 16px;
-            padding: 1px 0;
-            > .triangle{
-                border: 8px solid transparent;
-                border-top-color: #ddd;
-                border-bottom-color: transparent;
-                transform: translateY(4px);
-                &.up{
-                    border-top-color: transparent;
-                    border-bottom-color: #ddd;
-                    transform: translateY(-4px);
-                }
-            }
+    > .code-switch-wrapper{
+        position: relative;
+        overflow: hidden;
+        > .code{
+            padding: 24px;
         }
-        > .text{
-            display: none;
-            padding-left: 8px;
-            @include fontLineColor(14px, 18px, #409eff);
-        }
-        &:hover{
-            > .icon > .triangle{
-                border-top-color: #409eff;
-                border-bottom-color: transparent;
-                &.up{
-                    border-top-color: transparent;
-                    border-bottom-color: #409eff;
+        > .switch{
+            @include flex(center, center);
+            min-height: 18px;
+            padding: 12px 0;
+            border-top: 1px solid #ebebeb;
+            position: relative;
+            > .icon{
+                fill: #ddd;
+                position: absolute;
+                transition: all 0.5s linear;
+                &.active{
+                    fill: #409eff;
+                    transform: translateX(-40px);
                 }
             }
             > .text{
-                display: block;
+                padding-left: 8px;
+                @include fontLineColor(14px, 18px, #409eff);
             }
         }
     }
+
 }
+
+.demo-fade-enter-active,
+.demo-fade-leave-active {
+    transition: all 0.5s linear;
+}
+
+.demo-fade-enter,
+.demo-fade-leave-to{
+    transform: translateY(-100%);
+}
+
+.demo-slide-enter-active,
+.demo-slide-leave-active {
+    transition: all 0.5s linear;
+}
+
+.demo-slide-enter,
+.demo-slide-leave-to{
+    transform: translateX(40px);
+    opacity: 0;
+}
+
 </style>
 
 

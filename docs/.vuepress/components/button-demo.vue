@@ -1,7 +1,7 @@
 <template>
     <div class="button-demo">
         <demo-content-block v-if="type === 'basic'">
-            <g-button>默认组件</g-button>
+            <g-button>默认按钮</g-button>
             <template slot="code">
                 使用type、plain、round和circle属性来定义 Button 的样式。
                 <pre><code>{{basicCode}}</code></pre>
@@ -42,8 +42,8 @@
 
 <script>
 import DemoContentBlock from './demo-block';
-import Button from '../../../src/button/button';
-import ButtonGroup from '../../../src/button/button-group';
+import Button from '../../../src/components/button/button';
+import ButtonGroup from '../../../src/components/button/button-group';
 export default {
     components: {
         'g-button': Button,
@@ -63,7 +63,7 @@ export default {
             <g-button icon="setting">设置</g-button>
             <g-button :loading="true">loading</g-button>
             `.replace(/^\n+|\t+| +/g, '').trim(),
-            basicCode: `<g-button>默认组件</g-button>`.replace(/^\n+|\t+| +/g, '').trim(),
+            basicCode: `<g-button>默认按钮</g-button>`.replace(/^\n+|\t+| +/g, '').trim(),
             iconCode: `
                 <g-button icon="setting"></g-button>
                 <g-button icon="setting">设置</g-button>
