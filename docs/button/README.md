@@ -22,6 +22,7 @@ permalink: /button
 
 ## 图标按钮
 带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。
+
 <ClientOnly>
   <button-demo type="icon"/>
 </ClientOnly>
@@ -33,3 +34,13 @@ permalink: /button
   <button-demo type="group"/>
 </ClientOnly>
 
+## 加载中
+点击按钮后进行数据加载操作，在按钮上显示加载状态。
+
+<ClientOnly>
+  <button-demo type="loading"/>
+</ClientOnly>
+
+## Attributes
+
+// TODO: 使用 Table 组件写
