@@ -188,12 +188,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../src/assist/style/docs-demo-style.scss';
-.row{
-    margin-bottom: 0.5em;
-    &:last-of-type{
-        margin-bottom: 0;
-    }
-}
 .button{
     margin-left: 0.5em;
     &:first-of-type{

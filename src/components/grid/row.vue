@@ -43,7 +43,7 @@ export default {
     created() {},
     mounted() {
         this.$children.map((vm) => {
-            vm.gutter = this.gutter;
+            vm.gutter = this.gutter || 0;
         })
     },
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="button-demo">
+    <div class="input-demo">
         <demo-content-block v-if="type === 'basic'">
             <g-input class="input limitWidth" placeholder="请输入内容" />
             <template slot="code">
@@ -136,7 +136,19 @@ export default {
                 ${'<'}/script>
             `.replace(/^ {16}/gm, '').trim(),
             mixedCode: `
-            
+                <g-input v-model="input6" class="input" placeholder="网址" pre-text="http://" next-text=".com" />
+                <g-input v-model="input7" class="input" placeholder="内容" next-text="搜索" />
+
+                <script>
+                    export default{
+                        data() {
+                            return {
+                                input6: '',
+                                input7: '',
+                            }
+                        }
+                    }
+                ${'<'}/script>
             `.replace(/^ {16}/gm, '').trim(),
         };
     },
@@ -145,12 +157,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../src/assist/style/docs-demo-style.scss';
-.row{
-    margin-bottom: 0.5em;
-    &:last-of-type{
-        margin-bottom: 0;
-    }
-}
+
 .input{
     margin-left: 0.5em;
     &:first-of-type{
@@ -160,7 +167,6 @@ export default {
         width: 180px;
     }
 }
-
 </style>
 
 

@@ -4,6 +4,14 @@
         <g-button @click="onClickToast">click toast</g-button>
         <g-input class="input" :clearable="true" value="文本"></g-input>
 
+
+        <g-row gutter="24">
+            <g-col span="8">8</g-col>
+            <g-col span="8">8</g-col>
+            <g-col span="8">8</g-col>
+        </g-row>
+
+
         <g-popover>
             <template slot="content" slot-scope="{close}">
                 <div>内容</div>
@@ -89,6 +97,8 @@
 <script>
 import Input from './components/input/input';
 import Button from './components/button/button';
+import GRow from './components/grid/row';
+import GCol from './components/grid/column';
 import Cascader from './components/cascader/cascader';
 import Collapse from './components/collapse/collapse';
 import CollapseItem from './components/collapse/collapse-item';
@@ -123,6 +133,8 @@ export default {
     components: {
         'g-input': Input,
         'g-button': Button,
+        'g-row': GRow,
+        'g-col': GCol,
         'g-icon': Icon,
         'g-tabs': Tabs,
         'g-tabs-head': TabsHead,

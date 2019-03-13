@@ -11,7 +11,7 @@
     - 使用 border-box
 
     ```
-    *, *::before, *::after { box-sizing: boeder-box; }
+    *, *::before, *::after { box-sizing: border-box; }
     ```
     IE 8 及以上浏览器都支持此样式。
 
