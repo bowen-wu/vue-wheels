@@ -124,11 +124,6 @@ export default {
     },
     data() {
         return {
-            content: `
-                <g-button>默认组件</g-button>
-                <g-button icon="setting">设置</g-button>
-                <g-button :loading="true">loading</g-button>
-            `.replace(/^ {16}/gm, '').trim(),
             basicCode: `
                 <g-button>默认按钮</g-button>
                 <g-button type="primary">主要按钮</g-button>

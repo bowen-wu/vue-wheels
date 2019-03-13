@@ -1,6 +1,6 @@
 <template>
     <div class="g-input-wrapper" :class="{[`tips-${tipsPosition}`]: true}">
-        <label class="g-label" :class="{'pre-icon': preIcon, 'next-icon': nextIcon, 'pre-text': preText, 'next-text': nextText, 'tips': tipsType, [`tips-${tipsType}`]: true, 'clearable': clearable}">
+        <label class="g-label" :class="{'pre-icon': preIcon, 'next-icon': nextIcon, 'pre-text': preText, 'next-text': nextText, 'tips': tipsType, [`tips-${tipsType}`]: tipsType, 'clearable': clearable}">
             <!-- label -->
             <span v-if="label" class="g-label-content">{{label}}</span>
 
@@ -15,21 +15,21 @@
             </div>
 
             <!-- input -->
-            <input class="g-input" :type="type" :value="inputValue" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style" 
+            <input class="g-input" :class="{'has-two-icon': nextIcon && clearable}" :type="type" :value="inputValue" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" :autofocus="autofocus" :maxlength="maxlength" :style="style" 
             @change="$emit('change', $event.target.value)" 
             @input="inputEvent" 
             @focus="$emit('focus', $event.target.value)" 
             @blur="$emit('blur', $event.target.value)">
 
             <!-- clearable -->
-            <div v-if="clearable" class="g-clear-icon" :class="{'active': inputValue}" @click="clearEvent">
+            <span v-if="clearable" class="g-clear-icon" :class="{'active': inputValue, 'has-next-icon': nextIcon}" @click="clearEvent">
                 <g-icon name="clear" class="g-icon"></g-icon>
-            </div>
+            </span>
 
             <!-- next Icon -->
-            <div v-if="nextIcon" class="g-next-icon">
+            <span v-if="nextIcon" class="g-next-icon">
                 <g-icon :name="nextIcon" class="g-icon"></g-icon>
-            </div>
+            </span>
 
             <!-- next text -->
             <div v-if="nextText" class="g-next-text">
@@ -191,10 +191,9 @@ export default {
 }
 
 .g-input-wrapper{
-    // @include flex(center);
     & > .g-label{
         width: 100%;
-        @include flex(center);
+        @include flex(center, center);
         position: relative;
 
         & > .g-label-content{
@@ -204,11 +203,14 @@ export default {
 
         // pre icon + next icon
         & > .g-pre-icon, & > .g-next-icon, & > .g-clear-icon{
-            display: flex;
+            display: inline-flex;
             position: absolute;
             top: 50%;
             transform: translate(0, -50%);
-            padding: 0.5em;
+            padding: $padding-samller;
+            &.has-next-icon {
+                transform: translate(-1em, -50%);
+            }
             & > .g-icon{
                 fill: $pre-next-icon-fill;
             }
@@ -219,14 +221,14 @@ export default {
                 left: 2px;
             }
             & > .g-input{
-                padding-left: calc(2em);
+                padding-left: $padding + 2em - $padding-samller;
             }
         }
 
         &.clearable > .g-input:focus,
         &.clearable > .g-input:hover{
             & ~ .g-clear-icon.active{
-                display: block;
+                display: inline-flex;
             }
         }
         &.next-icon, &.clearable{
@@ -237,18 +239,18 @@ export default {
                 display: none;
                 z-index: 1;
                 &.active:hover{
-                    display: block;
+                    display: inline-flex;
                 }
             }
             & > .g-input{
-                padding-right: calc(2em);
+                padding-right: $padding + 2em - $padding-samller;
             }
         }
 
         // pre text + next text
         & > .g-pre-text, & > .g-next-text{
             @include fontLineColor();
-            padding: 8px 16px;
+            padding: $padding $padding-bigger;
             border: 1px solid $border-color;
             border-radius: $border-radius;
             display: flex;
@@ -290,11 +292,14 @@ export default {
         // input 
         & > .g-input{
             @include fontLineColor();
-            padding: 8px;
+            padding: $padding $padding-bigger;
             border-radius: $border-radius;
             border: 1px solid $border-color;
             width: 100%;
             min-width: 120px;
+            &.has-two-icon{
+                padding-right: $padding-bigger + 2em;
+            }
             &:hover{
                 border-color: $border-color-hover;
             }
@@ -310,20 +315,20 @@ export default {
                 color: $color-disabled;
             }
             &::placeholder {
-                @include fontLineColor($color-placeholder);
+                color: $color-placeholder;
             }
         }
 
         // tips
         &.tips{
             & > .g-input{
-                margin-right: 0.5em;
+                margin-right: $padding-samller;
                 width: 60%;
             }
             & > .g-tips{
-                @include flex(center);
+                @include flex(center, center);
                 :not(:last-child){
-                    margin-right: 0.5em;
+                    margin-right: $padding-samller;
                 }
             }
             &.tips-tips > .g-tips{
@@ -379,11 +384,11 @@ export default {
                 width: 100%;
             }
             & > .g-tips{
-                @include flex(center);
-                margin-top: 0.5em;
+                @include flex(center, center);
+                margin-top: $padding-samller;
                 padding-left: 4px;
                 :not(:last-child){
-                    margin-right: 0.5em;
+                    margin-right: $padding-samller;
                 }
             }
         }
