@@ -35,7 +35,7 @@ permalink: /grid
 </ClientOnly>
 
 ## 响应式布局
-参照了 Bootstrap 的 响应式设计，预设了五个响应尺寸：sm、md、lg 和 xl
+参照了 Bootstrap 的 响应式设计，预设了五个响应尺寸：`sm`、`md`、`lg` 和 `xl`
 
 <ClientOnly>
   <grid-demo type="responsive"/>
