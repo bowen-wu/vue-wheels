@@ -22,14 +22,14 @@
             @blur="$emit('blur', $event.target.value)">
 
             <!-- clearable -->
-            <span v-if="clearable" class="g-clear-icon" :class="{'active': inputValue, 'has-next-icon': nextIcon}" @click="clearEvent">
+            <div v-if="clearable" class="g-clear-icon" :class="{'active': inputValue, 'has-next-icon': nextIcon}" @click="clearEvent">
                 <g-icon name="clear" class="g-icon"></g-icon>
-            </span>
+            </div>
 
             <!-- next Icon -->
-            <span v-if="nextIcon" class="g-next-icon">
+            <div v-if="nextIcon" class="g-next-icon">
                 <g-icon :name="nextIcon" class="g-icon"></g-icon>
-            </span>
+            </div>
 
             <!-- next text -->
             <div v-if="nextText" class="g-next-text">
