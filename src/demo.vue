@@ -112,6 +112,7 @@ import TabsPane from './components/tabs/tabs-pane';
 import Toast from './components/toast/toast';
 import DB from './assist/util/china.js';
 import {removeListener} from './assist/util/click-outside.js'
+
 const AJAX = ({ id = '0' }) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {

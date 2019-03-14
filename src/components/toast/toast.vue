@@ -95,6 +95,7 @@ export default {
 
 .g-toast-wrapper {
     position: fixed;
+    z-index: 2;
     &.position-top {
         top: 0;
         left: 50%;
