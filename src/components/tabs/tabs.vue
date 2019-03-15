@@ -35,7 +35,11 @@ export default {
             }
         },
     },
-    created() {},
+    created() {
+        this.EventHub && this.EventHub.$on('tabs-click', (selectedName, vm) => {
+            this.$emit('tabs-click', selectedName);
+        })
+    },
     mounted() {
         if(this.$children.length === 0){
             console && console.warn && console.warn('tabs的子组件应该是 tabs-head 和 tabs-body, 但你没有写子组件');

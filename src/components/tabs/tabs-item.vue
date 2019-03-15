@@ -48,7 +48,7 @@ export default {
                 return;
             }
             this.EventHub.$emit('update:selected', this.name, this);
-            this.$emit('click', this);
+            this.EventHub.$emit('tabs-click', this.name, this)
         },
     }
 }

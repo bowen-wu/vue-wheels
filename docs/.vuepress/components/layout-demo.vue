@@ -98,7 +98,6 @@ export default {
     },
     data() {
         return {
-            input: '',
             basicCode: `
                 <g-layout class="layout-demo-layout">
                     <g-header>Header</g-header>
