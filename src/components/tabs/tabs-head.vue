@@ -4,7 +4,7 @@
             <slot></slot>
         </div>
         <div class="line" ref="line"></div>
-        <div class="g-tabs-actions">
+        <div class="g-tabs-actions" v-if="direction === 'horizontal'">
             <div class="g-tabs-actions-inner">
                 <slot name="actions"></slot>
             </div>

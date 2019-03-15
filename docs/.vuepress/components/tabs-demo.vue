@@ -111,7 +111,7 @@
             </div>
             
             <template slot="code">
-                通过具名插槽可以设置附加操作。
+                通过具名插槽可以设置附加操作。注意： 目前只有当 <code>direction</code> 为 <code>horizontal</code> 时，才支持附加操作。
                 <pre><code>{{actionsCode}}</code></pre>
             </template>
         </demo-content-block>
