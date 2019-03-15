@@ -63,9 +63,9 @@ export default {
     margin-right: -1px;
     margin-top: -1px;
     > .g-collapse-item-title {
-        @include fontLineColor(12px, 16px, #333);
+        @include fontLineColor(14px, 18px, #303133);
         border: 1px solid $border-color;
-        padding: $padding-vertical $padding-horizontal;
+        padding: $padding;
         cursor: pointer;
         position: relative;
         &.active {

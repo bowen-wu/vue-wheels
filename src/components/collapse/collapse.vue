@@ -15,7 +15,7 @@ export default {
         },
         selected: {
             type: Array,
-            required: false,
+            required: true,
         }
     },
     data() {

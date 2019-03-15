@@ -235,7 +235,6 @@ export default {
             border-color: $border-color-disabled-info;
         }
     }
-    &-text{}
     > .icon {
         order: 0;
         margin-right: 0.3em;
