@@ -193,7 +193,7 @@ export default {
             border-bottom: 0;
         }
         &::before {
-            border-top-color: #333;
+            border-top-color: #dcdfe6;
             top: 100%;
         }
         &::after {
@@ -209,7 +209,7 @@ export default {
             border-top: 0;
         }
         &::before {
-            border-bottom-color: #333;
+            border-bottom-color: #dcdfe6;
             bottom: 100%;
         }
         &::after {
@@ -227,7 +227,7 @@ export default {
             border-right: 0;
         }
         &::before {
-            border-left-color: #333;
+            border-left-color: #dcdfe6;
             left: 100%;
         }
         &::after {
@@ -244,7 +244,7 @@ export default {
             border-left: 0;
         }
         &::before {
-            border-right-color: #333;
+            border-right-color: #dcdfe6;
             right: 100%;
         }
         &::after {
