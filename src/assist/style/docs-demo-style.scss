@@ -1,0 +1,19 @@
+*, *::before, *::after { box-sizing: border-box; }
+.row{
+    margin-bottom: 0.5em;
+    &:last-of-type{
+        margin-bottom: 0;
+    }
+    .bg-purple-dark {
+        background-color: #99a9bf;
+    }
+    .bg-purple-light {
+        background-color: #e5e9f2;
+    }
+    .bg-purple {
+        background-color: #d3dce6;
+    }
+}
+.code {
+    line-height: 26px;
+}

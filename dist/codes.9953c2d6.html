@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wheel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --font-size: 14px;
+            --line-height: 32px;
+            --color: #333;
+            --button-bg: #fff;
+            --button-active-bg: #eee;
+            --border-radius: 4px;
+            --border-color: #999;
+            --border-color-hover: #666;
+        }
+
+        body {
+            font-size: var(--font-size);
+        }
+
+        #app {
+            padding: 20px;
+        }
+    </style>
+    <style>
+
+    </style>
+<link rel="stylesheet" href="/app.5bb95668.css"></head>
+
+<body>
+    <div id="app">
+        <g-button>按钮</g-button>
+        <g-button icon="setting" :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
+        <g-button icon="setting" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>
+
+        <g-button-group>
+            <g-button icon="left">上一页</g-button>
+            <g-button icon="right" icon-position="right">下一页</g-button>
+        </g-button-group>
+
+        <g-button-group>
+            <g-button icon="left">上一页</g-button>
+            <g-button>更多</g-button>
+            <g-button icon="right" icon-position="right">下一页</g-button>
+        </g-button-group>
+    </div>
+    <div id="test"></div>
+    <script src="/app.5bb95668.js"></script>
+    <script src="//at.alicdn.com/t/font_742059_0qo8i85vyiu.js"></script>
+</body>
+
+</html>

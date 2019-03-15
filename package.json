@@ -1,0 +1,142 @@
+{
+    "name": "vue-wheels-bowen",
+    "version": "0.0.1",
+    "description": "vue UI 组件",
+    "private": true,
+    "scripts": {
+        "start": "npm run serve",
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "test": "vue-cli-service test:unit",
+        "test:unit": "vue-cli-service test:unit",
+        "test:unit-watch": "vue-cli-service test:unit --watch",
+        "docs:dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs"
+    },
+    "dependencies": {
+        "vue": "^2.5.17"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^3.0.1",
+        "@vue/cli-plugin-eslint": "^3.0.1",
+        "@vue/cli-plugin-unit-mocha": "^3.0.1",
+        "@vue/cli-service": "^3.0.1",
+        "@vue/eslint-config-prettier": "^3.0.1",
+        "@vue/test-utils": "^1.0.0-beta.20",
+        "chai": "^4.1.2",
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.0.1",
+        "sinon": "^7.1.1",
+        "sinon-chai": "^3.2.0",
+        "vue-template-compiler": "^2.5.17",
+        "vuepress": "^0.14.4"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "@vue/prettier"
+        ],
+        "rules": {
+            "no-console": [
+                "warn",
+                {
+                    "allow": [
+                        "warn",
+                        "error"
+                    ]
+                }
+            ],
+            "indent": [
+                "error",
+                4
+            ],
+            "prettier/prettier": "off",
+            "quotes": [
+                "error",
+                "single",
+                {
+                    "allowTemplateLiterals": true
+                }
+            ],
+            "semi": [
+                "error",
+                "always"
+            ],
+            "comma-dangle": [
+                "error",
+                {
+                    "arrays": "always-multiline",
+                    "objects": "always-multiline",
+                    "imports": "always-multiline",
+                    "exports": "always-multiline",
+                    "functions": "always-multiline"
+                }
+            ],
+            "comma-spacing": [
+                "error",
+                {
+                    "before": false,
+                    "after": true
+                }
+            ],
+            "comma-style": [
+                "error",
+                "first",
+                {
+                    "exceptions": {
+                        "ArrayExpression": true,
+                        "ObjectExpression": true
+                    }
+                }
+            ],
+            "no-unused-vars": [
+                "error",
+                {
+                    "vars": "all",
+                    "args": "all",
+                    "ignoreRestSiblings": false
+                }
+            ],
+            "consistent-this": "error",
+            "eqeqeq": [
+                "error",
+                "always"
+            ],
+            "no-const-assign": "error",
+            "no-dupe-args": "error",
+            "no-empty-function": "error",
+            "no-eval": "error",
+            "no-extra-semi": "error",
+            "no-global-assign": "error",
+            "curly": "error",
+            "object-curly-spacing": [
+                "error",
+                "always"
+            ],
+            "object-curly-newline": [
+                "error",
+                {
+                    "multiline": true
+                }
+            ]
+        },
+        "parserOptions": {
+            "parser": "babel-eslint"
+        }
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}

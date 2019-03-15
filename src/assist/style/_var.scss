@@ -1,0 +1,187 @@
+$color: #333;
+$color-white: #fff;
+$color-disabled: #c0c4cc;
+$color-placeholder: #ccc;
+
+$bg-color: #fff;
+$bg-color-hover: #ecf5ff;
+$border-color: #dcdfe6;
+$border-color-hover: #c6e2ff;
+$border-color-disabled: #ebeef5;
+$transition-duration: 0.2s;
+$color-plain: #409eff;
+$border-color-plain-hover: #409eff;
+
+
+
+$bg-color-primary: #409eff;
+$bg-color-success: #85ce61;
+$bg-color-warning: #e6a23c;
+$bg-color-danger: #f56c6c;
+$bg-color-info: #909399;
+
+$bg-color-hover-primary: #66b1ff;
+$bg-color-hover-success: #67c23a;
+$bg-color-hover-warning: #ebb563;
+$bg-color-hover-danger: #f78989;
+$bg-color-hover-info: #a6a9ad;
+
+$border-color-primary: #409eff;
+$border-color-success: #67c23a;
+$border-color-warning: #e6a23c;
+$border-color-danger: #f56c6c;
+$border-color-info: #909399;
+
+$border-color-hover-primary: #66b1ff;
+$border-color-hover-success: #67c23a;
+$border-color-hover-warning: #ebb563;
+$border-color-hover-danger: #f78989;
+$border-color-hover-info: #a6a9ad;
+
+
+$color-plain-primary: #409eff;
+$color-plain-success: #67c23a;
+$color-plain-warning: #e6a23c;
+$color-plain-danger: #f56c6c;
+$color-plain-info: #909399;
+
+$bg-color-plain-primary: #ecf5ff;
+$bg-color-plain-success: #f0f9eb;
+$bg-color-plain-warning: #fdf6ec;
+$bg-color-plain-danger: #fef0f0;
+$bg-color-plain-info: #f4f4f5;
+
+$bg-color-plain-hover-primary: #409eff;
+$bg-color-plain-hover-success: #67c23a;
+$bg-color-plain-hover-warning: #e6a23c;
+$bg-color-plain-hover-danger: #f56c6c;
+$bg-color-plain-hover-info: #909399;
+
+$border-color-plain-primary: #b3d8ff;
+$border-color-plain-success: #c2e7b0;
+$border-color-plain-warning: #f5dab1;
+$border-color-plain-danger: #fbc4c4;
+$border-color-plain-info: #d3d4d6;
+
+$border-color-plain-hover-primary: #409eff;
+$border-color-plain-hover-success: #67c23a;
+$border-color-plain-hover-warning: #e6a23c;
+$border-color-plain-hover-danger: #f56c6c;
+$border-color-plain-hover-info: #909399;
+
+$bg-color-disabled-primary: #a0cfff;
+$bg-color-disabled-success: #b3e19d;
+$bg-color-disabled-warning: #f3d19e;
+$bg-color-disabled-danger: #fab6b6;
+$bg-color-disabled-info: #c8c9cc;
+
+$border-color-disabled-primary: #a0cfff;
+$border-color-disabled-success: #b3e19d;
+$border-color-disabled-warning: #f3d19e;
+$border-color-disabled-danger: #fab6b6;
+$border-color-disabled-info: #c8c9cc;
+
+$padding-bigger: 1em;
+$padding-biggest: 2em;
+$padding-horizontal: 8px;
+$padding-vertical: 7px;
+$padding: 0.8em;
+$padding-samller: 0.5em;
+
+
+
+
+
+
+
+
+$animate-duration: 0.3s;
+$bg-color-disabled: #f5f7fa;
+$bg-color-light: #f3f3f3;
+$bg-color-white: #fff;
+$border-color-disabled: #e4e7ed;
+$border-color-error: #F1453D;
+$border-color-focus: #999;
+$border-color-hover: #c0c4cc;
+$border-color-light: lighten($border-color, 6%);
+$border-color-success: #67c23a;
+$border-radius-large: 6px;
+$border-radius: 4px;
+$box-shadow-color-error: rgba(241, 69, 61, 0.2);
+$box-shadow-color-success: rgba(103, 194, 58, 0.2);
+$box-shadow-color: rgba(153, 153, 153, 0.2);
+$button-active-bg: #eee;
+$button-bg: #fff;
+$color-active: #2d8cf0;
+$color-tips-error: #F1453D;
+$color-tips-success: #67c23a;
+$color-tips: #57a3f3;
+$disabled-color: #eee;
+$font-size-tips: 12px;
+$font-size: 14px;
+$hover-color: #409eff;
+$line-bg-color: #409eff;
+$line-height-tips: 14px;
+$line-height: 16px;
+$margin-top: 4px;
+$min-height: 40px;
+$min-width: 10em;
+$pre-next-icon-fill: #a1acb3;
+@mixin fontLineColor($fontSize: $font-size, $lineHeight: $line-height, $color: $color) {
+    font-size: $fontSize;
+    line-height: $lineHeight;
+    color: $color;
+}
+
+@mixin flex($justifyContent: flex-start, $alignItems: flex-start) {
+    display: flex;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}
+
+@mixin inline-flex($justifyContent: flex-start, $alignItems: flex-start) {
+    display: inline-flex;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    vertical-align: middle;
+}
+
+@mixin boxShadow() {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
