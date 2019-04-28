@@ -26,7 +26,7 @@ module.exports = {
             },
             {
                 title: '组件',
-                collapsable: false, 
+                collapsable: false,
                 children: [
                     '/button/',
                     '/input/',
@@ -36,6 +36,7 @@ module.exports = {
                     '/tabs/',
                     '/popover/',
                     '/collapse/',
+                    '/cascader/',
                 ]
             }
         ]

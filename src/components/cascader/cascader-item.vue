@@ -1,11 +1,11 @@
 <template>
-    <div class="g-cascader-item" :style="{height: height}">
+    <div class="g-cascader-item" :style="{height}">
         <div class="g-cascader-item-parents">
-            <div class="g-cascader-item-parent" v-for="parent in source" @click="onSelectParent(parent)" :class="{'g-cascader-item-parent-active': selected[level] && (parent.name === selected[level].name)}">
+            <div class="g-cascader-item-parent" v-for="parent in source" :key="parent.value" @click="onSelectParent(parent)" :class="{'g-cascader-item-parent-active': selected[level] && (parent.label === selected[level].label)}">
                 <div class="g-cascader-item-parent-text">
-                    {{parent.name}}
+                    {{parent.label}}
                 </div>
-                <template v-if="loadingItem.id === parent.id && loadingItem.name === parent.name">
+                <template v-if="loadingItem.value === parent.value && loadingItem.label === parent.label">
                     <g-icon name="loading" class="g-cascader-item-parent-icon g-cascader-item-parent-icon-loading"></g-icon>
                 </template>
                 <template v-else>
@@ -23,9 +23,7 @@
 import Icon from '../icon/icon';
 export default {
     name: 'bowen-cascader-item',
-    components: {
-        'g-icon': Icon,
-    },
+    components: { 'g-icon': Icon },
     props: {
         source: {
             type: Array,
@@ -42,23 +40,14 @@ export default {
             required: false,
             default: 0,
         },
-        height: {
-            type: String,
-        },
-        loadData: {
-            type: Function,
-        },
-        loadingItem: {
-            type: Object,
-        },
-    },
-    data() {
-        return {};
+        height: { type: String },
+        loadData: { type: Function },
+        loadingItem: { type: Object },
     },
     computed: {
         children() {
             if(this.selected[this.level]) {
-                let item = this.source.filter(item => item.id === this.selected[this.level].id)
+                let item = this.source.filter(item => item.value === this.selected[this.level].value);
                 if(item && item[0].children && item[0].children.length > 0) {
                     return item[0].children;
                 } else {
@@ -66,12 +55,7 @@ export default {
                 }
             }
         },
-        dynamicClass() {
-            return;
-        },
     },
-    created() {},
-    mounted() {},
     methods: {
         onSelectParent(parent) {
             // 需要 深拷贝
@@ -87,7 +71,7 @@ export default {
             this.$emit('close-cascader');
         },
         rightIconVisible(parent) {
-            return this.loadData ? !parent.isLeaf : parent.children
+            return this.loadData ? !parent.isLeaf : parent.children;
         },
     },
 };

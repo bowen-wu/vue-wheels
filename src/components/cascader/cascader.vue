@@ -1,7 +1,7 @@
 <template>
     <div class="g-cascader" ref="cascader" v-click-outside="closeCascader">
         <div class="g-cascader-trigger" @click="trigger">
-            {{exhibitionText || '&nbsp'}}
+            {{exhibitionText || '&nbsp;'}}
             <div class="g-cascader-trigger-arrow" :class="dynamicClass">
                 <icon name="down" class="g-cascader-trigger-arrow-icon"></icon>
             </div>
@@ -19,14 +19,15 @@
 <script>
 import CascaderItem from './cascader-item';
 import Icon from '../icon/icon';
-import ClickOutside, {removeEventListener} from '../../assist/util/click-outside.js';
+import ClickOutside, { removeEventListener } from '../../assist/util/click-outside.js';
+
 export default {
     name: 'bowen-cascader',
     components: {
         CascaderItem,
         Icon,
     },
-    directives: {ClickOutside},
+    directives: { ClickOutside },
     props: {
         source: {
             type: Array,
@@ -44,9 +45,7 @@ export default {
                 return '200px';
             },
         },
-        loadData: {
-            type: Function,
-        },
+        loadData: { type: Function },
     },
     data() {
         return {
@@ -56,12 +55,10 @@ export default {
     },
     computed: {
         exhibitionText() {
-            return this.selected.map(obj => obj.name).join(' / ');
+            return this.selected.map(obj => obj.label).join(' / ');
         },
         dynamicClass() {
-            return {
-                'g-cascader-trigger-arrow-cross': this.cascaderItemVisible,
-            };
+            return { 'g-cascader-trigger-arrow-cross': this.cascaderItemVisible };
         },
     },
     methods: {
@@ -82,7 +79,7 @@ export default {
             this.$emit('update:selected', newSelected);
 
             let selectedItem = newSelected[newSelected.length - 1];
-            
+
             if(this.loadData) {
                 this.loadingItem = selectedItem;
                 if(selectedItem.isLeaf) {
@@ -90,10 +87,9 @@ export default {
                     this.loadingItem = {};
                 } else {
                     this.loadData(selectedItem, children => {
-                        let sourceCopy = JSON.parse(
-                            JSON.stringify(this.source),
-                        );
-                        let item = this.complex(sourceCopy, selectedItem.id);
+                        let sourceCopy = JSON.parse(JSON.stringify(this.source));
+
+                        let item = this.complex(sourceCopy, selectedItem.value);
                         if (item) {
                             item.children = children;
                         }
@@ -103,24 +99,22 @@ export default {
                 }
             } else {
                 if(!selectedItem.children) {
-                    this.closeCascader();                    
+                    this.closeCascader();
                 }
             }
         },
-        simple(hasNoChildren, id) {
+        simple(hasNoChildren, value) {
             let fondItem = null;
             hasNoChildren.some(item => {
-                if (item.id === id) {
+                if (item.value === value) {
                     fondItem = item;
                     return true;
                 }
             });
             return fondItem;
         },
-        complex(source, id) {
-            let fondItem = null,
-                hasNoChildren = [],
-                hasChildren = [];
+        complex(source, value) {
+            let fondItem = null, hasNoChildren = [], hasChildren = [];
             source.forEach(item => {
                 if (item.children) {
                     hasChildren.push(item);
@@ -128,11 +122,10 @@ export default {
                     hasNoChildren.push(item);
                 }
             });
-            fondItem =
-                this.simple(hasNoChildren, id) || this.simple(hasChildren, id);
+            fondItem = this.simple(hasNoChildren, value) || this.simple(hasChildren, value);
             if (!fondItem) {
                 hasChildren.forEach(item => {
-                    fondItem = this.complex(item.children, id);
+                    fondItem = this.complex(item.children, value);
                 });
             }
             return fondItem;

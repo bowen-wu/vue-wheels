@@ -20,10 +20,11 @@
         </g-popover>
 
         <div>11111</div>
-        <div>{{selected[0] && selected[0].name || '空'}}</div>
-        <div>{{selected[1] && selected[1].name || '空'}}</div>
-        <div>{{selected[2] && selected[2].name || '空'}}</div>
-        <g-cascader :source.sync="source1" :selected.sync="selected1" cascaderHeight="200px" :load-data="loadData"></g-cascader>
+        <div>{{selected[0] && selected[0].label || '空'}}</div>
+        <div>{{selected[1] && selected[1].label || '空'}}</div>
+        <div>{{selected[2] && selected[2].label || '空'}}</div>
+        <g-cascader :source.sync="source1" :selected.sync="selected1" cascaderHeight="200px"
+                    :load-data="loadData"></g-cascader>
         <div>22222</div>
         <g-cascader :source.sync="source" :selected.sync="selected"></g-cascader>
 
@@ -111,17 +112,16 @@ import TabsItem from './components/tabs/tabs-item';
 import TabsPane from './components/tabs/tabs-pane';
 import Toast from './components/toast/toast';
 import DB from './assist/util/china.js';
-import {removeListener} from './assist/util/click-outside.js'
+import { removeListener } from './assist/util/click-outside.js';
 
-const AJAX = ({ id = '0' }) => {
+const AJAX = ({ value = '0' }) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            let response = DB.filter(item => item.parentId === id);
-            response.forEach(obj => {
-                if (DB.filter(item => item.parentId === obj.id).length > 0) {
-                    obj.isLeaf = false;
+            const response = DB.filter(item => item.parentId === value).map(({ id: value, name: label }) => {
+                if (DB.filter(item => item.parentId === value).length > 0) {
+                    return { isLeaf: false, value, label };
                 } else {
-                    obj.isLeaf = true;
+                    return { isLeaf: true, value, label };
                 }
             });
             resolve(response);
@@ -154,69 +154,132 @@ export default {
             selected1: [],
             source: [
                 {
-                    name: '浙江',
+                    label: '浙江',
+                    value: '110000',
                     children: [
                         {
-                            name: '杭州',
+                            label: '杭州',
+                            value: '110100',
                             children: [
-                                {name: '西湖'},
-                                {name: '滨江'},
-                                {name: '上城'},
-                            ]
+                                {
+                                    label: '西湖',
+                                    value: '110101',
+                                },
+                                {
+                                    label: '滨江',
+                                    value: '110102',
+                                },
+                                {
+                                    label: '上城',
+                                    value: '110103',
+                                },
+                            ],
                         },
                         {
-                            name: '绍兴',
+                            label: '绍兴',
+                            value: '110200',
                             children: [
-                                {name: '上虞'},
-                                {name: '柯桥'},
-                                {name: '越城'}
-                            ]
-                        }
-                    ]
+                                {
+                                    label: '上虞',
+                                    value: '110201',
+                                },
+                                {
+                                    label: '柯桥',
+                                    value: '110202',
+                                },
+                                {
+                                    label: '越城',
+                                    value: '110203',
+                                },
+                            ],
+                        },
+                    ],
                 },
                 {
-                    name: '山东',
+                    label: '山东',
+                    value: '120000',
                     children: [
                         {
-                            name: '青岛',
+                            label: '青岛',
+                            value: '120100',
                             children: [
-                                {name: '市南'},
-                                {name: '市北'},
-                                {name: '崂山'}
-                            ]
+                                {
+                                    label: '市南',
+                                    value: '120101',
+                                },
+                                {
+                                    label: '市北',
+                                    value: '120102',
+                                },
+                                {
+                                    label: '崂山',
+                                    value: '120103',
+                                },
+                            ],
                         },
                         {
-                            name: '济南',
+                            label: '济南',
+                            value: '120200',
                             children: [
-                                {name: '市中'},
-                                {name: '天桥'},
-                                {name: '历城'}
-                            ]
-                        }
-                    ]
+                                {
+                                    label: '市中',
+                                    value: '120201',
+                                },
+                                {
+                                    label: '天桥',
+                                    value: '120202',
+                                },
+                                {
+                                    label: '历城',
+                                    value: '120203',
+                                },
+                            ],
+                        },
+                    ],
                 },
                 {
-                    name: '辽宁',
-                    children: [{
-                        name: '鞍山',
-                        children: [{
-                            name: '铁东'
-                        },{
-                            name: '铁西'
-                        }, {
-                            name: '立山'
-                        }]
-                    }, {
-                        name: '沈阳',
-                        children: [{
-                            name: '和平'
-                        }, {
-                            name: '沈河'
-                        }, {
-                            name: '皇姑'
-                        }]
-                    }]
-                }
+                    label: '辽宁',
+                    value: '130000',
+                    children: [
+                        {
+                            label: '鞍山',
+                            value: '130100',
+                            children: [
+                                {
+                                    label: '铁东',
+                                    value: '130101',
+                                },
+                                {
+                                    label: '铁西',
+                                    value: '130102',
+                                },
+                                {
+                                    label: '立山',
+                                    value: '130103',
+                                },
+                            ],
+                        },
+                        {
+                            label: '沈阳',
+                            value: '130200',
+                            children: [
+                                {
+                                    label: '和平',
+                                    value: '130201',
+
+                                },
+                                {
+                                    label: '沈河',
+                                    value: '130200',
+                                },
+                                {
+                                    label: '皇姑',
+                                    value: '130200',
+                                },
+                            ],
+                        },
+                    ],
+                },
             ],
             source1: [],
             obj: {},
@@ -225,7 +288,7 @@ export default {
     created() {
         AJAX({}).then(source => {
             this.source1 = source;
-            console.log('this.source', this.source);
+            console.log('this.source1', this.source1);
         });
         // removeListener();
     },
@@ -256,21 +319,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assist/style/_var.scss';
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.demo {
-    margin: 200px;
-    height: 100vh;
-}
-.popover {
-    margin-right: 20px;
-}
-.input{
-    @include flex();
-}
+    @import './assist/style/_var.scss';
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .demo {
+        margin: 200px;
+        height: 100vh;
+    }
+
+    .popover {
+        margin-right: 20px;
+    }
+
+    .input {
+        @include flex();
+    }
 </style>
 
