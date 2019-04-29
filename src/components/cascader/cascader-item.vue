@@ -1,7 +1,7 @@
 <template>
     <div class="g-cascader-item" :style="{height}">
-        <div class="g-cascader-item-parents">
-            <div class="g-cascader-item-parent" v-for="parent in source" :key="parent.value" @click="onSelectParent(parent)" :class="{'g-cascader-item-parent-active': selected[level] && (parent.label === selected[level].label)}">
+        <div ref="g-cascader-item-parents" class="g-cascader-item-parents">
+            <div ref="g-cascader-item-parent" class="g-cascader-item-parent" v-for="parent in source" :key="parent.value" @click="onSelectParent(parent)" :class="{'g-cascader-item-parent-active': selected[level] && (parent.label === selected[level].label)}">
                 <div class="g-cascader-item-parent-text">
                     {{parent.label}}
                 </div>
@@ -44,6 +44,15 @@ export default {
         loadData: { type: Function },
         loadingItem: { type: Object },
     },
+    mounted() {
+        if(this.selected.length) {
+            this.$refs['g-cascader-item-parent'].map((item, index) => {
+                if(item.classList.contains('g-cascader-item-parent-active')) {
+                    this.$refs['g-cascader-item-parents'].scrollTop = index * item.clientHeight;
+                }
+            });
+        }
+    },
     computed: {
         children() {
             if(this.selected[this.level]) {
@@ -82,6 +91,7 @@ export default {
 .g-cascader-item {
     @include flex();
     height: 100%;
+    overflow: hidden;
     > .g-cascader-item-parents {
         height: 100%;
         padding: 4px 0;
