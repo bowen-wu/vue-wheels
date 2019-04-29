@@ -124,8 +124,11 @@ export default {
             });
             fondItem = this.simple(hasNoChildren, value) || this.simple(hasChildren, value);
             if (!fondItem) {
-                hasChildren.forEach(item => {
+                hasChildren.some(item => {
                     fondItem = this.complex(item.children, value);
+                    if(fondItem) {
+                        return true;
+                    }
                 });
             }
             return fondItem;

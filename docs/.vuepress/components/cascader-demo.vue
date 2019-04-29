@@ -52,66 +52,128 @@
                 source: [
                     {
                         label: '浙江',
+                        value: '330000',
                         children: [
                             {
                                 label: '杭州',
+                                value: '330100',
                                 children: [
-                                    { label: '西湖' },
-                                    { label: '滨江' },
-                                    { label: '上城' },
+                                    {
+                                        label: '西湖',
+                                        value: '330106'
+                                    },
+                                    {
+                                        label: '滨江',
+                                        value: '330108'
+                                    },
                                 ],
                             },
                             {
                                 label: '绍兴',
+                                value: '330600',
                                 children: [
-                                    { label: '上虞' },
-                                    { label: '柯桥' },
-                                    { label: '越城' },
+                                    {
+                                        label: '上虞',
+                                        value: '330604'
+                                    },
+                                    {
+                                        label: '柯桥',
+                                        value: '330603'
+                                    },
                                 ],
                             },
                         ],
                     },
                     {
                         label: '山东',
+                        value: '370000',
                         children: [
                             {
                                 label: '青岛',
+                                value: '370200',
                                 children: [
-                                    { label: '市南' },
-                                    { label: '市北' },
-                                    { label: '崂山' },
+                                    {
+                                        label: '市南',
+                                        value: '370202'
+                                    },
+                                    {
+                                        label: '崂山',
+                                        value: '370212'
+                                    },
                                 ],
                             },
                             {
                                 label: '济南',
+                                value: '370100',
                                 children: [
-                                    { label: '市中' },
-                                    { label: '天桥' },
-                                    { label: '历城' },
+                                    {
+                                        label: '市中',
+                                        value: '370103'
+                                    },
+                                    {
+                                        label: '天桥',
+                                        value: '370105'
+                                    },
                                 ],
                             },
                         ],
                     },
                     {
                         label: '辽宁',
-                        children: [{
-                            label: '鞍山',
-                            children: [{ label: '铁东' }, { label: '铁西' }, { label: '立山' }],
-                        }, {
-                            label: '沈阳',
-                            children: [{ label: '和平' }, { label: '沈河' }, { label: '皇姑' }],
-                        }],
+                        value: '210000',
+                        children: [
+                            {
+                                label: '鞍山',
+                                value: '210300',
+                                children: [
+                                    {
+                                        label: '铁东',
+                                        value: '220303'
+                                    }, {
+                                        label: '铁西',
+                                        value: '220302'
+                                    }
+                                ],
+                            }, {
+                                label: '沈阳',
+                                value: '210100',
+                                children: [
+                                    {
+                                        label: '沈河',
+                                        value: '210103'
+                                    }, {
+                                        label: '皇姑',
+                                        value: '210105'
+                                    }
+                                ],
+                            }],
                     },
                 ],
                 selected: [],
-                selected1: [{ label: '浙江' }, { label: '杭州' }, { label: '西湖' }],
-                source2: [{
-                    label: '浙江',
-                    isLeaf: false,
-                }, {
-                    label: '山东',
-                    isLeaf: false,
-                }],
+                selected1: [
+                    {
+                        label: '浙江',
+                        value: '330000'
+                    },
+                    {
+                        label: '杭州',
+                        value: '330100'
+                    }, {
+                        label: '西湖',
+                        value: '330106'
+                    }
+                ],
+                source2: [
+                    {
+                        label: '浙江',
+                        value: '330000',
+                        isLeaf: false,
+                    }, {
+                        label: '山东',
+                        value: '370000',
+                        isLeaf: false,
+                    }
+                ],
                 selected2: [],
                 basicCode: `
                     <g-cascader :source.sync="source" :selected.sync="selected" />
@@ -123,55 +185,101 @@
                                     source: [
                                         {
                                             label: '浙江',
+                                            value: '330000',
                                             children: [
                                                 {
                                                     label: '杭州',
+                                                    value: '330100',
                                                     children: [
-                                                        { label: '西湖' },
-                                                        { label: '滨江' },
-                                                        { label: '上城' },
+                                                        {
+                                                            label: '西湖',
+                                                            value: '330106'
+                                                        },
+                                                        {
+                                                            label: '滨江',
+                                                            value: '330108'
+                                                        },
                                                     ],
                                                 },
                                                 {
                                                     label: '绍兴',
+                                                    value: '330600',
                                                     children: [
-                                                        { label: '上虞' },
-                                                        { label: '柯桥' },
-                                                        { label: '越城' },
+                                                        {
+                                                            label: '上虞',
+                                                            value: '330604'
+                                                        },
+                                                        {
+                                                            label: '柯桥',
+                                                            value: '330603'
+                                                        },
                                                     ],
                                                 },
                                             ],
                                         },
                                         {
                                             label: '山东',
+                                            value: '370000',
                                             children: [
                                                 {
                                                     label: '青岛',
+                                                    value: '370200',
                                                     children: [
-                                                        { label: '市南' },
-                                                        { label: '市北' },
-                                                        { label: '崂山' },
+                                                        {
+                                                            label: '市南',
+                                                            value: '370202'
+                                                        },
+                                                        {
+                                                            label: '崂山',
+                                                            value: '370212'
+                                                        },
                                                     ],
                                                 },
                                                 {
                                                     label: '济南',
+                                                    value: '370100',
                                                     children: [
-                                                        { label: '市中' },
-                                                        { label: '天桥' },
-                                                        { label: '历城' },
+                                                        {
+                                                            label: '市中',
+                                                            value: '370103'
+                                                        },
+                                                        {
+                                                            label: '天桥',
+                                                            value: '370105'
+                                                        },
                                                     ],
                                                 },
                                             ],
                                         },
                                         {
                                             label: '辽宁',
-                                            children: [{
-                                                label: '鞍山',
-                                                children: [{ label: '铁东' }, { label: '铁西' }, { label: '立山' }],
-                                            }, {
-                                                label: '沈阳',
-                                                children: [{ label: '和平' }, { label: '沈河' }, { label: '皇姑' }],
-                                            }],
+                                            value: '210000',
+                                            children: [
+                                                {
+                                                    label: '鞍山',
+                                                    value: '210300',
+                                                    children: [
+                                                        {
+                                                            label: '铁东',
+                                                            value: '220303'
+                                                        }, {
+                                                            label: '铁西',
+                                                            value: '220302'
+                                                        }
+                                                    ],
+                                                }, {
+                                                    label: '沈阳',
+                                                    value: '210100',
+                                                    children: [
+                                                        {
+                                                            label: '沈河',
+                                                            value: '210103'
+                                                        }, {
+                                                            label: '皇姑',
+                                                            value: '210105'
+                                                        }
+                                                    ],
+                                                }],
                                         },
                                     ],
                                     selected: [],
@@ -190,125 +298,140 @@
                                     source1: [
                                         {
                                             label: '浙江',
+                                            value: '330000',
                                             children: [
                                                 {
                                                     label: '杭州',
+                                                    value: '330100',
                                                     children: [
-                                                        { label: '西湖' },
-                                                        { label: '滨江' },
-                                                        { label: '上城' },
+                                                        {
+                                                            label: '西湖',
+                                                            value: '330106'
+                                                        },
+                                                        {
+                                                            label: '滨江',
+                                                            value: '330108'
+                                                        },
                                                     ],
                                                 },
                                                 {
                                                     label: '绍兴',
+                                                    value: '330600',
                                                     children: [
-                                                        { label: '上虞' },
-                                                        { label: '柯桥' },
-                                                        { label: '越城' },
+                                                        {
+                                                            label: '上虞',
+                                                            value: '330604'
+                                                        },
+                                                        {
+                                                            label: '柯桥',
+                                                            value: '330603'
+                                                        },
                                                     ],
                                                 },
                                             ],
                                         },
                                         {
                                             label: '山东',
+                                            value: '370000',
                                             children: [
                                                 {
                                                     label: '青岛',
+                                                    value: '370200',
                                                     children: [
-                                                        { label: '市南' },
-                                                        { label: '市北' },
-                                                        { label: '崂山' },
+                                                        {
+                                                            label: '市南',
+                                                            value: '370202'
+                                                        },
+                                                        {
+                                                            label: '崂山',
+                                                            value: '370212'
+                                                        },
                                                     ],
                                                 },
                                                 {
                                                     label: '济南',
+                                                    value: '370100',
                                                     children: [
-                                                        { label: '市中' },
-                                                        { label: '天桥' },
-                                                        { label: '历城' },
+                                                        {
+                                                            label: '市中',
+                                                            value: '370103'
+                                                        },
+                                                        {
+                                                            label: '天桥',
+                                                            value: '370105'
+                                                        },
                                                     ],
                                                 },
                                             ],
                                         },
                                         {
                                             label: '辽宁',
-                                            children: [{
-                                                label: '鞍山',
-                                                children: [{ label: '铁东' }, { label: '铁西' }, { label: '立山' }],
-                                            }, {
-                                                label: '沈阳',
-                                                children: [{ label: '和平' }, { label: '沈河' }, { label: '皇姑' }],
-                                            }],
+                                            value: '210000',
+                                            children: [
+                                                {
+                                                    label: '鞍山',
+                                                    value: '210300',
+                                                    children: [
+                                                        {
+                                                            label: '铁东',
+                                                            value: '220303'
+                                                        }, {
+                                                            label: '铁西',
+                                                            value: '220302'
+                                                        }
+                                                    ],
+                                                }, {
+                                                    label: '沈阳',
+                                                    value: '210100',
+                                                    children: [
+                                                        {
+                                                            label: '沈河',
+                                                            value: '210103'
+                                                        }, {
+                                                            label: '皇姑',
+                                                            value: '210105'
+                                                        }
+                                                    ],
+                                                }],
                                         },
                                     ],
-                                    selected1: [{label: '浙江'}, {label: '杭州'}, {label: '西湖'}],
+                                    selected1: [
+                                        {
+                                            label: '浙江',
+                                            value: '330000'
+                                        },
+                                        {
+                                            label: '杭州',
+                                            value: '330100'
+                                        }, {
+                                            label: '西湖',
+                                            value: '330106'
+                                        }
+                                    ],
                                 }
                             }
                         }
                     ${'<'}/script>
                 `.replace(/^ {16}/gm, '').trim(),
                 dynamicCode: `
-                    <g-cascader :source.sync="source1" :selected.sync="selected1" />
+                    <g-cascader :source.sync="source1" :selected.sync="selected2" />
 
                     <script>
                         export default{
                             data() {
                                 return {
-                                    source1: [
+                                    source2: [
                                         {
                                             label: '浙江',
-                                            children: [
-                                                {
-                                                    label: '杭州',
-                                                    children: [
-                                                        { label: '西湖' },
-                                                        { label: '滨江' },
-                                                        { label: '上城' },
-                                                    ],
-                                                },
-                                                {
-                                                    label: '绍兴',
-                                                    children: [
-                                                        { label: '上虞' },
-                                                        { label: '柯桥' },
-                                                        { label: '越城' },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
+                                            value: '330000',
+                                            isLeaf: false,
+                                        }, {
                                             label: '山东',
-                                            children: [
-                                                {
-                                                    label: '青岛',
-                                                    children: [
-                                                        { label: '市南' },
-                                                        { label: '市北' },
-                                                        { label: '崂山' },
-                                                    ],
-                                                },
-                                                {
-                                                    label: '济南',
-                                                    children: [
-                                                        { label: '市中' },
-                                                        { label: '天桥' },
-                                                        { label: '历城' },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            label: '辽宁',
-                                            children: [{
-                                                label: '鞍山',
-                                                children: [{ label: '铁东' }, { label: '铁西' }, { label: '立山' }],
-                                            }, {
-                                                label: '沈阳',
-                                                children: [{ label: '和平' }, { label: '沈河' }, { label: '皇姑' }],
-                                            }],
-                                        },
+                                            value: '370000',
+                                            isLeaf: false,
+                                        }
                                     ],
-                                    selected1: [{label: '浙江'}, {label: '杭州'}, {label: '西湖'}],
+                                    selected2: [],
                                 }
                             }
                         }
@@ -324,80 +447,86 @@
                         case '浙江':
                             res = [{
                                 label: '杭州',
+                                value: '330100',
                                 isLeaf: false
                             }, {
                                 label: '绍兴',
+                                value: '330600',
                                 isLeaf: false,
                             }];
                             break;
                         case '杭州':
-                            res = [{
-                                label: '西湖',
-                                isLeaf: true
-                            },
+                            res = [
+                                {
+                                    label: '西湖',
+                                    value: '330106',
+                                    isLeaf: true
+                                },
                                 {
                                     label: '滨江',
+                                    value: '330108',
                                     isLeaf: true
                                 },
-                                {
-                                    label: '上城',
-                                    isLeaf: true
-                                }];
+                            ];
                             break;
                         case '绍兴':
-                            res = [{
-                                label: '上虞',
-                                isLeaf: true
-                            },
+                            res = [
                                 {
-                                    label: '柯桥',
+                                    label: '上虞',
+                                    value: '330604',
                                     isLeaf: true
                                 },
                                 {
-                                    label: '越城',
+                                    label: '柯桥',
+                                    value: '330603',
                                     isLeaf: true
-                                }];
+                                },
+                            ];
                             break;
                         case '山东':
-                            res = [{
-                                label: '青岛',
-                                isLeaf: false,
-                            }, {
-                                label: '济南',
-                                isLeaf: false,
-                            }];
+                            res = [
+                                {
+                                    label: '青岛',
+                                    value: '370200',
+                                    isLeaf: false,
+                                }, {
+                                    label: '济南',
+                                    value: '370100',
+                                    isLeaf: false,
+                                }
+                            ];
                             break;
                         case '青岛':
-                            res = [{
-                                label: '市南',
-                                isLeaf: true
-                            },
+                            res = [
                                 {
-                                    label: '市北',
+                                    label: '市南',
+                                    value: '370202',
                                     isLeaf: true
                                 },
                                 {
                                     label: '崂山',
+                                    value: '370212',
                                     isLeaf: true
                                 }];
                             break;
                         case '济南':
-                            res = [{
-                                label: '市中',
-                                isLeaf: true
-                            },
+                            res = [
                                 {
-                                    label: '天桥',
+                                    label: '市中',
+                                    value: '370103',
                                     isLeaf: true
                                 },
                                 {
-                                    label: '历城',
+                                    label: '天桥',
+                                    value: '370105',
                                     isLeaf: true
-                                }];
+                                },
+                            ];
                             break;
-                    };
+                    }
+                    ;
                     callback && callback(res);
-                }, 3000);
+                }, 1000);
             },
         }
     };
